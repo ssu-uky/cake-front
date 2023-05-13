@@ -14,8 +14,6 @@ export default function Main() {
   const router = useRouter();
   const { user_pk } = router.query;
   const [cakeData, setCakeData] = useState({});
-  const [showModal, setShowModal] = useState(false);
-  const [selectedCake, setSelectedCake] = useState(null);
   const [loggedInUserPk, setLoggedInUserPk] = useState(null);
 
   // 로그인한 사용자의 user_pk를 가져오는 함수 추가
@@ -85,8 +83,6 @@ const getNewAccessToken = async (refreshToken) => {
     return null;
   }
 };
-
-
 
 
 
@@ -169,41 +165,33 @@ useEffect(() => {
     backgroundColor: tableColor, marginTop:"20px" 
   };
 
-  const handleImageSelection = (pickcake) => {
-    setSelectedCake(pickcake);
+
+  // 모달 시작 2 // 
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCake, setSelectedCake] = useState(null);
+
+  // 모달 컨테이너 클릭 이벤트 핸들러
+  const handleModalContainerClick = (event) => {
+    if (event.target.classList.contains("modal_container")) {
+      handleHideModal();
+    }
   };
 
-    // 모달 시작 (클릭 시 편지와 보이는 케이크)
-  // const handleShowModal = (event, pickcake) => {
-  //   event.stopPropagation();
-  //   setSelectedCake(pickcake);
-  //   setShowModal(true);
-  // };
-
-  const handleShowModal = (event, pickcake) => {
-    event.stopPropagation();
-
-    // 로그인한 사용자와 테이블 주인이 일치하는지 확인
-    if (loggedInUserPk && loggedInUserPk === user_pk) {
-    setSelectedCake(pickcake);
+  const handleShowModal = (event, visitor) => {
+    event.preventDefault();
+    setSelectedCake(visitor.pickcake);
     setShowModal(true);
-  } else {
-    alert("테이블 주인만 편지 내용을 확인할 수 있습니다.");
-  }
+  };
+
+const modalContainerStyle = {
+  display: showModal ? 'flex' : 'none',
 };
-//   const loggedInUser = sessionStorage.getItem("user_pk");
-//   if (loggedInUser && loggedInUser === user_pk) {
-//     setSelectedCake(pickcake);
-//     setShowModal(true);
-//   } else {
-//     alert("테이블 주인만 편지 내용을 확인할 수 있습니다.");
-//   }
-// };
 
-
-  const handleHideModal = (e) => setShowModal(false);
-  // 모달 끝
-
+const handleHideModal = () => {
+  setSelectedCake(null);
+  setShowModal(false);
+};
+  // 모달 끝 2 //
   
   return (
     <div className="main_container bgimg">
@@ -215,11 +203,12 @@ useEffect(() => {
 
       <div className="main_cakeImg">
         {/* 페이지네이션 버튼 구현 (1줄에 4개, 총 2줄) */}
-        {paginatedCakes[currentPage] && paginatedCakes[currentPage].map((visitor, index) => (
-          <div className={`pickcake ${index < 4 ? "first-row" : "second-row"}`}
-            key={index}
-            onClick={(event) => handleShowModal(event, visitor)}
-          >
+        {paginatedCakes[currentPage] &&
+          paginatedCakes[currentPage].map((visitor, index) => (
+            <div className={`pickcake ${index < 4 ? "first-row" : "second-row"}`}
+              key={index}
+              onClick={(event) => handleShowModal(event, visitor)}
+            >
             {visitor.pickcake === selectedCake ? (
               <Image
                 src={`/images/cakes/${selectedCake}.png`}
@@ -239,18 +228,41 @@ useEffect(() => {
                   priority
               />
             )}
-            {showModal && (
-              <div className="modal">
-                <span className="close" onClick={handleHideModal}>
-                  &times;
-                </span>
-                <p id={visitor.id}>{visitor.visitor_name}</p>
-                <p id={visitor.id}>{visitor.letter}</p>
+
+            {/* 모달 창 코드 시작 */}
+
+            {showModal && visitor.pickcake === selectedCake && (
+              <div
+                className="modal_container"
+                onClick={handleHideModal}
+                // style={modalContainerStyle}
+                // onClick={handleModalContainerClick}
+                >
+                  <span
+                    className="modal_close"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleHideModal();
+                    }}
+                    // onClick={() => handleHideModal()}
+                    style={{ cursor: "pointer" }}
+                  >
+                    닫기&nbsp; &times;
+                  </span>
+                  {/* <p className="modal_title" id={visitor.id}> {visitor.visitor_name} </p> */}
+                  <p className="modal_title"  id={selectedCake}> {visitor.visitor_name} </p>
+                <br></br>
+                  {/* <p className="modal_body" id={visitor.id}> {visitor.letter} </p> */}
+                  <p className="modal_body"  id={selectedCake}> {visitor.letter} </p>
               </div>
             )}
+
+            {/* 모달 창 코드 끝 */}
+
           </div>
         ))}
       </div>
+      
       
       <div style={style}>
         <Image src={Caketable} alt="caketableimg" width={500} height={450} className="caketable" />
@@ -306,6 +318,7 @@ useEffect(() => {
 }
 
 
+
 const main = css`
   @font-face {
     font-family: "Bazzi";
@@ -314,6 +327,41 @@ const main = css`
     font-weight: normal;
     font-style: normal;
   }
+
+  .modal_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    font-family: "Bazzi";
+    background-color: white;
+    color: black;
+    position: absolute;
+    padding: 20px;
+  }
+
+  .modal_close{
+    align-self: flex-end;
+    color: #aaa;
+    font-size: 17px;
+  }
+
+  .modal_title{
+    display: inline-block;
+    font-size: 20px;
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+
+  .modal_body{
+    display: inline-block;
+    font-size: 17px;
+    margin-top: 20px;
+  }
+
 
   .main_container {
     width: 100%;
@@ -327,7 +375,7 @@ const main = css`
     
     //중앙정렬
     // position: absolute;
-    top: 50%;
+    // top: 50%;
     // left: 50%;
     // transform: translate(-50%, -50%);
   }
@@ -343,7 +391,7 @@ const main = css`
 
   // 하단 버튼 정렬
   .main_btn_container {
-    width: 100%;
+    width: 100vw;
     position: absolute;
     display: flex;
     margin-top: 10%;
@@ -353,6 +401,8 @@ const main = css`
   
   // 하단 버튼 디자인
   .main_btn {
+    width: 150px;
+    // width: 20%;
     height: 45px;
     border-radius: 15px;
     border: none;

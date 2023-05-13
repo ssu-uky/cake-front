@@ -1,65 +1,90 @@
-const Modal = ({ visitor_name, owner, letter, onClose }) => {
-  const [showContent, setShowContent] = useState(false);
+import React from "react";
+import css  from "styled-jsx/css";
+import { useSelector, useDispatch } from "react-redux";
+import { hideModal } from "../../redux/actions";
+import { getSelectedCake } from "../../redux/selectors";
+import {showModal, selectedCake, onHideModal} from "../../redux/actions";
+import {showModal, selectedCake, onHideModal} from "../caketables/caketables/"
 
-  const checkOwner = () => {
-    if (owner) {
-      setShowContent(true);
-    } else {
-      alert("편지는 주인만 확인 할 수 있습니다.");
-    }
+
+const Modal = ({ showModal, selectedCake, onHideModal }) => {
+  const modalContainerStyle = {
+    display: showModal ? 'flex' : 'none',
   };
 
-  const deleteLetter = () => {
-    if (window.confirm("삭제하시겠습니까?")) {
-      console.log("삭제되었습니다.");
-      onClose();
+  const handleModalContainerClick = (event) => {
+    if (event.target.classList.contains("modal_container")) {
+      onHideModal();
     }
   };
 
   return (
-    <div className="modal">
-      {showContent && (
-        <div>
-          <p>방문자: {visitor_name}</p>
-          <p>편지: {letter}</p>
-          <button onClick={deleteLetter}>삭제</button>
-        </div>
+    <div
+      className="modal_container"
+      style={modalContainerStyle}
+      onClick={handleModalContainerClick}
+    >
+      <span
+        className="modal_close"
+        onClick={onHideModal}
+        style={{ cursor: "pointer" }}
+      >
+        닫기&nbsp; &times;
+      </span>
+      {selectedCake && (
+        <>
+          <p className="modal_title" id={selectedCake.id}>
+            {selectedCake.visitor_name}
+          </p>
+          <br />
+          <p className="modal_body" id={selectedCake.id}>
+            {selectedCake.letter}
+          </p>
+        </>
       )}
-      {!showContent && (
-        <div>
-          <p>로그인이 필요합니다.</p>
-          <button onClick={checkOwner}>로그인</button>
-        </div>
-      )}
-      <button onClick={onClose}>닫기</button>
+      <style jsx>{modal}</style>
     </div>
   );
 };
 
 
-`
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 300px;
-    height: 300px;
-    background-color: rgba(0, 0, 0, 0.5);
+export default Modal;
+
+const modal = css`
+  .modal_container{
+    position: absolute;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 0;
-    margin: 0;
-}
-
-.modal-content {
+    vertical-align: middle;
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    font-family: "Bazzi";
     background-color: white;
+    color: black;
+    position: absolute;
     padding: 20px;
-    border-radius: 5px;
-    border: 3px solid #f073cd;
-    width: 80%;
-    max-width: 500px;
-}
-`;
+    z-index: 3000;
+  }
 
+  .modal_close{
+    align-self: flex-end;
+    color: #aaa;
+    font-size: 17px;
+  }
 
+  .modal_title{
+    display: inline-block;
+    font-size: 20px;
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+
+  .modal_body{
+    display: inline-block;
+    font-size: 17px;
+    margin-top: 20px;
+  }
+
+`
