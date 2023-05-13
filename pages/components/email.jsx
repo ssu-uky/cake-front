@@ -11,7 +11,6 @@ export default function Emaillogin() {
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -91,7 +90,7 @@ return(
           &nbsp;&nbsp; | &nbsp;&nbsp;
           <li>비밀번호 찾기</li>
           &nbsp;&nbsp; | &nbsp;&nbsp;
-          <li onClick={() => window.location.href = '/Login'}style={{ cursor: 'pointer' }}>회원가입</li>
+          <li>회원가입</li>
         </div>
       </form>
 

@@ -7,6 +7,8 @@ export default function Letter() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    // Send the letter content to the backend here
+    // For example, using fetch or axios:
     fetch("http://127.0.0.1:8000/api/caketables/pick/", {
       method: "POST",
       body: JSON.stringify({ content: letterContent }),
