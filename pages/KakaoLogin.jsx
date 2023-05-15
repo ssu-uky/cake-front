@@ -9,8 +9,9 @@ const KakaoLogin = () => {
   useEffect(() => {
     const CheckTable = async () => {
       if (refresh && access && user_pk) {
-        sessionStorage.setItem("refresh_token", refresh);
-        sessionStorage.setItem("access_token", access);
+        sessionStorage.setItem("refresh", refresh);
+        sessionStorage.setItem("access", access);
+        // sessionStorage.setItem("user_pk", user_pk);
 
         try {
           const response = await axios.get(`http://127.0.0.1:8000/api/caketables/${user_pk}/`);

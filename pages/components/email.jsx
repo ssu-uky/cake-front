@@ -13,7 +13,7 @@ export default function EmailLogin() {
   const router = useRouter();
 
   useEffect(() => {
-    const access = sessionStorage.getItem("access_token");
+    const access = sessionStorage.getItem("access");
     if (access) {
       axios.get(`http://127.0.0.1:8000/api/users/info/`, {
         headers: {
@@ -29,8 +29,14 @@ export default function EmailLogin() {
   }, []);
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+  event.preventDefault();
 
+  if (!email || !password) {
+    alert("모든 항목을 채워주세요.");
+    return;
+  }
+
+  try {
     const response = await fetch(`http://127.0.0.1:8000/api/users/login/`, {
       method: "POST",
       headers: {
@@ -40,34 +46,39 @@ export default function EmailLogin() {
         email: email,
         password: password,
       }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("로그인 오류");
-        }
-        return response.json();
-      })
-      .then(async (response) => {
-        if (response.message === "Email not found") {
-          alert("아이디 혹은 비밀번호를 다시 확인해주세요.");
-        } else {
-          sessionStorage.setItem("access_token", response.token.access_token);
-          sessionStorage.setItem("refresh_token", response.token.refresh_token);
+    });
+
+    if (!response.ok) {
+      throw new Error("로그인 오류");
+    }
+
+    const data = await response.json();
+    const accessToken = data.token.access;
+      const refreshToken = data.token.refresh;
+
+      sessionStorage.setItem("access", accessToken);
+      sessionStorage.setItem("refresh", refreshToken);
 
           // caketable 존재 확인
-          const user_pk = response.user_pk;
+          const user_pk = data.user_pk;
+          console.log(user_pk);
+
           const caketableResponse = await fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}`);
           const caketableData = await caketableResponse.json();
 
-          console.log(response);
           if (caketableData[0] && caketableData[0].tablecolor) {
             router.push(`/caketables/${user_pk}`);
           } else {
             router.push("/Useruse");
           }
-        }
-      })
-  };
+        
+      }
+      catch (error) {
+        alert("아이디와 비밀번호를 다시 확인해주세요");
+        console.log("아이디와 비밀번호를 다시 확인해주세요");
+      }
+    };
+
 
 return(
   <div className="email_container">

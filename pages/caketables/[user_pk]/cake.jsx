@@ -1,5 +1,4 @@
 import css from "styled-jsx/css";
-import Sidebar from "pages/components/Sidebar.jsx";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -78,7 +77,6 @@ export default function CakeTable(props) {
 
   return (
     <div className="visitoruse_container">
-      <Sidebar />
       <p className="visitoruse_text font">
         {cakeData.nickname}님의
         <br /> 생일을 축하해주세요🎉
@@ -87,7 +85,7 @@ export default function CakeTable(props) {
         <div className="visitoruse_nickname_password_container">
           <div className="visitoruse_nickname_container">
             <label htmlFor="nickname" className="visitoruse_name font">
-              &nbsp;&nbsp;&nbsp;닉네임 &nbsp;
+              닉네임 &nbsp;
             </label>
             <input
               type="text"
@@ -95,12 +93,16 @@ export default function CakeTable(props) {
               className="visitoruse_nickname font"
               id="nickname"
               value={visitor_name}
+              placeholder="3글자 이내로 입력해주세요"
               onChange={handleNicknameChange}
+              onFocus={(e) => (e.target.placeholder = "")}
+              onBlur={(e) => (e.target.placeholder = "3글자 이내로 입력해주세요")}
+              required
             />
           </div>
           <div className="visitoruse_password_container">
             <label htmlFor="password" className="visitoruse_name font">
-              비밀번호 &nbsp;
+              &nbsp; 비밀번호 &nbsp;
             </label>
             <input
               type="password"
@@ -109,6 +111,9 @@ export default function CakeTable(props) {
               id="password"
               pattern="[0-9]{4}"
               value={visitor_password}
+              placeholder="4자리 숫자로 입력해주세요"
+              onFocus={(e) => (e.target.placeholder = "")}
+              onBlur={(e) => (e.target.placeholder = "4자리 숫자로 입력해주세요")}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
@@ -264,8 +269,9 @@ const visitoruse = css`
     justify-content: space-evenly;
     margin-top: 35px;
   }
+
   .visitoruse_container {
-    width: 500px;
+    width: 100vw;
     height: 100vh;
     overflow: hidden;
     background-color: #f7bedf;
@@ -279,20 +285,29 @@ const visitoruse = css`
   }
   
   .visitoruse_text {
-    font-size: 40px;
+    font-size: 35px;
     line-height: 45px;
-    margin-top: 3vh;
+    margin-top: 5vh;
   }
   .visitoruse_name {
     font-size: 25px;
   }
+
   .visitoruse_nickname {
     border: none; 
-    height: 30px;
+    height: 35px;
     width: 150px;
     border-radius: 10px;
     text-align: center;
-    font-size: 25px;
+    vertical-align: middle;
+    font-size: 17px;
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  .visitoruse_nickname font{
+    font-size: 17px;
+    padding: 10px;
   }
   .visitoruse_tab_container {
     margin-top: 30px;
@@ -303,7 +318,6 @@ const visitoruse = css`
   }
   .visitoruse_section {
     display: none;
-    /* padding: 20px 0 0; */
     border-top: 1px solid #f073cd;
     vertical-align: middle;
     text-align: center;
@@ -317,7 +331,6 @@ const visitoruse = css`
   
   .visitoruse_label {
     display: inline-block;
-    margin: 0 0 -1px;
     padding: 15px 89px;
     border-radius: 15px 15px 0 0;
     font-weight: 600;
@@ -338,7 +351,7 @@ const visitoruse = css`
 
   .visitoruse_pinktable {
     position: relative;
-    margin-top: 70px;
+    margin: calc(80px /-20);
   }
   
   .useruse_submit_button {
@@ -350,6 +363,7 @@ const visitoruse = css`
     font-size: 20px;
     border-radius: 10px;
     margin: 0 auto;
+    margin-top: 15px;
     vertical-align: middle;
     text-align: center;
     justify-content: center;
@@ -359,7 +373,7 @@ const visitoruse = css`
   }
 
   .letter_textarea {
-    width: 350px;
+    width: 400px;
     height: 250px;
     font-size: 25px;
     line-height: 45px;
@@ -367,7 +381,7 @@ const visitoruse = css`
     border-radius: 15px;
     outline: none;
     padding: 30px;
-    margin: 40px 0;
+    margin:0 auto;
   }
 
   .letter_textarea:focus {
@@ -377,67 +391,113 @@ const visitoruse = css`
   
   .selected {
     border: 2px dashed #f073cd;
-    margin-top: -5px;
+    width: 100px;
+    height: 100px;
+    display: fixed;
   }
+
+  .visitoruse_pinktable {
+  display: inline-block;
+  margin-top: 20%;
+}
+
 
   #cake1 {
     position: absolute;
-    right: 30px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100% / -2);
     top: -65px;
+    right: 50%;
   }
   #cake2 {
     position: absolute;
-    right: 140px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100% / -2);
     top: -65px;
+    right: 75%;
   }
   #cake3 {
     position: absolute;
-    right: 250px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100%  / -2);
     top: -65px;
+    right: 100%;
   }
   #cake4 {
     position: absolute;
-    right: 370px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100% / -2);
     top: -65px;
+    right: 125%;
   }
-  #cake5 {
+
+    #cake5 {
     position: absolute;
-    right: 30px;
-    top: 60px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100% / -2);
+    top: 50px;
+    right: 50%;
   }
   #cake6 {
     position: absolute;
-    right: 140px;
-    top: 60px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100% / -2);
+    top: 50px;
+    right: 75%;
   }
   #cake7 {
     position: absolute;
-    right: 250px;
-    top: 60px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100%  / -2);
+    top: 55px;
+    right: 100%;
   }
   #cake8 {
     position: absolute;
-    right: 370px;
-    top: 60px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100% / -2);
+    top: 55px;
+    right: 125%;
   }
+
   #cake9 {
     position: absolute;
-    right: 30px;
-    top: 190px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100% / -2);
+    top: 175px;
+    right: 50%;
   }
   #cake10 {
     position: absolute;
-    right: 140px;
-    top: 190px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100% / -2);
+    top: 175px;
+    right: 75%;
   }
   #cake11 {
     position: absolute;
-    right: 250px;
-    top: 190px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100%  / -2);
+    top: 175px;
+    right: 100%;
   }
   #cake12 {
     position: absolute;
-    right: 370px;
-    top: 190px;
+    width: 25%;
+    display: inline-block;
+    margin-right: calc(100% / -2);
+    top: 175px;
+    right: 125%;
   }
 `;

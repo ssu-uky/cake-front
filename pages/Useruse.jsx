@@ -4,14 +4,14 @@ import Image from "next/image";
 import cakeimg from "public/images/Caketable.png";
 import { createGlobalStyle } from "styled-components";
 import css from "styled-jsx/css";
-import Sidebar from "pages/components/Sidebar.jsx";
+// import Sidebar from "pages/components/Sidebar.jsx";
 import { useRouter } from "next/router";
 
 
 //토큰
 const getToken = () => {
   // return localStorage.getItem("accessToken");
-  return sessionStorage.getItem("access_token");
+  return sessionStorage.getItem("access");
 };
 
 export default function Useruse() {
@@ -79,7 +79,7 @@ export default function Useruse() {
   return (
     <div className="useruse_container">
       <Global />
-      <Sidebar />
+      {/* <Sidebar /> */}
       <form onSubmit={handleSubmit}>
         <div className="useruse_nickname_container font">
           <label for="nickname" className="useruse_name font">
@@ -150,7 +150,7 @@ const useruse = css`
   }
   .useruse_container {
     overflow: hidden;
-    width: 500px;
+    width: 100vw;
     height: 100vh;
     background-color: #f7bedf;
     color: white;

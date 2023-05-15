@@ -5,7 +5,7 @@ import Caketable from "public/images/Caketable.png";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../Sidebar";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -17,7 +17,6 @@ export default function Main() {
   const [cakeData, setCakeData] = useState({});
   const [loggedInUserPk, setLoggedInUserPk] = useState(null);
 
-  
     // access_token이 유효한지 확인하는 함수 추가
 const isTokenExpired = (token) => {
   try {
@@ -53,10 +52,14 @@ const getNewAccessToken = async (refreshToken) => {
 };
 
 
-  // 로그인한 사용자의 user_pk를 가져오는 함수 추가
+
+// 로그인한 사용자의 user_pk를 가져오는 함수 추가
 const fetchLoggedInUserPk = async () => {
+  // const accessToken = sessionStorage.getItem("access");
+  // const refreshToken = sessionStorage.getItem("refresh");
   const accessToken = sessionStorage.getItem("access_token");
   const refreshToken = sessionStorage.getItem("refresh_token");
+  
   if (!accessToken || !refreshToken) return;
 
   let validAccessToken = accessToken;
@@ -67,31 +70,35 @@ const fetchLoggedInUserPk = async () => {
     if (!validAccessToken) return;
 
     // 새로 발급받은 access_token을 세션 스토리지에 저장
-    sessionStorage.setItem("access_token", validAccessToken);
+    sessionStorage.setItem("access", validAccessToken);
   }
   try {
     // const response = await fetch("http://127.0.0.1:8000/api/users/login/token/refresh/", {
-    const response = await fetch("http://127.0.0.1:8000/api/token/", {
+    const response = await fetch("http://127.0.0.1:8000/api/users/info/", {
     // const response = await fetch("https://kauth.kakao.com/oauth/token", {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${validAccessToken}`,
       },
+      // body: JSON.stringify({ email, password }), // remove this line
     });
-
+    console.log(response, validAccessToken)
+    
     const data = await response.json();
     setLoggedInUserPk(data.user_pk);
+    console.log(data.user_pk, "데이터 가져옴?");
   } catch (error) {
     console.error("Error:", error);
+    // console.log(setLoggedInUserPk, loggedInUserPk, data ) // data is not defined in this scope.
   }
 };
-  
 
 // 컴포넌트가 마운트되면 로그인한 사용자의 user_pk를 가져옵니다.
 useEffect(() => {
   fetchLoggedInUserPk();
 }, []);
+
 
   // 페이지네이션 구현 시작
   const [currentPage, setCurrentPage] = useState(0);
@@ -106,20 +113,24 @@ useEffect(() => {
 
   const cakesPerPage = 8;
   const paginatedCakes = cakeData.visitors ? paginateCakes(cakeData.visitors, cakesPerPage) : [];
+  const totalPages = paginatedCakes.length;
 
+  // 이전 페이지 버튼
   const handleBeforePage = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
     }
   };
-  
-  const handleNextPage = () => {
-    if (currentPage < paginatedCakes.length - 1) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-  // 페이지 네이션 구현 끝 (하단에서 버튼으로 다시 이어짐)
 
+  // 다음 페이지 버튼
+  const handleNextPage = () => {
+  if (currentPage < totalPages - 1) {
+    setCurrentPage(currentPage + 1);
+  }
+};
+
+  const paginationText = `${currentPage + 1} / ${totalPages}`;
+  // 페이지 네이션 구현 끝 (하단에서 버튼으로 다시 이어짐)
 
   // 링크 복사
   const copyURL = async () => {
@@ -170,12 +181,11 @@ useEffect(() => {
   };
 
 
-  // 모달 시작 2 // 
+  // 모달 시작 // 
   const [showModal, setShowModal] = useState(false);
   const [selectedCake, setSelectedCake] = useState(null);
   const [selectedVisitor, setSelectedVisitor] = useState(null);
 
-  // 모달 컨테이너 클릭 이벤트 핸들러
 
   const handleShowModal = (event, visitor) => {
     event.preventDefault();
@@ -190,11 +200,12 @@ useEffect(() => {
     setShowModal(false);
   };
 
-  // 모달 끝 2 //
+  // 모달 끝 //
   
   return (
+    <div className="bg_container">
     <div className="main_container bgimg">
-      <Sidebar />
+      {/* <Sidebar /> */}
       <p className="main_text">{cakeData.nickname}님의 케이크</p>
       <p className="main_text">
         {cakeData.total_visitor}명이 축하메세지를 보냈습니다
@@ -246,7 +257,7 @@ useEffect(() => {
                   >
                     닫기&nbsp; &times;
                   </span>
-                  <p className="modal_title"  id={selectedCake}> {visitor.visitor_name} </p>
+                  <p className="modal_title"  id={selectedCake}> 🎉&nbsp; {visitor.visitor_name} 🎉 </p>
                 <br></br>
                   <p className="modal_body"  id={selectedCake}> {visitor.letter} </p>
               </div>
@@ -263,30 +274,29 @@ useEffect(() => {
       <div style={style}>
         <Image src={Caketable} alt="caketableimg" width={500} height={450} className="caketable" />
       </div>
-      
-      {/* 왼쪽 버튼 */}
+
+      <div className="pagebtn">
+      {/* 이전 버튼 */}
       <FontAwesomeIcon
         icon={faAngleLeft}
         className={`leftbtn ${currentPage === 0 ? 'inactive' : ''}`}
         style={{
-          fontSize: '1.5em',
-          marginRight: '30px',
-          marginTop: '30px',
           cursor: currentPage === 0 ? 'default' : 'pointer',
           opacity: currentPage === 0 ? 0.5 : 1,
           color: currentPage === 0 ? '' : 'white',
         }}
         onClick={handleBeforePage}
       />
+      
+      <span className="pagetext">
+        {paginationText}
+      </span>
 
-      {/* 오른쪽 버튼 */}
+      {/* 다음 버튼 */}
       <FontAwesomeIcon
         icon={faAngleRight}
         className={`rightbtn ${currentPage === 0 ? 'inactive' : ''}`}
         style={{
-          fontSize: '1.5em',
-          marginLeft: '30px',
-          marginTop: '30px',
           cursor: currentPage === paginatedCakes.length - 1 ? 'default' : 'pointer',
           opacity: currentPage === paginatedCakes.length - 1 ? 0.5 : 1,
           color: currentPage === paginatedCakes.length - 1 ? '' : 'white',
@@ -296,6 +306,7 @@ useEffect(() => {
 
       // hidden={currentPage === paginatedCakes.length - 1} // 마지막 페이지에서는 오른쪽 버튼 안보이게
       />
+      </div>
 
       <div className="main_btn_container">
         <button className="main_btn" onClick={handleClick}>
@@ -310,6 +321,7 @@ useEffect(() => {
       </div>
       <style jsx>{main}</style>
     </div>
+    </div>
   );
 }
 
@@ -322,6 +334,13 @@ const main = css`
     font-style: normal;
   }
   
+  .bg_container{
+    background: #f7bedf;
+    width:100vw;
+    height:100vh;
+    overflow: hidden;
+  }
+
   .main_container {
     width: 500px;
     height: 100vh;
@@ -369,8 +388,8 @@ const main = css`
   // 케이크 테이블 이미지
   .caketableimg {
     position: relative;
-    width: 100%;
-    display: flex;
+    width: 500px;
+    display: fixed;
     top: 100px;
     // left: 50%;
     transform: translate(-50%, -50%);
@@ -398,6 +417,29 @@ const main = css`
   .second-row {
     margin-top: 25px;
   }
+
+  // 페이지네이션
+  .pagebtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    vertical-align: middle;
+    align-items: center;
+    font-family: "Bazzi";
+    font-size: 1.5em;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+
+  .pagetext{
+    font-size: 0.8em;
+    font-family: "Bazzi";
+    align-items: center;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 20px;
+  }
+
 
   // 모달 창
   .modal_container{

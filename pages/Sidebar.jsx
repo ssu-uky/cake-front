@@ -1,23 +1,53 @@
 // 링크 텍스트에 underline 지우기
 
 import css from "styled-jsx/css";
-import Footer from "./Footer";
+import Footer from "./components/Footer";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const Sidebar = () => {
   const router = useRouter();
 
-  const handleClick = () => {
-    const accessToken = sessionStorage.getItem("access_token");
-    const userPk = sessionStorage.getItem("userPk");
+  const handleClick = async () => {
+    const accessToken = sessionStorage.getItem("access");
 
-    if (accessToken && userPk) {
-      router.push(`/caketables/${userPk}`);
+    if(accessToken) {
+      try{
+        const response = await axios.get("http://127.0.0.1:8000/api/users/info/", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        
+        // 케이크 테이블이 있으면 테이블로 이동
+        const user_pk = response.data.user_pk;
+        router.push(`/caketables/${user_pk}`);
+        console.log(user_pk)
+      } catch (error){
+        console.log("로그인 오류");
+      }
     } else {
-      router.push("/login");
+      router.push("/");
     }
   };
+
+  
+  const handleLogout = async () => {
+    const CheckLogout = window.confirm("정말 로그아웃 하시겠습니까?");
+    if(!CheckLogout){
+      return;
+    }
+    try{
+      await axios.post("http://127.0.0.1:8000/api/users/logout/");
+      sessionStorage.removeItem("access");
+      sessionStorage.removeItem("refresh");
+      router.push("/");
+    } catch (error){
+      console.log("로그아웃에 실패하였습니다.");
+    }
+  };
+
 
   return (
     <div className="sidebar_container">
@@ -30,10 +60,14 @@ const Sidebar = () => {
           <span></span>
 
           <ul className="sidebar_menu">
-            <Link href="/Login">
-              <li style={{ textDecoration: "none" }}>Login / Logout</li>
-            </Link>
-            <li onClick={handleClick} style={{ textDecoration: "none", cursor: "pointer" }}>
+            <div className="signbtn">
+          <Link href="/login">
+          <li className="loginbtn" style={{ textDecoration: "none", cursor: "pointer" }} > Login </li>
+          </Link>
+          <li className="slash"> / </li>
+          <li className="logoutbtn" onClick={handleLogout} style={{ textDecoration: "none", cursor: "pointer" }} >Logout</li>
+            </div>
+          <li onClick={handleClick} style={{ textDecoration: "none", cursor: "pointer" }}>
               내 케이크 보기
             </li>
             <Link href="/">
@@ -64,7 +98,8 @@ const sidebar = css`
   .sidebar_container {
     font-family: "Bazzi";
     width: 100%;
-    // height: 100vh;
+    height: 100vh;
+    overflow: hidden;
   }
 
   .sidebar_menuToggle {
@@ -164,7 +199,6 @@ const sidebar = css`
   // 메뉴 바 글씨
   .sidebar_menu li {
     line-height: 60px;
-    padding-right: 30px;
     font-size: 22px;
   }
   
@@ -172,6 +206,26 @@ const sidebar = css`
   .sidebar_menuToggle input:checked ~ ul {
     transform: none;
   }
+
+  .signbtn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    vertical-align: middle;
+  }
+
+  .loginbtn{
+    padding-right: 10px;
+    align-items: center;
+    vertical-align: middle;
+  }
+
+  .slash{
+    padding-right: 10px;
+    align-items: center;
+    vertical-align: middle;
+  }
+
 `;
 
 
