@@ -4,12 +4,29 @@ import Loginimg from "public/images/Loginimg.png";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import router from "next/router";
+import axios from "axios";
 
 
-export default function Emaillogin() {
+export default function EmailLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const access = sessionStorage.getItem("access_token");
+    if (access) {
+      axios.get(`http://127.0.0.1:8000/api/users/info/`, {
+        headers: {
+          Authorization: `Bearer ${access}`,
+        },
+      }).then((response) => {
+        const user_pk = response.data.user_pk;
+        router.push(`/caketables/${user_pk}/`);
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,29 +37,37 @@ export default function Emaillogin() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email : email,
-        password : password,
+        email: email,
+        password: password,
       }),
-    }).then((response) => {
-      if(!response.ok){
-        throw new Error ("로그인 오류");
-      }
-      return response.json();
-    }).then((response) => {
-      
-      sessionStorage.setItem('access', response.token.access);
-      sessionStorage.setItem('refresh', response.token.refresh);
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("로그인 오류");
+        }
+        return response.json();
+      })
+      .then(async (response) => {
+        if (response.message === "Email not found") {
+          alert("아이디 혹은 비밀번호를 다시 확인해주세요.");
+        } else {
+          sessionStorage.setItem("access_token", response.token.access_token);
+          sessionStorage.setItem("refresh_token", response.token.refresh_token);
 
-      console.log(response,"로그인 성공"); 
+          // caketable 존재 확인
+          const user_pk = response.user_pk;
+          const caketableResponse = await fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}`);
+          const caketableData = await caketableResponse.json();
 
-      alert("로그인 성공");
-      router.push("/Useruse");
-    }
-    );
-      
+          console.log(response);
+          if (caketableData[0] && caketableData[0].tablecolor) {
+            router.push(`/caketables/${user_pk}`);
+          } else {
+            router.push("/Useruse");
+          }
+        }
+      })
   };
-
-
 
 return(
   <div className="email_container">

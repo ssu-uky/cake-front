@@ -17,43 +17,8 @@ export default function Main() {
   const [cakeData, setCakeData] = useState({});
   const [loggedInUserPk, setLoggedInUserPk] = useState(null);
 
-
-  // 로그인한 사용자의 user_pk를 가져오는 함수 추가
-const fetchLoggedInUserPk = async () => {
-  const accessToken = sessionStorage.getItem("access_token");
-  const refreshToken = sessionStorage.getItem("refresh_token");
-  if (!accessToken || !refreshToken) return;
-
-  let validAccessToken = accessToken;
-
-  // access_token이 만료되었는지 확인하고, 만료된 경우 새로운 access_token을 발급받음
-  if (isTokenExpired(accessToken)) {
-    validAccessToken = await getNewAccessToken(refreshToken);
-    if (!validAccessToken) return;
-
-    // 새로 발급받은 access_token을 세션 스토리지에 저장
-    sessionStorage.setItem("access_token", validAccessToken);
-  }
-  try {
-    const response = await fetch("http://127.0.0.1:8000/api/users/login/token/refresh/", {
-    // const response = await fetch("http://127.0.0.1:8000/api/token/", {
-    // const response = await fetch("https://kauth.kakao.com/oauth/token", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${validAccessToken}`,
-      },
-    });
-
-
-    const data = await response.json();
-    setLoggedInUserPk(data.user_pk);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
   
-  // access_token이 유효한지 확인하는 함수 추가
+    // access_token이 유효한지 확인하는 함수 추가
 const isTokenExpired = (token) => {
   try {
     const decodedToken = jwt_decode(token);
@@ -86,6 +51,42 @@ const getNewAccessToken = async (refreshToken) => {
     return null;
   }
 };
+
+
+  // 로그인한 사용자의 user_pk를 가져오는 함수 추가
+const fetchLoggedInUserPk = async () => {
+  const accessToken = sessionStorage.getItem("access_token");
+  const refreshToken = sessionStorage.getItem("refresh_token");
+  if (!accessToken || !refreshToken) return;
+
+  let validAccessToken = accessToken;
+
+  // access_token이 만료되었는지 확인하고, 만료된 경우 새로운 access_token을 발급받음
+  if (isTokenExpired(accessToken)) {
+    validAccessToken = await getNewAccessToken(refreshToken);
+    if (!validAccessToken) return;
+
+    // 새로 발급받은 access_token을 세션 스토리지에 저장
+    sessionStorage.setItem("access_token", validAccessToken);
+  }
+  try {
+    // const response = await fetch("http://127.0.0.1:8000/api/users/login/token/refresh/", {
+    const response = await fetch("http://127.0.0.1:8000/api/token/", {
+    // const response = await fetch("https://kauth.kakao.com/oauth/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${validAccessToken}`,
+      },
+    });
+
+    const data = await response.json();
+    setLoggedInUserPk(data.user_pk);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+  
 
 // 컴포넌트가 마운트되면 로그인한 사용자의 user_pk를 가져옵니다.
 useEffect(() => {
@@ -291,7 +292,7 @@ useEffect(() => {
           color: currentPage === paginatedCakes.length - 1 ? '' : 'white',
         }}
         onClick={handleNextPage}
-        inactive={currentPage === paginatedCakes.length - 1}
+        inactive={currentPage === paginatedCakes.length - 1 ? 'true' : 'false'}
 
       // hidden={currentPage === paginatedCakes.length - 1} // 마지막 페이지에서는 오른쪽 버튼 안보이게
       />

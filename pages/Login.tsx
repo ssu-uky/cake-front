@@ -11,12 +11,15 @@ import Router, { useRouter } from 'next/router';
 
 export default function Login() {
   const router = useRouter();
+  const email = "user@example.com";
   
   const handleKakaoLogin = () => {
     // 로그인 페이지로 리디렉션
     window.location.href = "http://127.0.0.1:8000/api/users/signin/kakao/";  // 로컬용
     // window.location.href = "https://manage.neokkukae.store/api/users/signin/kakao/";  // 배포용
   };
+
+
   
   return (
     <div className="login_container">
@@ -31,16 +34,16 @@ export default function Login() {
       <div className="login_btn_container">
           <button className="login_kakao_btn loginbtn" onClick={handleKakaoLogin}>
             <div className="login_text_box">
-              <FontAwesomeIcon icon={faComment} />
-              카카오 로그인
+              <FontAwesomeIcon icon={faComment} className="icon" />
+              &nbsp; 카카오 로그인
             </div>
         </button>
         <br></br><br></br>
         <Link href="/components/email">
           <button className="login_email_btn loginbtn">
             <div className="login_text_box">
-              <FontAwesomeIcon icon={faEnvelope} />
-              이메일 로그인
+              <FontAwesomeIcon icon={faEnvelope} className="icon" />
+              &nbsp; 이메일 로그인
             </div>
           </button>
         </Link>
@@ -66,6 +69,7 @@ const login = css`
     font-weight: normal;
     font-style: normal;
   }
+
   .login_container {
     width: 100vw;
     height: 100vh;
@@ -84,21 +88,23 @@ const login = css`
     text-align: center;
     font-size: 55px;
     margin-top: 10vh;
-    margin-bottom: 10vh;
+    margin-bottom: 8vh;
     font-family: "Bazzi";
   }
 
+
   .login_btn_container {
-    margin-top: 7vh;
+    margin-top: 8vh;
   }
 
   .login_text_box {
     display: flex;
     justify-content: center;
+    align-items: center;
+    margin: 0 auto;
   }
-  span {
-    margin-left: 0px;
-  }
+
+
   .loginbtn {
     width: 300px;
     height: 60px;
@@ -108,8 +114,9 @@ const login = css`
     cursor: pointer;
     font-family: "Bazzi";
     background-color: yellow;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
+
   .login_email_btn {
     background-color: white;
   }

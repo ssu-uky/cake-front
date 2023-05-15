@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 //토큰
 const getToken = () => {
   // return localStorage.getItem("accessToken");
-  return sessionStorage.getItem("access");
+  return sessionStorage.getItem("access_token");
 };
 
 export default function Useruse() {

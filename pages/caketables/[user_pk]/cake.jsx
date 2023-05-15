@@ -134,7 +134,7 @@ export default function CakeTable(props) {
           <label htmlFor="tab2" className="visitoruse_label font">
             편지 쓰기
           </label>
-          <section id="content1" className="visitoruse_secion">
+          <section id="content1" className="visitoruse_section">
             <div className="visitoruse_pinktable">
               <Image src={Pinktable} width={500} alt="caketable" />
 
@@ -224,7 +224,7 @@ export default function CakeTable(props) {
               </div>
             </div>
           </section>
-          <section id="content2" className="visitoruse_secion">
+          <section id="content2" className="visitoruse_section">
             <div className="visitoruse_text">
               <textarea
                 className="letter_textarea font"
@@ -267,6 +267,7 @@ const visitoruse = css`
   .visitoruse_container {
     width: 500px;
     height: 100vh;
+    overflow: hidden;
     background-color: #f7bedf;
     color: white;
     text-align: center;
@@ -276,10 +277,11 @@ const visitoruse = css`
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  
   .visitoruse_text {
     font-size: 40px;
     line-height: 45px;
-    margin-top: 5vh;
+    margin-top: 3vh;
   }
   .visitoruse_name {
     font-size: 25px;
@@ -299,14 +301,20 @@ const visitoruse = css`
     border: 2px solid #f073cd;
     outline: none;
   }
-  .visitoruse_secion {
+  .visitoruse_section {
     display: none;
     /* padding: 20px 0 0; */
     border-top: 1px solid #f073cd;
+    vertical-align: middle;
+    text-align: center;
+    align-items: center;
   }
+
+
   .visitoruse_input {
     display: none;
   }
+  
   .visitoruse_label {
     display: inline-block;
     margin: 0 0 -1px;
@@ -327,33 +335,51 @@ const visitoruse = css`
   #tab2:checked ~ #content2 {
     display: block;
   }
+
   .visitoruse_pinktable {
     position: relative;
-    margin-top: 65px;
+    margin-top: 70px;
   }
+  
   .useruse_submit_button {
     border: none;
     background-color: #f073cd;
     color: white;
     width: 100px;
-    height: 35px;
+    height: 40px;
     font-size: 20px;
     border-radius: 10px;
-    margin-top: 50px;
+    margin: 0 auto;
+    vertical-align: middle;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
   .letter_textarea {
     width: 350px;
-    height: 130px;
-    font-size: 30px;
+    height: 250px;
+    font-size: 25px;
     line-height: 45px;
     border: 0;
     border-radius: 15px;
     outline: none;
-    padding: 40px;
+    padding: 30px;
+    margin: 40px 0;
   }
+
+  .letter_textarea:focus {
+    border: 2px solid #f073cd;
+    outline: none;
+  }
+  
   .selected {
     border: 2px dashed #f073cd;
+    margin-top: -5px;
   }
+
   #cake1 {
     position: absolute;
     right: 30px;

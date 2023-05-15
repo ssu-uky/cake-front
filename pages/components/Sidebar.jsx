@@ -9,7 +9,7 @@ const Sidebar = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = sessionStorage.getItem("access_token");
     const userPk = sessionStorage.getItem("userPk");
 
     if (accessToken && userPk) {
