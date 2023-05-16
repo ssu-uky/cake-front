@@ -166,7 +166,10 @@ const useruse = css`
   }
   .useruse_name {
     font-size: 35px;
+    vertical-align: middle;
+    margin-right: 10px;
   }
+
   .useruse_nickname {
     border: none;
     height: 40px;
@@ -174,7 +177,10 @@ const useruse = css`
     border-radius: 15px;
     text-align: center;
     font-size: 25px;
+    vertical-align: middle;
+    line-height: 50px;
   }
+
   .useruse_nickname:focus {
     border: 2px solid #f073cd;
     outline: none;
@@ -186,7 +192,11 @@ const useruse = css`
     margin: 0 auto;
     margin-top: 20px;
   }
+
   .useruse_submit_button {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%); 
     border: none;
     border-radius: 15px;
     height: 35px;
@@ -195,6 +205,12 @@ const useruse = css`
     margin-top: 130px;
     color: white;
     background-color: #f073cd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
   }
-  
+
 `;
