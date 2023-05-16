@@ -5,11 +5,14 @@ import Footer from "./components/Footer";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { useState } from "react";
 
 const Sidebar = () => {
   const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleClick = async () => {
+
+  const handleCakeClick = async () => {
     const accessToken = sessionStorage.getItem("access");
 
     if(accessToken) {
@@ -48,33 +51,58 @@ const Sidebar = () => {
     }
   };
 
+  const handleLinkClick = () => {
+    setIsOpen(false); // 페이지 전환 전에 사이드바를 닫습니다.
+  };
+
 
   return (
     <div className="sidebar_container">
       <nav role="sidebar_navigation">
         <div className="sidebar_menuToggle">
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={isOpen}
+            onChange={() => setIsOpen(!isOpen)}
+          />
 
           <span></span>
           <span></span>
           <span></span>
 
-          <ul className="sidebar_menu">
+          <ul className={`sidebar_menu ${isOpen ? "open" : ""}`}>
             <div className="signbtn">
-          <Link href="/login">
-          <li className="loginbtn" style={{ textDecoration: "none", cursor: "pointer" }} > Login </li>
+          <Link href="/">
+          <li className="loginbtn"
+            onClick={() => {
+              handleLinkClick();}}
+          style={{ textDecoration: "none", cursor: "pointer" }} > Login </li>
           </Link>
           <li className="slash"> / </li>
-          <li className="logoutbtn" onClick={handleLogout} style={{ textDecoration: "none", cursor: "pointer" }} >Logout</li>
+          <li className="logoutbtn"
+          onClick={() => {
+              handleLogout();
+              handleLinkClick();}}
+          style={{ textDecoration: "none", cursor: "pointer" }} >Logout</li>
             </div>
-          <li onClick={handleClick} style={{ textDecoration: "none", cursor: "pointer" }}>
+          <li 
+            onClick={() => {
+              handleCakeClick();
+              handleLinkClick();}}
+              style={{ textDecoration: "none", cursor: "pointer" }}>
               내 케이크 보기
             </li>
             <Link href="/">
-              <li style={{ textDecoration: "none" }}>서비스 소개</li>
+              <li
+              onClick={() => {
+              handleLinkClick();}}
+              style={{ textDecoration: "none" }}>서비스 소개</li>
             </Link>
             <Link href="/">
-              <li style={{ textDecoration: "none" }}>개발자 소개</li>
+              <li
+              onClick={() => {
+              handleLinkClick();}}
+              style={{ textDecoration: "none" }}>개발자 소개</li>
             </Link>
             <Footer />
           </ul>

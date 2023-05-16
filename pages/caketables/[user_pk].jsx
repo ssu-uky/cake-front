@@ -1,11 +1,12 @@
 import css from "styled-jsx/css";
 import Image from "next/image";
 import Caketable from "public/images/Caketable.png";
+import jwt_decode from "jwt-decode";
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import Sidebar from "../Sidebar";
+import { faAngleRight, faAngleLeft, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+// import Sidebar from "../Sidebar";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -34,7 +35,6 @@ const isTokenExpired = (token) => {
   // 새로운 access_token을 발급받는 함수
 const getNewAccessToken = async (refreshToken) => {
   try {
-    // const response = await fetch("http://127.0.0.1:8000/api/users/login/token/refresh/", {
     const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
       method: "POST",
       headers: {
@@ -55,10 +55,8 @@ const getNewAccessToken = async (refreshToken) => {
 
 // 로그인한 사용자의 user_pk를 가져오는 함수 추가
 const fetchLoggedInUserPk = async () => {
-  // const accessToken = sessionStorage.getItem("access");
-  // const refreshToken = sessionStorage.getItem("refresh");
-  const accessToken = sessionStorage.getItem("access_token");
-  const refreshToken = sessionStorage.getItem("refresh_token");
+  const accessToken = sessionStorage.getItem("access");
+  const refreshToken = sessionStorage.getItem("refresh");
   
   if (!accessToken || !refreshToken) return;
 
@@ -73,24 +71,19 @@ const fetchLoggedInUserPk = async () => {
     sessionStorage.setItem("access", validAccessToken);
   }
   try {
-    // const response = await fetch("http://127.0.0.1:8000/api/users/login/token/refresh/", {
     const response = await fetch("http://127.0.0.1:8000/api/users/info/", {
-    // const response = await fetch("https://kauth.kakao.com/oauth/token", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${validAccessToken}`,
       },
-      // body: JSON.stringify({ email, password }), // remove this line
     });
-    console.log(response, validAccessToken)
     
     const data = await response.json();
     setLoggedInUserPk(data.user_pk);
-    console.log(data.user_pk, "데이터 가져옴?");
   } catch (error) {
     console.error("Error:", error);
-    // console.log(setLoggedInUserPk, loggedInUserPk, data ) // data is not defined in this scope.
+    console.log(setLoggedInUserPk, loggedInUserPk, data ) // data is not defined in this scope.
   }
 };
 
@@ -124,7 +117,7 @@ useEffect(() => {
 
   // 다음 페이지 버튼
   const handleNextPage = () => {
-  if (currentPage < totalPages - 1) {
+  if (currentPage < totalPages ) {
     setCurrentPage(currentPage + 1);
   }
 };
@@ -188,17 +181,55 @@ useEffect(() => {
 
 
   const handleShowModal = (event, visitor) => {
+  event.preventDefault();
+  
+  // 로그인 한 본인만 모달창 내용 확인 가능
+  if (loggedInUserPk === parseInt(user_pk)) {
     event.preventDefault();
     setSelectedCake(visitor.pickcake);
-    setSelectedVisitor(visitor);
+    setSelectedVisitor(visitor.pk);
     setShowModal(true);
-  };
+  } else {
+    alert("본인만 확인할 수 있습니다.");
+    console.log(loggedInUserPk, user_pk, visitor.pickcake, visitor.pk)
+  }
+};
 
   const handleHideModal = () => {
     setSelectedCake(null);
     setSelectedVisitor(null);
     setShowModal(false);
   };
+
+
+  const handleDelete = async () => {
+    const accessToken = sessionStorage.getItem("access");
+    const confirm = window.confirm("편지를 정말 삭제하시겠습니까?");
+
+    if (confirm) {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/${selectedVisitor}/`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        console.log(selectedVisitor);
+
+        if (response.ok) {
+          handleHideModal();
+          router.push(`/caketables/${user_pk}/`);
+      }else{
+        console.log("삭제 실패");
+      }
+  }
+      catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
+
 
   // 모달 끝 //
   
@@ -233,15 +264,15 @@ useEffect(() => {
                   src={`/images/cakes/${visitor.pickcake}.png`}
                   height={100}
                   width={100}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer" , margin:0}}
                   alt="테이블에서 보이는 visitor가 선택한 케이크"
                   priority
               />
             )}
+            <p className="visitor_name">{visitor.visitor_name}</p> 
 
             {/* 모달 창 코드 시작 */}
-            {/* {showModal && visitor.pickcake === selectedCake && ( */}
-            {selectedVisitor === visitor && (
+            {selectedVisitor === visitor.pk && (
               <div
                 className="modal_container"
                 onClick={handleHideModal}
@@ -260,6 +291,11 @@ useEffect(() => {
                   <p className="modal_title"  id={selectedCake}> 🎉&nbsp; {visitor.visitor_name} 🎉 </p>
                 <br></br>
                   <p className="modal_body"  id={selectedCake}> {visitor.letter} </p>
+                    <FontAwesomeIcon
+                    icon={faTrashCan}
+                    onClick={handleDelete}
+                    style={{fontSize:"1.2em", color: "#ffffff", marginLeft:"70%", cursor:"pointer" }}
+                    />
               </div>
               </div>
             )}
@@ -272,7 +308,9 @@ useEffect(() => {
       
       
       <div style={style}>
-        <Image src={Caketable} alt="caketableimg" width={500} height={450} className="caketable" />
+        <Image src={Caketable} alt="caketableimg"
+        width={500} height={450}
+        className="caketable" />
       </div>
 
       <div className="pagebtn">
@@ -334,15 +372,8 @@ const main = css`
     font-style: normal;
   }
   
-  .bg_container{
-    background: #f7bedf;
-    width:100vw;
-    height:100vh;
-    overflow: hidden;
-  }
-
   .main_container {
-    width: 500px;
+    width: 100vw;
     height: 100vh;
     overflow: hidden;
     background-color: #f7bedf;
@@ -351,6 +382,8 @@ const main = css`
     position: relative;
     font-family: "Bazzi";
     vertical-align: middle;
+    align-items: center;
+    justify-content: center;
 
     //중앙정렬
     position: absolute;
@@ -385,37 +418,46 @@ const main = css`
     font-size: 15px;
   }
 
-  // 케이크 테이블 이미지
-  .caketableimg {
-    position: relative;
-    width: 500px;
-    display: fixed;
-    top: 100px;
-    // left: 50%;
-    transform: translate(-50%, -50%);
-  }
 
   // 전체 케이크 이동
   .main_cakeImg {
     position: absolute;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    z-index: 10;
     display: flex;
     flex-flow: row wrap;
-    width: 100%;
-    top: 340px;
-    justify-content: space-between;
-    z-index: 10;
+    flex-wrap: wrap;
   }
 
   .pickcake {
     width: calc(25% - 10px);
-    height: 100px;
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .visitor_name {
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+    font-family: "Bazzi";
+    text-align: center;
+    align-items: center;
+    vertical-align: middle;
+    margin-top: -5px;
+}
+
+  .first-row{
+    margin-top: 190px;
   }
 
   // 두번째 줄
   .second-row {
-    margin-top: 25px;
+    margin-bottom: 280px;
   }
 
   // 페이지네이션
@@ -454,7 +496,7 @@ const main = css`
     position: fixed;
     bottom: 0;
     left: 0;
-    padding: 20px;
+    padding: 25px;
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -463,16 +505,14 @@ const main = css`
 
   .modal_inner{
     width : 90%;
-    height : 70%;
-    display: absolute;
+    height : 80%;
+    display: relative;
     margin : 0 auto;
     vertical-align: middle;
     align-items: center;
     background-color: #f073cd;
-    // background-color: white;
     border-radius: 20px;
     margin-top: 50px;
-    // margin-bottom: 35px;
   }
 
   .modal_close {
@@ -487,15 +527,20 @@ const main = css`
     // color: #f073cd;
     font-size: 20px;
     margin: 0 auto;
-    padding-top: 40px;
+    padding-top: 30px;
     text-align: center;
   }
 
   .modal_body {
-    // color: #f073cd;
     font-size: 17px;
     padding: 10px;
     text-align: center;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
   }
+
 `;
 
