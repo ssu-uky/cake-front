@@ -2,12 +2,12 @@ import css from "styled-jsx/css";
 import Image from "next/image";
 import Caketable from "public/images/Caketable.png";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faAngleLeft, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 // import Sidebar from "../Sidebar";
-import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -122,10 +122,51 @@ useEffect(() => {
   }
 };
 
-  const paginationText = `${currentPage + 1} / ${totalPages}`;
+  const paginationText = `${currentPage + 1} / ${totalPages !== 0 ? totalPages : 1}`;
+
   // 페이지 네이션 구현 끝 (하단에서 버튼으로 다시 이어짐)
 
-  // 링크 복사
+
+
+  // 생일 축하해주기 버튼 시작
+  const handleClick = (event) => {
+    event.preventDefault();
+    router.push(`/caketables/${cakeData.user_pk}/cake/`);
+  };
+  // 생일 축하해주기 버튼 끝
+
+  // 내 케이크 만들기 시작
+  const handleMyCake = async () => {
+    const accessToken = sessionStorage.getItem("access");
+
+    if (accessToken) {
+      try{
+        const response = await axios.get("http://127.0.0.1:8000/api/users/info/", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        const data = response.data;
+        router.push(`/caketables/${data.user_pk}/`);
+      } catch (error) {
+        console.error(error);
+      }
+        } else {
+      alert("로그인이 필요합니다.");
+      router.push("/Login");
+      }
+
+    // if (accessToken) {
+    //   // router.push(`/caketables/${cakeData.user_pk}`);
+    //   router.push(`/caketables/${user_pk}`);
+    // } else {
+    //   alert("로그인이 필요합니다.");
+    //   router.push("/Login");
+    // }
+  };
+  // 내 케이크 만들기 끝
+
+  // 링크 복사 시작
   const copyURL = async () => {
     try {
       const currentUrl = window.location.href;
@@ -137,13 +178,6 @@ useEffect(() => {
   };
   // 링크 복사 끝
 
-
-  // 하단 버튼 시작
-  const handleClick = (event) => {
-    event.preventDefault();
-    router.push(`/caketables/${cakeData.user_pk}/cake/`);
-  };
-  // 하단 버튼 끝
 
 
   //user 정보
@@ -201,7 +235,7 @@ useEffect(() => {
     setShowModal(false);
   };
 
-
+  // 케이크 삭제
   const handleDelete = async () => {
     const accessToken = sessionStorage.getItem("access");
     const confirm = window.confirm("편지를 정말 삭제하시겠습니까?");
@@ -220,6 +254,7 @@ useEffect(() => {
         if (response.ok) {
           handleHideModal();
           router.push(`/caketables/${user_pk}/`);
+          fetchLoggedInUserPk();
       }else{
         console.log("삭제 실패");
       }
@@ -237,8 +272,9 @@ useEffect(() => {
     <div className="bg_container">
     <div className="main_container bgimg">
       {/* <Sidebar /> */}
-      <p className="main_text">{cakeData.nickname}님의 케이크</p>
-      <p className="main_text">
+      <p className="main_text_title">
+        {cakeData.nickname}님의 케이크</p>
+      <p className="main_text_message">
         {cakeData.total_visitor}명이 축하메세지를 보냈습니다
       </p>
 
@@ -350,9 +386,9 @@ useEffect(() => {
         <button className="main_btn" onClick={handleClick}>
           생일 축하해주기
         </button>
-        <Link href="/Login">
-          <button className="main_btn">내 케이크 만들기</button>
-        </Link>
+        <button className="main_btn" onClick={handleMyCake}>
+          내 케이크 만들기
+          </button>
         <button className="main_btn" onClick={copyURL}>
           내 케이크 공유하기
         </button>
@@ -392,11 +428,16 @@ const main = css`
     transform: translate(-50%, -50%);
   }
 
-  .main_text {
-    font-size: 30px;
-    margin-bottom: 35px;
-    line-height: 5px;
+  .main_text_title{
+    font-size: 2em;
     margin-top: 40px;
+    margin-bottom: 10px;
+  }
+
+  .main_text_message {
+    font-size: 2em;
+    margin-top: -15px;
+    margin-bottom: 35px;
   }
 
   // 하단 버튼 정렬
@@ -416,6 +457,7 @@ const main = css`
     background-color: #f073cd;
     color: white;
     font-size: 15px;
+    cursor: pointer;
   }
 
 
@@ -423,12 +465,16 @@ const main = css`
   .main_cakeImg {
     position: absolute;
     width: 100%;
-    height: 100%;
-    justify-content: space-evenly;
     z-index: 10;
     display: flex;
     flex-flow: row wrap;
     flex-wrap: wrap;
+    // justify-content: space-evenly;
+    justify-content: space-between;
+  }
+
+  .caketable{
+    display: inline-block;
   }
 
   .pickcake {
@@ -449,16 +495,13 @@ const main = css`
     align-items: center;
     vertical-align: middle;
     margin-top: -5px;
+    margin-bottom: 5px;
 }
 
   .first-row{
     margin-top: 190px;
   }
 
-  // 두번째 줄
-  .second-row {
-    margin-bottom: 280px;
-  }
 
   // 페이지네이션
   .pagebtn {
@@ -541,6 +584,62 @@ const main = css`
     align-items: center;
     position: relative;
   }
-
 `;
 
+// const main = css`
+//   @font-face {
+//     font-family: "Bazzi";
+//     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
+//       format("woff");
+//     font-weight: normal;
+//     font-style: normal;
+//   }
+//   .main_container {
+//     width: 500px;
+//     height: 100vh;
+//     background-color: #f7bedf;
+//     color: white;
+//     text-align: center;
+//     font-family: "Bazzi";
+//     //중앙정렬
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//   }
+//   .main_text {
+//     font-size: 30px;
+//     line-height: 15px;
+//   }
+//   .main_btn_container {
+//     display: flex;
+//     justify-content: space-evenly;
+//   }
+//   .main_btn {
+//     width: 150px;
+//     height: 45px;
+//     border-radius: 15px;
+//     border: none;
+//     font-family: "Bazzi";
+//     background-color: #f073cd;
+//     color: white;
+//     margin-top: 10px;
+//     font-size: 15px;
+//   }
+//   .main_cakeImg {
+//     position: absolute;
+//     display: flex;
+//     flex-flow: row wrap;
+//     width: 100%;
+//     top: 330px;
+//   }
+//   .pickcake {
+//     margin-right: 30px;
+//   }
+//   .modal {
+//     height: 100px;
+//     width: 100px;
+//     background-color: #ffffff;
+//     color: black;
+//       }
+// `;

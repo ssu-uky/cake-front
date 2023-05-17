@@ -80,6 +80,11 @@ export default function EmailLogin() {
     };
 
 
+    const handleSignup = async () => {
+      router.push("signup/");
+    };
+
+
 return(
   <div className="email_container">
     <br></br><br></br>
@@ -126,7 +131,7 @@ return(
           &nbsp;&nbsp; | &nbsp;&nbsp;
           <li>비밀번호 찾기</li>
           &nbsp;&nbsp; | &nbsp;&nbsp;
-          <li>회원가입</li>
+          <li onClick={handleSignup} style={{cursor:"pointer"}}>회원가입</li>
         </div>
       </form>
 
@@ -235,5 +240,4 @@ const email_login = css`
     text-decoration: none;
     list-style: none;
   }
-
 `

@@ -122,3 +122,55 @@ const login = css`
   }
 
 `;
+
+
+// const login = css`
+//   @font-face {
+//     font-family: "Bazzi";
+//     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
+//       format("woff");
+//     font-weight: normal;
+//     font-style: normal;
+//   }
+//   .login_container {
+//     width: 500px;
+//     height: 100vh;
+//     background-color: #f7bedf;
+//     color: white;
+//     text-align: center;
+//     //중앙정렬
+//     position: absolute;
+//     top: 50%; 
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//   }
+//   .login_title {
+//     text-align: center;
+//     font-size: 55px;
+//     margin-top: 15vh;
+//     margin-bottom: 10vh;
+//     font-family: "Bazzi";
+//   }
+
+//   .login_btn_container {
+//     margin-top: 7vh;
+//   }
+//   .login_text_box {
+//     display: flex;
+//     justify-content: center;
+//   }
+//   span {
+//     margin-left: 0px;
+//   }
+//   .loginbtn {
+//     width: 300px;
+//     height: 60px;
+//     border-radius: 15px;
+//     border: none;
+//     font-size: 20px;
+//     cursor: pointer;
+//     font-family: "Bazzi";
+//     background-color: yellow;
+//     margin-bottom: 10px;
+//   }
+// `;

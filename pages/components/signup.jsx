@@ -54,7 +54,7 @@ export default function Email_login() {
       // sessionStorage.setItem('refresh', response.token.refresh);
       
       alert("회원가입이 완료되었습니다.");
-      window.location.href = "/Login";
+      window.location.href = "/";
       })
   };
 
@@ -253,7 +253,7 @@ const emaillogin = css`
 }
 
   .emaillogin_container .emaillogin_button {
-    width: 200px;
+    width: 170px;
     height: 50px;
     align-items: center;
     vertical-align: middle;

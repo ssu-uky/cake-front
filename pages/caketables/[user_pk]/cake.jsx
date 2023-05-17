@@ -291,6 +291,7 @@ const visitoruse = css`
   }
   .visitoruse_name {
     font-size: 25px;
+    vertical-align: middle;
   }
 
   .visitoruse_nickname {
@@ -363,7 +364,7 @@ const visitoruse = css`
     font-size: 20px;
     border-radius: 10px;
     margin: 0 auto;
-    margin-top: 15px;
+    margin-top: 25px;
     vertical-align: middle;
     text-align: center;
     justify-content: center;
@@ -381,7 +382,7 @@ const visitoruse = css`
     border-radius: 15px;
     outline: none;
     padding: 30px;
-    margin:0 auto;
+    margin-top: 25px;
   }
 
   .letter_textarea:focus {
@@ -398,7 +399,7 @@ const visitoruse = css`
 
   .visitoruse_pinktable {
   display: inline-block;
-  margin-top: 20%;
+  margin-top: 100px;
 }
 
 
@@ -501,3 +502,171 @@ const visitoruse = css`
     right: 125%;
   }
 `;
+
+
+// const visitoruse = css`
+//   @font-face {
+//     font-family: "Bazzi";
+//     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
+//       format("woff");
+//     font-weight: normal;
+//     font-style: normal;
+//   }
+//   .font {
+//     font-family: "Bazzi";
+//   }
+//   .visitoruse_nickname_password_container {
+//     display: flex;
+//     justify-content: space-evenly;
+//     margin-top: 35px;
+//   }
+//   .visitoruse_container {
+//     width: 500px;
+//     height: 100vh;
+//     background-color: #f7bedf;
+//     color: white;
+//     text-align: center;
+//     //중앙정렬
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//   }
+//   .visitoruse_text {
+//     font-size: 40px;
+//     line-height: 40px;
+//     margin-top: 6vh;
+//   }
+//   .visitoruse_name {
+//     font-size: 25px;
+//   }
+//   .visitoruse_nickname {
+//     border: none;
+//     height: 30px;
+//     width: 150px;
+//     border-radius: 10px;
+//     text-align: center;
+//     font-size: 25px;
+//   }
+//   .visitoruse_tab_container {
+//     margin-top: 30px;
+//   }
+//   .visitoruse_nickname:focus {
+//     border: 2px solid #f073cd;
+//     outline: none;
+//   }
+//   .visitoruse_secion {
+//     display: none;
+//     /* padding: 20px 0 0; */
+//     border-top: 1px solid #f073cd;
+//   }
+//   .visitoruse_input {
+//     display: none;
+//   }
+//   .visitoruse_label {
+//     display: inline-block;
+//     margin: 0 0 -1px;
+//     padding: 15px 89px;
+//     border-radius: 15px 15px 0 0;
+//     font-weight: 600;
+//     color: #f073cd;
+//     font-size: 20px;
+//   }
+//   //input 클릭시, label 스타일
+//   .visitoruse_input:checked + .visitoruse_label {
+//     color: #ffffff;
+//     border: 1px solid #f073cd;
+//     background-color: #f073cd;
+//   }
+//   #tab1:checked ~ #content1,
+//   #tab2:checked ~ #content2 {
+//     display: block;
+//   }
+//   .visitoruse_pinktable {
+//     position: relative;
+//     margin-top: 65px;
+//   }
+//   .useruse_submit_button {
+//     border: none;
+//     background-color: #f073cd;
+//     color: white;
+//     width: 100px;
+//     height: 35px;
+//     font-size: 20px;
+//     border-radius: 10px;
+//     margin-top: 50px;
+//   }
+//   .letter_textarea {
+//     width: 350px;
+//     height: 130px;
+//     font-size: 30px;
+//     line-height: 45px;
+//     border: 0;
+//     border-radius: 15px;
+//     outline: none;
+//     padding: 40px;
+//   }
+//   .selected {
+//     border: 2px dashed #f073cd;
+//   }
+//   #cake1 {
+//     position: absolute;
+//     right: 30px;
+//     top: -65px;
+//   }
+//   #cake2 {
+//     position: absolute;
+//     right: 140px;
+//     top: -65px;
+//   }
+//   #cake3 {
+//     position: absolute;
+//     right: 250px;
+//     top: -65px;
+//   }
+//   #cake4 {
+//     position: absolute;
+//     right: 370px;
+//     top: -65px;
+//   }
+//   #cake5 {
+//     position: absolute;
+//     right: 30px;
+//     top: 60px;
+//   }
+//   #cake6 {
+//     position: absolute;
+//     right: 140px;
+//     top: 60px;
+//   }
+//   #cake7 {
+//     position: absolute;
+//     right: 250px;
+//     top: 60px;
+//   }
+//   #cake8 {
+//     position: absolute;
+//     right: 370px;
+//     top: 60px;
+//   }
+//   #cake9 {
+//     position: absolute;
+//     right: 30px;
+//     top: 190px;
+//   }
+//   #cake10 {
+//     position: absolute;
+//     right: 140px;
+//     top: 190px;
+//   }
+//   #cake11 {
+//     position: absolute;
+//     right: 250px;
+//     top: 190px;
+//   }
+//   #cake12 {
+//     position: absolute;
+//     right: 370px;
+//     top: 190px;
+//   }
+// `;

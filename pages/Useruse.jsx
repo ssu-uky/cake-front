@@ -214,3 +214,89 @@ const useruse = css`
   }
 
 `;
+
+
+
+//react-color custom
+// const Global = createGlobalStyle`
+// .flexbox-fix:last-child {
+//   visibility: hidden;
+// }
+// .flexbox-fix:nth-child(1) {
+//   visibility: hidden;
+// }
+// .chrome-picker > div > div:nth-child(1){
+//   height:100px;
+//   /* margin-top: 50px; */
+// }
+// .chrome-picker:nth-child(1){
+//   height:100px;
+  
+// }
+// .hue-horizontal {
+//   visibility: visible;
+//   position: fixed;
+//   top: -175px;
+//   left: -15px;
+// }
+// `;
+
+// const useruse = css`
+//   @font-face {
+//     font-family: "Bazzi";
+//     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
+//       format("woff");
+//     font-weight: normal;
+//     font-style: normal;
+//   }
+//   .font {
+//     font-family: "Bazzi";
+//   }
+//   .useruse_container {
+//     width: 500px;
+//     height: 100vh;
+//     background-color: #f7bedf;
+//     color: white;
+//     text-align: center;
+//     //중앙정렬
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//   }
+//   .useruse_nickname_container {
+//     margin-top: 5vh;
+//   }
+//   .useruse_name {
+//     font-size: 35px;
+//   }
+//   .useruse_nickname {
+//     border: none;
+//     height: 40px;
+//     width: 200px;
+//     border-radius: 15px;
+//     text-align: center;
+//     font-size: 25px;
+//   }
+//   .useruse_nickname:focus {
+//     border: 2px solid #f073cd;
+//     outline: none;
+//   }
+
+//   .useruse_color_button {
+//     height: 400px;
+//     width: 450px;
+//     margin: 0 auto;
+//     margin-top: 20px;
+//   }
+//   .useruse_submit_button {
+//     border: none;
+//     border-radius: 15px;
+//     height: 35px;
+//     width: 90px;
+//     font-size: 20px;
+//     margin-top: 130px;
+//     color: white;
+//     background-color: #f073cd;
+//   }
+// `;

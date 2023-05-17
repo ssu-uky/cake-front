@@ -52,7 +52,7 @@ const Sidebar = () => {
   };
 
   const handleLinkClick = () => {
-    setIsOpen(false); // 페이지 전환 전에 사이드바를 닫습니다.
+    setIsOpen(false); // 페이지 이동 전에 사이드바를 닫습니다.
   };
 
 
@@ -151,11 +151,9 @@ const sidebar = css`
 
   .sidebar_menuToggle input {
     display: block;
-    width: 40px;
-    height: 32px;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    top: -7px;
-    left: -5px;
 
     cursor: pointer;
 
@@ -255,7 +253,6 @@ const sidebar = css`
   }
 
 `;
-
 
 
 
