@@ -37,7 +37,7 @@ export default function Login() {
             </div>
         </button>
         <br></br><br></br>
-        <Link href="/components/email">
+        <Link href="/login/email">
           <button className="login_email_btn loginbtn">
             <div className="login_text_box">
               <FontAwesomeIcon icon={faEnvelope} className="icon" />

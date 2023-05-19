@@ -88,61 +88,70 @@ export default function EmailLogin() {
     const handleSignup = async () => {
       router.push("signup/");
     };
+  
+  const handleFindPw = async () => {
+    router.push("resetpw/");
+  };
 
 
-return(
-  <div className="email_container">
-    <br></br><br></br>
-    <Image
-      src={Loginimg}
-      alt="로그인 이미지"
-      width={180}
-      height={130}
-      className="loginimg"
-    />
-    <h1> 네가 꾸민 케이크 </h1>
-    <form className="login_form" onSubmit={handleSubmit}>
-      <div className="email_label">
-        <input
-          type="email"
-          id="input2"
-          placeholder="아이디"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onFocus={(e) => (e.target.placeholder = "")}
-          onBlur={(e) => (e.target.placeholder = "아이디")}
-          className="email_input"
+return (
+    <div className="email_container">
+        <br></br>
+        <br></br>
+        <Image
+            src={Loginimg}
+            alt="로그인 이미지"
+            width={180}
+            height={130}
+            className="loginimg"
         />
-        </div>
-        <div className="email_label">
-          <input
-            type="password"
-            id="input3"
-            placeholder="비밀번호"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "비밀번호")}
-            className="email_input"
-          />
-        </div>
-        <div className="login_button">
-          <button type="submit" className="login_btn">
-            로그인
-          </button>
-        </div>  
-        <div className="find_button">
-          <li>아이디 찾기</li>
-          &nbsp;&nbsp; | &nbsp;&nbsp;
-          <li>비밀번호 찾기</li>
-          &nbsp;&nbsp; | &nbsp;&nbsp;
-          <li onClick={handleSignup} style={{cursor:"pointer"}}>회원가입</li>
-        </div>
-      </form>
+        <h1> 네가 꾸민 케이크 </h1>
+        <form className="login_form" onSubmit={handleSubmit}>
+            <div className="email_label">
+                <input
+                    type="email"
+                    id="input2"
+                    placeholder="아이디"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={(e) => (e.target.placeholder = "")}
+                    onBlur={(e) => (e.target.placeholder = "아이디")}
+                    className="email_input"
+                />
+            </div>
+            <div className="email_label">
+                <input
+                    type="password"
+                    id="input3"
+                    placeholder="비밀번호"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onFocus={(e) => (e.target.placeholder = "")}
+                    onBlur={(e) => (e.target.placeholder = "비밀번호")}
+                    className="email_input"
+                />
+            </div>
+            <div className="login_button">
+                <button type="submit" className="login_btn">
+                    로그인
+                </button>
+            </div>
+            <div className="find_button">
+                <li>아이디 찾기</li>
+                &nbsp;&nbsp; | &nbsp;&nbsp;
+                <li onClick={handleFindPw} style={{ cursor: "pointer" }}>
+                    비밀번호 찾기
+                </li>
+                &nbsp;&nbsp; | &nbsp;&nbsp;
+                <li onClick={handleSignup} style={{ cursor: "pointer" }}>
+                    회원가입
+                </li>
+            </div>
+        </form>
 
-      <style jsx>{email_login}</style>
+        <style jsx>{email_login}</style>
     </div>
-  );
+);
 }
 
 
