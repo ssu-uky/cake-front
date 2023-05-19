@@ -7,11 +7,9 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faComment } from "@fortawesome/free-solid-svg-icons";
 import * as React from 'react';
-import Router, { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function Login() {
-  const router = useRouter();
-  const email = "user@example.com";
   
   const handleKakaoLogin = () => {
     // 로그인 페이지로 리디렉션

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { ChromePicker } from "react-color";
 import Image from "next/image";
@@ -7,22 +8,18 @@ import css from "styled-jsx/css";
 // import Sidebar from "pages/components/Sidebar.jsx";
 import { useRouter } from "next/router";
 
-
-//토큰
-const getToken = () => {
-  // return localStorage.getItem("accessToken");
-  return sessionStorage.getItem("access");
-};
-
 export default function Useruse() {
   const router = useRouter();
+  const user_pk = router.query.user_pk;
 
   const [tablecolor, setTableColor] = useState("#ffffff");
   const [nickname, setNickname] = useState("");
   const [token, setToken] = useState("");
 
-  //토큰
   useEffect(() => {
+    const getToken = () => {
+      return window.sessionStorage.getItem("access");
+    };
     setToken(getToken());
   }, []);
 
@@ -30,7 +27,6 @@ export default function Useruse() {
     return token !== "";
   };
 
-  //색선택
   const handleChange = (newColor) => {
     setTableColor(newColor.hex);
     document.getElementById("image-container").style.backgroundColor =
@@ -42,13 +38,11 @@ export default function Useruse() {
 
     if (!isLoggedIn()) {
       alert("로그인이 필요합니다");
-      window.location.href = "/Login"; // 로그인 페이지로 이동
+      window.location.href = "/Login";
       return;
     }
 
-    // fetch(`https://manage.neokkukae.store/api/caketables/new/`, { // 배포용
-    fetch(`http://127.0.0.1:8000/api/caketables/new/`, { // 로컬용
-
+    fetch(`http://127.0.0.1:8000/api/caketables/new/`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -68,13 +62,15 @@ export default function Useruse() {
       .then((data) => {
         const { owner } = data;
         router.push(`/caketables/${owner}`);
-        // console.log(data, owner, 121212);
       })
       .catch((error) => {
         console.error("Error:", error);
         alert("2-케이크는 하나만 생성이 가능합니다.");
       });
+    console.log(user_pk, nickname, tablecolor);
   };
+
+  // 여
 
   return (
     <div className="useruse_container">
@@ -82,7 +78,7 @@ export default function Useruse() {
       {/* <Sidebar /> */}
       <form onSubmit={handleSubmit}>
         <div className="useruse_nickname_container font">
-          <label for="nickname" className="useruse_name font">
+          <label htmlFor="nickname" className="useruse_name font">
             닉네임 :{" "}
           </label>
           <input
@@ -99,9 +95,10 @@ export default function Useruse() {
             color={tablecolor}
             onChange={handleChange}
             width={450}
+            height={400}
           />
-          <div id="image-container" style={{ backgroundColor: tablecolor}}>
-            <Image src={cakeimg} width={450} />
+          <div id="image-container" style={{ backgroundColor: tablecolor }}>
+            <Image src={cakeimg} width={450} height={400} />
           </div>
         </div>
         <button type="submit" className="useruse_submit_button font">

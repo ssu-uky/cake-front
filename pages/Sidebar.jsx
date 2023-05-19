@@ -133,7 +133,9 @@ const sidebar = css`
   .sidebar_menuToggle {
     display: block;
     position: relative;
-    top: 50px;
+    width: 40px;
+    height: 40px;
+    top: 40px;
     left: 30px;
 
     z-index: 1000;
@@ -143,6 +145,8 @@ const sidebar = css`
   }
 
   .sidebar_menuToggle li {
+    list-style: none;
+    display: block;
     color: #000000;
     line-height: 40px;
     float: left;
@@ -151,8 +155,8 @@ const sidebar = css`
 
   .sidebar_menuToggle input {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 40px;
+    height: 32px;
     position: absolute;
 
     cursor: pointer;
@@ -163,14 +167,20 @@ const sidebar = css`
     -webkit-touch-callout: none;
   }
 
+  // .sidebar_menuToggle:hover {
+  //   border-radius: 4px;
+  //   border: 1px solid #ffffff;
+  // }
+
   // X 버튼
   .sidebar_menuToggle span {
     display: block;
+    flex-direction: column;
     width: 33px;
     height: 4px;
-    margin-left: 15px;
-    margin-bottom: 5px;
+    margin: 5px 3px;
     position: relative;
+    
 
     background: #ffffff;
     border-radius: 3px;

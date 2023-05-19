@@ -11,26 +11,31 @@ const KakaoLogin = () => {
       if (refresh && access && user_pk) {
         sessionStorage.setItem("refresh", refresh);
         sessionStorage.setItem("access", access);
-        // sessionStorage.setItem("user_pk", user_pk);
 
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/caketables/${user_pk}/`);
+          const response = await axios.get(
+            `http://127.0.0.1:8000/api/caketables/${user_pk}/`
+          );
           console.log(response.data);
-          if (Array.isArray(response.data) && response.data[0].tablecolor && response.data[0].tablecolor.trim() !== '') {
+          if (
+            Array.isArray(response.data) &&
+            response.data[0].tablecolor &&
+            response.data[0].tablecolor.trim() !== ""
+          ) {
             router.push(`/caketables/${user_pk}/`);
           } else {
-            router.push('/Useruse');
+            router.push("/Useruse");
           }
         } catch (error) {
           console.error(error);
-          router.push('/Useruse');
+          router.push("/Useruse");
         }
       }
     };
-
     CheckTable();
   }, [refresh, access, user_pk, router]);
 
+  console.log(refresh, access, user_pk)
   return <div>{/* <h1>카카오 로그인 중...</h1> */}</div>;
 };
 

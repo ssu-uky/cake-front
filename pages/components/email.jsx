@@ -53,6 +53,8 @@ export default function EmailLogin() {
     }
 
     const data = await response.json();
+    console.log(data);
+
     const accessToken = data.token.access;
       const refreshToken = data.token.refresh;
 
@@ -71,10 +73,13 @@ export default function EmailLogin() {
           } else {
             router.push("/Useruse");
           }
+
+          console.log(caketableData.tablecolor, email, password)
         
       }
       catch (error) {
         alert("아이디와 비밀번호를 다시 확인해주세요");
+        console.log(error)
         console.log("아이디와 비밀번호를 다시 확인해주세요");
       }
     };

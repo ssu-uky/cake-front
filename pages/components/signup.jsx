@@ -17,6 +17,12 @@ export default function Email_login() {
     alert("모든 항목을 채워주세요.");
     return;
   }
+  
+  // 이름 형식 확인
+  if (!/^[A-Za-z]{2,7}$|^[가-힣]{2,7}$/.test(name)) {
+    alert('이름을 올바르게 입력해주세요.');
+    return;
+  }
     // 비밀번호 확인
     if (password !== passwordConfirm) {
       alert("비밀번호가 일치하지 않습니다.");
@@ -53,7 +59,8 @@ export default function Email_login() {
       // sessionStorage.setItem('access', response.token.access);
       // sessionStorage.setItem('refresh', response.token.refresh);
       
-      alert("회원가입이 완료되었습니다.");
+      // alert("회원가입이 완료되었습니다. 이메일 인증을 하신 후 로그인 해주세요!");
+        alert("회원가입이 완료되었습니다. 로그인을 해주세요!")
       window.location.href = "/";
       })
   };
@@ -73,12 +80,14 @@ export default function Email_login() {
   <div className="emaillogin_label">
     <label htmlFor="input1">이름 :</label>
     <input
-      type="text"
+      type="name"
       placeholder="이름을 입력해주세요"
       onFocus={(e) => (e.target.placeholder = "")}
       onBlur={(e) => (e.target.placeholder = "이름을 입력해주세요")}
       className="emaillogin_input"
       id="input1"
+      minLength={2}
+      maxLength={7}
     />
   </div>
   <div className="emaillogin_label">
