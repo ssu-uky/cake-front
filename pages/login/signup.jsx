@@ -126,10 +126,10 @@ const validationMessageElement = document.getElementById(
       <h1>회원가입</h1>
       <form className="emaillogin_form" onSubmit={handleSubmit}>
         <div className="emaillogin_label">
-          <label htmlFor="input1">이름 :</label>
+          <label htmlFor="input1"></label>
           <input
             type="name"
-            placeholder="이름을 입력해주세요"
+            placeholder="이름"
             onFocus={(e) => (e.target.placeholder = "")}
             onBlur={(e) => (e.target.placeholder = "이름을 입력해주세요")}
             className="emaillogin_input"
@@ -140,7 +140,7 @@ const validationMessageElement = document.getElementById(
           <div className="signup-error"></div>
         </div>
         <div className="emaillogin_label">
-          <label htmlFor="input2"> 이메일 :</label>
+          <label htmlFor="input2"></label>
           <input
             type="email"
             placeholder="이메일을 입력해주세요"
@@ -152,10 +152,10 @@ const validationMessageElement = document.getElementById(
           <div className="signup-error"></div>
         </div>
         <div className="emaillogin_label">
-          <label htmlFor="input3">비밀번호 :</label>
+          <label htmlFor="input3"></label>
           <input
             type="password"
-            placeholder="비밀번호를 입력해주세요"
+            placeholder="비밀번호"
             onFocus={(e) => (e.target.placeholder = "")}
             onBlur={(e) => (e.target.placeholder = "비밀번호를 입력해주세요")}
             className="emaillogin_input"
@@ -167,10 +167,10 @@ const validationMessageElement = document.getElementById(
           <div id="password-validation-message"></div>
         </div>
         <div className="emaillogin_label">
-          <label htmlFor="input4">비밀번호 확인 :</label>
+          <label htmlFor="input4"></label>
           <input
             type="password"
-            placeholder="비밀번호를 다시 입력해주세요"
+            placeholder="비밀번호 확인"
             onFocus={(e) => (e.target.placeholder = "")}
             onBlur={(e) =>
               (e.target.placeholder = "비밀번호를 다시 입력해주세요")
