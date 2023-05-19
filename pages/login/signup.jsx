@@ -113,83 +113,90 @@ const validationMessageElement = document.getElementById(
   };
 
   return (
-    <div className="emaillogin_container">
-      <br></br>
-      <br></br>
-      <Image
-        src={Loginimg}
-        alt="loginimg"
-        width={180}
-        height={130}
-        className="login_img"
-      />
-      <h1>회원가입</h1>
-      <form className="emaillogin_form" onSubmit={handleSubmit}>
-        <div className="emaillogin_label">
-          <label htmlFor="input1"></label>
-          <input
-            type="name"
-            placeholder="이름"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "이름을 입력해주세요")}
-            className="emaillogin_input"
-            id="input1"
-            minLength={2}
-            maxLength={7}
+      <div className="emaillogin_container">
+          <br></br>
+          <br></br>
+          <Image
+              src={Loginimg}
+              alt="loginimg"
+              width={180}
+              height={130}
+              className="login_img"
           />
-          <div className="signup-error"></div>
-        </div>
-        <div className="emaillogin_label">
-          <label htmlFor="input2"></label>
-          <input
-            type="email"
-            placeholder="이메일을 입력해주세요"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "이메일을 입력해주세요")}
-            className="emaillogin_input"
-            id="input2"
-          />
-          <div className="signup-error"></div>
-        </div>
-        <div className="emaillogin_label">
-          <label htmlFor="input3"></label>
-          <input
-            type="password"
-            placeholder="비밀번호"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "비밀번호를 입력해주세요")}
-            className="emaillogin_input"
-            id="input3"
-            minLength={8}
-            maxLength={14}
-            onChange={handlePasswordChange}
-          />
-          <div id="password-validation-message"></div>
-        </div>
-        <div className="emaillogin_label">
-          <label htmlFor="input4"></label>
-          <input
-            type="password"
-            placeholder="비밀번호 확인"
-            onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) =>
-              (e.target.placeholder = "비밀번호를 다시 입력해주세요")
-            }
-            className="emaillogin_input"
-            id="input4"
-            minLength={8}
-            maxLength={14}
-          />
-          <div className="signup-error"></div>
-        </div>
+          <h1>회원가입</h1>
+          <form className="emaillogin_form" onSubmit={handleSubmit}>
+              <div className="emaillogin_label">
+                  <label htmlFor="input1"></label>
+                  <input
+                      type="name"
+                      placeholder="이름을 입력해주세요"
+                      onFocus={(e) => (e.target.placeholder = "")}
+                      onBlur={(e) =>
+                          (e.target.placeholder = "이름을 입력해주세요")
+                      }
+                      className="emaillogin_input"
+                      id="input1"
+                      minLength={2}
+                      maxLength={7}
+                  />
+                  <div className="signup-error"></div>
+              </div>
+              <div className="emaillogin_label">
+                  <label htmlFor="input2"></label>
+                  <input
+                      type="email"
+                      placeholder="이메일을 입력해주세요"
+                      onFocus={(e) => (e.target.placeholder = "")}
+                      onBlur={(e) =>
+                          (e.target.placeholder = "이메일을 입력해주세요")
+                      }
+                      className="emaillogin_input"
+                      id="input2"
+                  />
+                  <div className="signup-error"></div>
+              </div>
+              <div className="emaillogin_label">
+                  <label htmlFor="input3"></label>
+                  <input
+                      type="password"
+                      placeholder="비밀번호를 입력해주세요"
+                      onFocus={(e) => (e.target.placeholder = "")}
+                      onBlur={(e) =>
+                          (e.target.placeholder = "비밀번호를 입력해주세요")
+                      }
+                      className="emaillogin_input"
+                      id="input3"
+                      minLength={8}
+                      maxLength={14}
+                      onChange={handlePasswordChange}
+                  />
+                  <div id="password-validation-message"></div>
+              </div>
+              <div className="emaillogin_label">
+                  <label htmlFor="input4"></label>
+                  <input
+                      type="password"
+                      placeholder="비밀번호를 다시 입력해주세요"
+                      onFocus={(e) => (e.target.placeholder = "")}
+                      onBlur={(e) =>
+                          (e.target.placeholder =
+                              "비밀번호를 다시 입력해주세요")
+                      }
+                      className="emaillogin_input"
+                      id="input4"
+                      minLength={8}
+                      maxLength={14}
+                  />
+                  <div className="signup-error"></div>
+              </div>
 
-        <button type="submit" className="emaillogin_button">
-          회원가입
-        </button>
-      </form>
+              <button type="submit" className="emaillogin_button">
+                  회원가입
+              </button>
+          </form>
 
-      <style jsx>{emaillogin}</style>
-    </div>
+          <style jsx>{emaillogin}</style>
+      </div>
   );
 }
 
