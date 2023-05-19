@@ -131,7 +131,7 @@ const validationMessageElement = document.getElementById(
             type="name"
             placeholder="이름을 입력해주세요"
             onFocus={(e) => (e.target.placeholder = "")}
-            onBlur={(e) => (e.target.placeholder = "7글자 이내로 입력해주세요.")}
+            onBlur={(e) => (e.target.placeholder = "이름을 입력해주세요")}
             className="emaillogin_input"
             id="input1"
             minLength={2}
