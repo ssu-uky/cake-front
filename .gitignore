@@ -1,11 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+
 /.pnp
 .pnp.js
 
-node_modules/
+
 build/
 *.log
 
@@ -45,7 +45,7 @@ vscode
 
 ### NextJS ###
 # dependencies
-/node_modules
+
 /.pnp
 .pnp.js
 
@@ -94,7 +94,6 @@ logs
 **/*.backup.*
 **/*.back.*
 
-node_modules
 bower_components
 
 *.sublime*
