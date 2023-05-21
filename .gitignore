@@ -109,4 +109,5 @@ thumb
 sketch
 
 
-# End of https://www.toptal.com/developers/gitignore/api/react,nextjs
+# End of https://www.toptal.com/developers/gitignore/api/react,nextjsnode_modules/
+node_modules/
