@@ -63,6 +63,7 @@ node_modules
 node_modules/*
 node_modules/**/*
 /node_modules
+node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node
 
 # misc
 .DS_Store
