@@ -69,6 +69,7 @@ node_modules/**/*
 .pnp.js
 /.pnp.js
 node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node
+/node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node
 
 # misc
 .DS_Store
