@@ -45,6 +45,7 @@ export default function ResetPw() {
         }
     };
 
+    // 비밀번호 변경 (비밀번호는 소문자 + 숫자로 구성되어야 함)
     const handlePasswordChange = (e) => {
         const password = e.target.value;
 

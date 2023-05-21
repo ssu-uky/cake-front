@@ -18,13 +18,13 @@ export default function Email_login() {
             return;
         }
 
-        // 이름 형식 확인
+        // 이름 형식 확인 (이름은 알파벳으로만 이루어지거나, 한글로만 이루어져야함/ 모음,자음 따로 안됨, 2-7길이)
         if (!/^[A-Za-z]{2,7}$|^[가-힣]{2,7}$/.test(name)) {
             alert("이름을 올바르게 입력해주세요.");
             return;
         }
 
-        // 대문자 확인
+        // 대문자 확인 (비밀번호는 소문자+숫자 구성)
         if (!/^(?=.*[a-z])(?=.*\d)/.test(password)) {
             if (password.match(/[A-Z]/) && !password.match(/[a-z]/)) {
                 const validationMessage =

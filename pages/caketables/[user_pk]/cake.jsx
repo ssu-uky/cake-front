@@ -14,10 +14,12 @@ export default function CakeTable(props) {
     const [pickcake, setPickcake] = useState(null);
     const { user_pk } = router.query;
 
+    // 닉네임 설정
     const handleNicknameChange = (event) => {
         setVisitor_name(event.target.value);
     };
-
+    
+    // 케이크 고르기
     const handleImageSelection = (pickcake) => {
         setPickcake(pickcake);
     };
@@ -42,6 +44,7 @@ export default function CakeTable(props) {
             });
     }, [user_pk]);
 
+    // 금지어 설정
     const handleSubmit = (event) => {
         event.preventDefault();
         const bannedWords = ["시발", "씨발", "ㅅㅂ", "ㅂㅅ", "병신"];

@@ -94,7 +94,7 @@ export default function Main() {
         }
     };
 
-    // 컴포넌트가 마운트되면 로그인한 사용자의 user_pk를 가져옵니다.
+    // 컴포넌트가 마운트되면 로그인한 사용자의 user_pk를 가져옴
     useEffect(() => {
         fetchLoggedInUserPk();
     }, []);
@@ -110,6 +110,7 @@ export default function Main() {
         return pages;
     };
 
+    // 한 페이지에 케이크는 8개
     const cakesPerPage = 8;
     const paginatedCakes = cakeData.visitors
         ? paginateCakes(cakeData.visitors, cakesPerPage)
@@ -133,7 +134,6 @@ export default function Main() {
     const paginationText = `${currentPage + 1} / ${
         totalPages !== 0 ? totalPages : 1
     }`;
-
     // 페이지 네이션 구현 끝 (하단에서 버튼으로 다시 이어짐)
 
     // 생일 축하해주기 버튼 시작
@@ -240,7 +240,7 @@ export default function Main() {
         setShowModal(false);
     };
 
-    // 케이크 삭제
+    // 편지 삭제 (휴지통 이미지)
     const handleDelete = async () => {
         const accessToken = sessionStorage.getItem("access");
         const confirm = window.confirm("편지를 정말 삭제하시겠습니까?");
@@ -272,7 +272,6 @@ export default function Main() {
             }
         }
     };
-
     // 모달 끝 //
 
     return (

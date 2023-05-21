@@ -15,11 +15,10 @@ export default function EmailLogin() {
         const access = sessionStorage.getItem("access");
         if (access) {
             // axios.get(`http://127.0.0.1:8000/api/users/info/`, {
-            axios
-                .get(`https://manage.naekkukae.store/api/users/info/`, {
-                    headers: {
-                        Authorization: `Bearer ${access}`,
-                    },
+            axios.get(`https://manage.naekkukae.store/api/users/info/`,{
+                headers: {
+                    Authorization: `Bearer ${access}`,
+                },
                 })
                 .then((response) => {
                     const user_pk = response.data.user_pk;
@@ -76,8 +75,9 @@ export default function EmailLogin() {
                 // `http://127.0.0.1:8000/api/caketables/${user_pk}/`
                 `https://manage.naekkukae.store/api/caketables/${user_pk}/`
             );
+            // 백엔드 데이터에 user_pk를 가진 사람 정보 확인 중 tablecolor 가 있으면 본인 페이지로 이동
+            //  tablecolor 가 없다면 Useruse로 이동
             const caketableData = await caketableResponse.json();
-
             if (caketableData[0] && caketableData[0].tablecolor) {
                 router.push(`/caketables/${user_pk}`);
             } else {

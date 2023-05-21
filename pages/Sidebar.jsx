@@ -1,4 +1,5 @@
 // 링크 텍스트에 underline 지우기
+// 사이드바 전역 사용 설정
 
 import css from "styled-jsx/css";
 import Footer from "./components/Footer";
