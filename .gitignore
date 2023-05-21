@@ -59,6 +59,10 @@ vscode
 # production
 /build
 node_modules/
+node_modules
+node_modules/*
+node_modules/**/*
+/node_modules
 
 # misc
 .DS_Store
