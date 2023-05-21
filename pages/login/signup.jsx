@@ -337,15 +337,16 @@ const emaillogin = css`
         justify-content: center;
         border: none;
         border-radius: 25px;
-        background-color: white;
-        margin-top: 5px;
-        // background-color: #f073cd;
-    }
-
-    .emaillogin_container .emaillogin_button:hover {
         background-color: #f073cd;
         color: white;
+        // background-color: white;
+        margin-top: 5px;
     }
+
+    // .emaillogin_container .emaillogin_button:hover {
+    //     background-color: #f073cd;
+    //     color: white;
+    // }
 
     #password-validation-message {
         font-family: "Bazzi";

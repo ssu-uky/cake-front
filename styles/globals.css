@@ -12,7 +12,8 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 * {
@@ -21,7 +22,6 @@ a:hover {
 
 img {
   max-width: 100%;
-  /* display: block; */
   height: auto;
 }
 

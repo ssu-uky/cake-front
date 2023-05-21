@@ -22,7 +22,7 @@ export default function Findpw() {
             );
             console.log("Password reset link:", response.data.link);
             alert(
-                "비밀번호 재설정 링크를 이메일로 전송되었습니다. 이메일을 확인해주세요."
+                "비밀번호 재설정 링크를 이메일로 전송되었습니다. 이메일을 확인해주세요!"
             );
             router.push("/");
         } catch (error) {
@@ -53,7 +53,7 @@ export default function Findpw() {
                         <div className="find_form_input">
                             <input
                                 type="email"
-                                placeholder="ID"
+                                placeholder="가입하셨던 이메일을 입력해주세요."
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 onFocus={(e) => (e.target.placeholder = "")}
@@ -149,11 +149,12 @@ const resetPw = css`
         margin-top: 15px;
         border: none;
         border-radius: 25px;
-        background-color: white;
-    }
-
-    .login_btn:hover {
         background-color: #f073cd;
         color: white;
     }
+
+    // .login_btn:hover {
+    //     background-color: #f073cd;
+    //     color: white;
+    // }
 `;
