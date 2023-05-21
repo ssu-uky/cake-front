@@ -42,31 +42,32 @@ export default function Useruse() {
       return;
     }
 
-    fetch(`http://127.0.0.1:8000/api/caketables/new/`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        nickname: nickname,
-        tablecolor: tablecolor,
-      }),
+    // fetch(`http://127.0.0.1:8000/api/caketables/new/`, {
+    fetch(`${process.env.SERVER_URL}/caketables/new/`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nickname: nickname,
+            tablecolor: tablecolor,
+        }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("1-케이크는 하나만 생성이 가능합니다.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const { owner } = data;
-        router.push(`/caketables/${owner}`);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("2-케이크는 하나만 생성이 가능합니다.");
-      });
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("1-케이크는 하나만 생성이 가능합니다.");
+            }
+            return response.json();
+        })
+        .then((data) => {
+            const { owner } = data;
+            router.push(`/caketables/${owner}`);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("2-케이크는 하나만 생성이 가능합니다.");
+        });
     console.log(user_pk, nickname, tablecolor);
   };
 

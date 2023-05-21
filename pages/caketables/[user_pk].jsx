@@ -38,12 +38,13 @@ export default function Main() {
   // 새로운 access_token을 발급받는 함수
   const getNewAccessToken = async (refreshToken) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ refresh: refreshToken }),
+      // const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
+      const response = await fetch(`${process.env.SERVER_URL}/token/refresh/`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ refresh: refreshToken }),
       });
 
       const data = await response.json();
@@ -72,12 +73,13 @@ export default function Main() {
       sessionStorage.setItem("access", validAccessToken);
     }
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/users/info/", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${validAccessToken}`,
-        },
+      // const response = await fetch("http://127.0.0.1:8000/api/users/info/", {
+      const response = await fetch(`${process.env.SERVER_URL}/users/info/`, {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${validAccessToken}`,
+          },
       });
 
       const data = await response.json();
@@ -143,12 +145,12 @@ export default function Main() {
     if (accessToken) {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/users/info/",
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
+            `${process.env.SERVER_URL}/users/info/`,
+            {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
         );
         const data = response.data;
         router.push(`/caketables/${data.user_pk}/`);
@@ -178,24 +180,24 @@ export default function Main() {
   useEffect(() => {
     if (!user_pk || checkData) return;
 
-    // fetch(`https://manage.neokkukae.store/api/caketables/${user_pk}/`, {  // 배포용
-    fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/`, {
-      // 로컬용 (마지막에 / 빼먹지 말기...)
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    // fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/`, {
+    fetch(`${process.env.SERVER_URL}/caketables/${user_pk}/`, {
+        // 로컬용 (마지막에 / 빼먹지 말기...)
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
     })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setCakeData(data[0]);
-        setCheckData(true);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            setCakeData(data[0]);
+            setCheckData(true);
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+        });
   }, [user_pk, checkData]);
 
   const tableColor = cakeData.tablecolor;
@@ -241,14 +243,15 @@ export default function Main() {
     if (confirm) {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/caketables/${user_pk}/${selectedVisitor}/`,
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
+            // `http://127.0.0.1:8000/api/caketables/${user_pk}/${selectedVisitor}/`,
+            `${process.env.SERVER_URL}/caketables/${user_pk}/${selectedVisitor}/`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }
         );
         console.log(selectedVisitor);
 

@@ -7,23 +7,22 @@ export default function Letter() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Send the letter content to the backend here
-    // For example, using fetch or axios:
-    fetch("http://127.0.0.1:8000/api/caketables/pick/", {
-      method: "POST",
-      body: JSON.stringify({ content: letterContent }),
-      headers: { "Content-Type": "application/json" },
+    // fetch("http://127.0.0.1:8000/api/caketables/pick/", {
+    fetch(`${process.env.SERVER_URL}/caketables/pick/`, {
+        method: "POST",
+        body: JSON.stringify({ content: letterContent }),
+        headers: { "Content-Type": "application/json" },
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("편지 전송에 실패하였습니다.");
-        }
-        // Handle successful response here
-      })
-      .catch((error) => {
-        console.error(error);
-        // Handle error heregetRangeAt
-      });
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("편지 전송에 실패하였습니다.");
+            }
+            // Handle successful response here
+        })
+        .catch((error) => {
+            console.error(error);
+            // Handle error heregetRangeAt
+        });
   };
 
 

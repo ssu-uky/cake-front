@@ -52,7 +52,7 @@ export default function Email_login() {
 
         // fetch(`https://manage.neokkukae.store/api/users/signup/`,{ //배포용
         // fetch(`http://127.0.0.1:8000/api/users/signup/`,{ //로컬용 / 이메일 인증 필요없음
-        fetch(`http://127.0.0.1:8000/api/users/signup/email/`, {
+        fetch(`${process.env.SERVER_URL}/users/signup/email/`, {
             //로컬용 이메일 인증 필요
             method: "POST",
             headers: {

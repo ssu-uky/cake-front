@@ -16,16 +16,17 @@ export default function Color_button({ tablecolor, handleChange }) {
     const cakeTable = {
       color: newColor.hex,
     };
-    fetch("http://127.0.0.1:8000/api/caketables/new/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cakeTable),
+    // fetch("http://127.0.0.1:8000/api/caketables/new/", {
+    fetch(`${process.env.SERVER_URL}/caketables/new/`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cakeTable),
     })
-    .then((response) => response.json())
-    // .then((data) => console.log(data))
-    .catch((error) => console.error(error));
+        .then((response) => response.json())
+        // .then((data) => console.log(data))
+        .catch((error) => console.error(error));
 
 
     handleChange(newColor);

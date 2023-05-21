@@ -30,7 +30,8 @@ export default function ResetPw() {
 
         try {
             const response = await axios.post(
-                `http://127.0.0.1:8000/api/users/login/resetpw/${user_pk}/`,
+                // `http://127.0.0.1:8000/api/users/login/resetpw/${user_pk}/`,
+                `${process.env.SERVER_URL}/users/login/resetpw/${user_pk}/`,
                 {
                     new_password: new_password,
                     check_password: check_password,

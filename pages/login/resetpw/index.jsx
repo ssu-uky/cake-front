@@ -14,7 +14,8 @@ export default function Findpw() {
 
         try {
             const response = await axios.post(
-                "http://127.0.0.1:8000/api/users/login/findpw/",
+                // "http://127.0.0.1:8000/api/users/login/findpw/",
+                "${process.env.SERVER_URL}/users/login/findpw/",
                 {
                     email: email,
                 }

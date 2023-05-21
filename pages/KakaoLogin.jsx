@@ -14,7 +14,8 @@ const KakaoLogin = () => {
 
         try {
           const response = await axios.get(
-            `http://127.0.0.1:8000/api/caketables/${user_pk}/`
+              // `http://127.0.0.1:8000/api/caketables/${user_pk}/`
+              `${process.env.SERVER_URL}/caketables/${user_pk}/`
           );
           console.log(response.data);
           if (
