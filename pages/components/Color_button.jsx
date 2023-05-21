@@ -6,46 +6,49 @@ import { createGlobalStyle } from "styled-components";
 import css from "styled-jsx/css";
 
 export default function Color_button({ tablecolor, handleChange }) {
-  const [color, setColor] = useState(tablecolor);
+    const [color, setColor] = useState(tablecolor);
 
-  const handleColorChange = (newColor) => {
-    setColor(newColor.hex);
-    document.getElementById("image-container").style.backgroundColor =
-      newColor.hex;
+    const handleColorChange = (newColor) => {
+        setColor(newColor.hex);
+        document.getElementById("image-container").style.backgroundColor =
+            newColor.hex;
 
-    const cakeTable = {
-      color: newColor.hex,
+        const cakeTable = {
+            color: newColor.hex,
+        };
+        // fetch("http://127.0.0.1:8000/api/caketables/new/", {
+        fetch(`https://manage.naekkukae.store/api/caketables/new/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(cakeTable),
+        })
+            .then((response) => response.json())
+            // .then((data) => console.log(data))
+            .catch((error) => console.error(error));
+
+        handleChange(newColor);
     };
-    // fetch("http://127.0.0.1:8000/api/caketables/new/", {
-    fetch(`${process.env.SERVER_URL}/caketables/new/`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(cakeTable),
-    })
-        .then((response) => response.json())
-        // .then((data) => console.log(data))
-        .catch((error) => console.error(error));
 
-
-    handleChange(newColor);
-  };
-
-  return (
-    <div>
-      <Global />
-      <ChromePicker color={color} onChange={handleColorChange} width={450} />
-      <div
-        id="image-container"
-        style={{ backgroundColor: color }}
-        className="color_button_container"
-      >
-        <Image src={cakeimg} width={450} />
-      </div>
-      <style jsx>{colorbutton}</style>
-    </div>
-  );
+    return (
+        <div>
+            <Global />
+            <ChromePicker
+                color={color}
+                onChange={handleColorChange}
+                width={450}
+            />
+            <div
+                id="image-container"
+                style={{ backgroundColor: color }}
+                className="color_button_container"
+            >
+                <Image src={cakeimg} width={450} />
+            </div>
+            <style jsx>{colorbutton}</style>
+        </div>
+    );
 }
 
 const Global = createGlobalStyle`
@@ -71,5 +74,4 @@ const Global = createGlobalStyle`
 }
 `;
 
-const colorbutton = css`
-`;
+const colorbutton = css``;

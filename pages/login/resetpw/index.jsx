@@ -15,7 +15,7 @@ export default function Findpw() {
         try {
             const response = await axios.post(
                 // "http://127.0.0.1:8000/api/users/login/findpw/",
-                "${process.env.SERVER_URL}/users/login/findpw/",
+                "https://manage.naekkukae.store/api/users/login/findpw/",
                 {
                     email: email,
                 }
@@ -87,7 +87,7 @@ const resetPw = css`
         font-family: "Bazzi";
         width: 100vw;
         height: 100vh;
-        overflow: hidden;
+        // overflow: hidden;
         background-color: #f7bedf;
         color: white;
         text-align: center;

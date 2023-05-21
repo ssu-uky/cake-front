@@ -1,49 +1,46 @@
-import axios from 'axios';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import axios from "axios";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const KakaoLogin = () => {
-  const router = useRouter();
-  const { refresh, access, user_pk } = router.query;
+    const router = useRouter();
+    const { refresh, access, user_pk } = router.query;
 
-  useEffect(() => {
-    const CheckTable = async () => {
-      if (refresh && access && user_pk) {
-        sessionStorage.setItem("refresh", refresh);
-        sessionStorage.setItem("access", access);
+    useEffect(() => {
+        const CheckTable = async () => {
+            if (refresh && access && user_pk) {
+                sessionStorage.setItem("refresh", refresh);
+                sessionStorage.setItem("access", access);
 
-        try {
-          const response = await axios.get(
-              // `http://127.0.0.1:8000/api/caketables/${user_pk}/`
-              `${process.env.SERVER_URL}/caketables/${user_pk}/`
-          );
-          console.log(response.data);
-          if (
-            Array.isArray(response.data) &&
-            response.data[0].tablecolor &&
-            response.data[0].tablecolor.trim() !== ""
-          ) {
-            router.push(`/caketables/${user_pk}/`);
-          } else {
-            router.push("/Useruse");
-          }
-        } catch (error) {
-          console.error(error);
-          router.push("/Useruse");
-        }
-      }
-    };
-    CheckTable();
-  }, [refresh, access, user_pk, router]);
+                try {
+                    const response = await axios.get(
+                        // `http://127.0.0.1:8000/api/caketables/${user_pk}/`
+                        `https://manage.naekkukae.store/api/caketables/${user_pk}/`
+                    );
+                    console.log(response.data);
+                    if (
+                        Array.isArray(response.data) &&
+                        response.data[0].tablecolor &&
+                        response.data[0].tablecolor.trim() !== ""
+                    ) {
+                        router.push(`/caketables/${user_pk}/`);
+                    } else {
+                        router.push("/Useruse");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    router.push("/Useruse");
+                }
+            }
+        };
+        CheckTable();
+    }, [refresh, access, user_pk, router]);
 
-  console.log(refresh, access, user_pk)
-  return <div>{/* <h1>카카오 로그인 중...</h1> */}</div>;
+    console.log(refresh, access, user_pk);
+    return <div>{/* <h1>카카오 로그인 중...</h1> */}</div>;
 };
 
 export default KakaoLogin;
-
-
-
 
 // const KakaoLogin = () => {
 //   const router = useRouter();
@@ -61,9 +58,6 @@ export default KakaoLogin;
 // };
 
 // export default KakaoLogin;
-
-
-
 
 // const KakaoLogin = () => {
 //   const router = useRouter();

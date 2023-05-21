@@ -15,18 +15,19 @@ export default function EmailLogin() {
         const access = sessionStorage.getItem("access");
         if (access) {
             // axios.get(`http://127.0.0.1:8000/api/users/info/`, {
-          axios.get(`${process.env.SERVER_URL}/users/info/`,{
-            headers: {
-              Authorization: `Bearer ${access}`,
-            },
-          })
-            .then((response) => {
-              const user_pk = response.data.user_pk;
-              router.push(`/caketables/${user_pk}/`);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
+            axios
+                .get(`https://manage.naekkukae.store/api/users/info/`, {
+                    headers: {
+                        Authorization: `Bearer ${access}`,
+                    },
+                })
+                .then((response) => {
+                    const user_pk = response.data.user_pk;
+                    router.push(`/caketables/${user_pk}/`);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         }
     }, []);
 
@@ -41,7 +42,7 @@ export default function EmailLogin() {
         try {
             const response = await fetch(
                 // `http://127.0.0.1:8000/api/users/login/`,
-                `${process.env.SERVER_URL}/users/login/`,
+                `https://manage.naekkukae.store/api/users/login/`,
                 {
                     method: "POST",
                     headers: {
@@ -73,7 +74,7 @@ export default function EmailLogin() {
 
             const caketableResponse = await fetch(
                 // `http://127.0.0.1:8000/api/caketables/${user_pk}/`
-                `${process.env.SERVER_URL}/caketables/${user_pk}/`
+                `https://manage.naekkukae.store/api/caketables/${user_pk}/`
             );
             const caketableData = await caketableResponse.json();
 
@@ -171,7 +172,7 @@ const email_login = css`
     .email_container {
         width: 100vw;
         height: 100vh;
-        overflow: hidden;
+        // overflow: hidden;
         background-color: #f7bedf;
         color: white;
         text-align: center;

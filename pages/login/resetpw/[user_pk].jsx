@@ -31,7 +31,7 @@ export default function ResetPw() {
         try {
             const response = await axios.post(
                 // `http://127.0.0.1:8000/api/users/login/resetpw/${user_pk}/`,
-                `${process.env.SERVER_URL}/users/login/resetpw/${user_pk}/`,
+                `https://manage.naekkukae.store/api/users/login/resetpw/${user_pk}/`,
                 {
                     new_password: new_password,
                     check_password: check_password,
@@ -50,9 +50,7 @@ export default function ResetPw() {
 
         // 대문자 확인
         const capsLockOn = password.match(/[A-Z]/) && !password.match(/[a-z]/);
-        const capsLockMessage = capsLockOn
-            ? "Caps Lock이 켜져 있습니다."
-            : "";
+        const capsLockMessage = capsLockOn ? "Caps Lock이 켜져 있습니다." : "";
 
         // 소문자, 숫자 확인
         const passwordFormatValid = /^(?=.*[a-z])(?=.*\d)/.test(password);
@@ -148,7 +146,7 @@ const resetPw = css`
         font-family: "Bazzi";
         width: 100vw;
         height: 100vh;
-        overflow: hidden;
+        // overflow: hidden;
         background-color: #f7bedf;
         color: white;
         text-align: center;

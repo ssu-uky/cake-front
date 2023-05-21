@@ -25,7 +25,7 @@ export default function CakeTable(props) {
     useEffect(() => {
         if (!user_pk) return;
         // fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/`, {
-        fetch(`${process.env.SERVER_URL}/caketables/${user_pk}/`, {
+        fetch(`https://manage.naekkukae.store/api/caketables/${user_pk}/`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -52,18 +52,21 @@ export default function CakeTable(props) {
             }
         }
         // fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/cake/`, {
-        fetch(`${process.env.SERVER_URL}/caketables/${user_pk}/cake/`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                visitor_name: visitor_name,
-                visitor_password: visitor_password,
-                pickcake: pickcake,
-                letter: letter,
-            }),
-        })
+        fetch(
+            `https://manage.naekkukae.store/api/caketables/${user_pk}/cake/`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    visitor_name: visitor_name,
+                    visitor_password: visitor_password,
+                    pickcake: pickcake,
+                    letter: letter,
+                }),
+            }
+        )
             .then((response) => {
                 return response.json();
             })
@@ -350,7 +353,7 @@ const visitoruse = css`
     .visitoruse_container {
         width: 100vw;
         height: 100vh;
-        overflow: hidden;
+        // overflow: hidden;
         background-color: #f7bedf;
         color: white;
         text-align: center;

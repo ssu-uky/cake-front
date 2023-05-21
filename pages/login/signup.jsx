@@ -52,7 +52,7 @@ export default function Email_login() {
 
         // fetch(`https://manage.neokkukae.store/api/users/signup/`,{ //배포용
         // fetch(`http://127.0.0.1:8000/api/users/signup/`,{ //로컬용 / 이메일 인증 필요없음
-        fetch(`${process.env.SERVER_URL}/users/signup/email/`, {
+        fetch(`https://manage.naekkukae.store/api/users/signup/email/`, {
             //로컬용 이메일 인증 필요
             method: "POST",
             headers: {
@@ -211,7 +211,7 @@ const emaillogin = css`
     .emaillogin_container {
         width: 100vw;
         height: 100vh;
-        overflow: hidden;
+        // overflow: hidden;
         background-color: #f7bedf;
         color: white;
         text-align: center;
@@ -306,7 +306,7 @@ const emaillogin = css`
         display: inline-block;
         width: 120px;
         vertical-align: middle;
-        margin-bottom:12px;
+        margin-bottom: 12px;
     }
 
     .emaillogin_container .emaillogin_input {
