@@ -146,7 +146,7 @@ const resetPw = css`
         font-family: "Bazzi";
         width: 100vw;
         height: 100vh;
-        // overflow: hidden;
+        overflow: hidden;
         background-color: #f7bedf;
         color: white;
         text-align: center;
