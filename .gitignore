@@ -63,7 +63,12 @@ node_modules
 node_modules/*
 node_modules/**/*
 /node_modules
+/node_modules/*
+/node_modules/**/*
 node_modules/@next/swc-darwin-arm64/next-swc.darwin-arm64.node
+/.pnp
+.pnp.js
+/.pnp.js
 
 # misc
 .DS_Store
@@ -77,6 +82,26 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
+.env.build
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.development
+.env*.test
+.env*.production
+.env*.staging
+.env*.preview
+.env*.rc
+.env.*.local
+.env.*.development
+.env.*.test
+.env.*.production
+.env.*.staging
+.env.*.preview
+.env.*.rc
+
 
 # vercel
 .vercel
