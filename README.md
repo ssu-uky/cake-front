@@ -11,5 +11,6 @@ overflow: hidden;
 +
 sidebar 항상 보이게 하기 (root page)
 
-## vercel 배포 할 때 용량이 커서 올라가지 않아요 ㅠㅠ 이유 모르겠음
+## vercel 배포 할 때 용량이 커서 올라가지 않음 ㅠㅠ
+## 용량을 어케 줄임 ;;
 ## 
