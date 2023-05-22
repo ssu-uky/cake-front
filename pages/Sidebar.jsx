@@ -17,10 +17,10 @@ const Sidebar = () => {
 
         if (accessToken) {
             try {
-                // const response = await axios.get("http://127.0.0.1:8000/api/users/info/", {
-                const response = await axios.get(
-                    `https://manage.naekkukae.store/api/users/info/`,
-                    {
+                const response = await axios.get("http://127.0.0.1:8000/api/users/info/", {
+                // const response = await axios.get(
+                //     `https://manage.naekkukae.store/api/users/info/`,
+                    // {
                         headers: {
                             Authorization: `Bearer ${accessToken}`,
                         },
@@ -45,10 +45,10 @@ const Sidebar = () => {
             return;
         }
         try {
-            // await axios.post("http://127.0.0.1:8000/api/users/logout/");
-            await axios.post(
-                `https://manage.naekkukae.store/api/users/logout/`
-            );
+            await axios.post("http://127.0.0.1:8000/api/users/logout/");
+            // await axios.post(
+            //     `https://manage.naekkukae.store/api/users/logout/`
+            // );
             sessionStorage.removeItem("access");
             sessionStorage.removeItem("refresh");
             router.push("/");

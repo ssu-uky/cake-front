@@ -41,8 +41,8 @@ export default function Useruse() {
             return;
         }
 
-        // fetch(`http://127.0.0.1:8000/api/caketables/new/`, {
-        fetch(`https://manage.naekkukae.store/api/caketables/new/`, {
+        fetch(`http://127.0.0.1:8000/api/caketables/new/`, {
+        // fetch(`https://manage.naekkukae.store/api/caketables/new/`, {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${token}`,

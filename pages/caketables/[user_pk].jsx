@@ -37,10 +37,10 @@ export default function Main() {
     // 새로운 access_token을 발급받는 함수
     const getNewAccessToken = async (refreshToken) => {
         try {
-            // const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
-            const response = await fetch(
-                `https://manage.naekkukae.store/api/token/refresh/`,
-                {
+            const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
+            // const response = await fetch(
+            //     `https://manage.naekkukae.store/api/token/refresh/`,
+            //     {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -75,10 +75,10 @@ export default function Main() {
             sessionStorage.setItem("access", validAccessToken);
         }
         try {
-            // const response = await fetch("http://127.0.0.1:8000/api/users/info/", {
-            const response = await fetch(
-                `https://manage.naekkukae.store/api/users/info/`,
-                {
+            const response = await fetch("http://127.0.0.1:8000/api/users/info/", {
+            // const response = await fetch(
+            //     `https://manage.naekkukae.store/api/users/info/`,
+            //     {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
