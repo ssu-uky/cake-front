@@ -54,9 +54,9 @@ export default function CakeTable(props) {
                 return;
             }
         }
-        fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/cake/`, {
+        // fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/cake/`, {
         fetch(
-            // `https://manage.naekkukae.store/api/caketables/${user_pk}/cake/`,
+            `https://manage.naekkukae.store/api/caketables/${user_pk}/cake/`,
             {
                 method: "POST",
                 headers: {
