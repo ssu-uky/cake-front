@@ -5,19 +5,28 @@ export default function Footer() {
   return (
     <div className="footer_container">
       <nav>
-        <Link href="https://frost-iron-ae9.notion.site/0ed831edf66c45358b242b9f4062a4f3">
-          <span className="footer_text">Notion</span>
+      {/* <span> www.naekkukae.store </span> */}
+      {/* <br /> */}
+      <span> 문의하기 </span>
+      {/* http://127.0.0.1:8000/api/users/feedback/ - 문의하기 post*/} 
+      <br />
+        <Link href="https://frost-iron-ae9.notion.site/0ed831edf66c45358b242b9f4062a4f3"  style={{ textDecorationLine: "none", color: "black" }}>
+          <span className="footer_text" >Notion</span>
         </Link>
         &nbsp; | &nbsp;
-        <Link href="https://github.com/cakeismine">
+        <Link href="https://github.com/cakeismine"  style={{ textDecorationLine: "none", color: "black" }}>
           <span className="footer_text">Github</span>
         </Link>
       </nav>
 
-      <span>autor : 냐옹이네 너꾸케</span>
+      
+      
+      <span>author : 냐옹이네 너꾸케</span>
       <br />
-      <span>email : leeeunbin219@gmail.com</span>
+      {/* <span> 이은빈 : leeeunbin219@gmail.com</span>
       <br />
+      <span> 이수현 : id_suhyun@naver.com</span>
+      <br /> */}
       <span>Copyright 2023. 너꾸케. All rights reserved.</span>
       <style jsx>{footer}</style>
     </div>
@@ -28,23 +37,22 @@ const footer = css`
   @font-face {
     font-family: "Bazzi";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
-      format("woff");
+    format("woff");
     font-weight: normal;
     font-style: normal;
   }
+
   .footer_container {
+    width: 100%;
+    overflow: hidden;
     position: fixed;
-    bottom: 4vh;
+    bottom: 5vh;
+    display: inline-block;
     color: black;
-    text-align: left;
-    margin-left: -34px;
     font-family: "Bazzi";
-  }
-  
-  .footer_text, span, nav {
-    color: black;
+    font-size: 20px;
     text-decoration: none;
-    font-size: 14px;
-    line-height: 1.7;
+    line-height: 2em;
+    left: 1.5em;
   }
 `;

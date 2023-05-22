@@ -1,0 +1,19 @@
+.container {
+  width: 100vh;
+  height: fit-content;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 310px;
+  }
+}
+
+@media (max-width: 376px) {
+  .modal {
+    width: 270px;
+  }
+}
