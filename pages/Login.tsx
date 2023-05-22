@@ -4,10 +4,11 @@ import css from "styled-jsx/css";
 import Image from "next/image";
 import Loginimg from "public/images/Loginimg.png";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope, faComment } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComment, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function Login() {
     const handleKakaoLogin = () => {
@@ -32,6 +33,7 @@ export default function Login() {
                     onClick={handleKakaoLogin}
                 >
                     <div className="login_text_box">
+                        {/* <Icon icon={faComment} className="icon" /> */}
                         <FontAwesomeIcon icon={faComment} className="icon" />
                         &nbsp; 카카오 로그인
                     </div>
@@ -41,10 +43,7 @@ export default function Login() {
                 <Link href="/login/email">
                     <button className="login_email_btn loginbtn">
                         <div className="login_text_box">
-                            <FontAwesomeIcon
-                                icon={faEnvelope}
-                                className="icon"
-                            />
+                            <FontAwesomeIcon icon={faEnvelope} className="icon" />
                             &nbsp; 이메일 로그인
                         </div>
                     </button>
