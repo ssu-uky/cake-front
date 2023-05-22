@@ -114,7 +114,6 @@ next.config.js
 packages/*/tsconfig.tsbuildinfo
 packages/*/next-env.d.ts
 package-lock.json
-package.json
 tsconfig.json
 
 
