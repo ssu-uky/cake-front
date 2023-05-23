@@ -212,5 +212,5 @@ const login = css`
     background-color: white;
     color: black;
     }
-
+}
 `;

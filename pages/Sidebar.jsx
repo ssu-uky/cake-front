@@ -1,4 +1,3 @@
-// 링크 텍스트에 underline 지우기
 // 사이드바 전역 사용 설정
 
 import css from "styled-jsx/css";
@@ -17,12 +16,10 @@ const Sidebar = () => {
 
     if (accessToken) {
       try {
+        // const response = await axios.get("http://127.0.0.1:8000/api/users/info/",{
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/users/info/",
+          `https://manage.naekkukae.store/api/users/info/`,
           {
-            // const response = await axios.get(
-            //     `https://manage.naekkukae.store/api/users/info/`,
-            // {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
@@ -47,10 +44,8 @@ const Sidebar = () => {
       return;
     }
     try {
-      await axios.post("http://127.0.0.1:8000/api/users/logout/");
-      // await axios.post(
-      //     `https://manage.naekkukae.store/api/users/logout/`
-      // );
+      // await axios.post("http://127.0.0.1:8000/api/users/logout/");
+      await axios.post(`https://manage.naekkukae.store/api/users/logout/`);
       sessionStorage.removeItem("access");
       sessionStorage.removeItem("refresh");
       router.push("/");
@@ -65,14 +60,13 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar_container">
-      <nav role="sidebar_navigation">
-        <div className="sidebar_menuToggle">
+      <div className="sidebar_menuToggle">
+        <nav role="sidebar_navigation">
           <input
             type="checkbox"
             checked={isOpen}
             onChange={() => setIsOpen(!isOpen)}
           />
-
           <span></span>
           <span></span>
           <span></span>
@@ -80,25 +74,21 @@ const Sidebar = () => {
           <ul className={`sidebar_menu ${isOpen ? "open" : ""}`}>
             <div className="menu_list">
               {/* <div className="signbtn"> */}
-                <Link
-                  href="/"
-                  style={{ textDecoration: "none", color: "black" }}
+              <Link href="/" style={{ textDecoration: "none", color: "black" }}>
+                <p
+                  className="loginbtn"
+                  onClick={() => {
+                    handleLinkClick();
+                  }}
+                  style={{
+                    textDecoration: "none",
+                    cursor: "pointer",
+                  }}
                 >
-                  <p
-                    className="loginbtn"
-                    onClick={() => {
-                      handleLinkClick();
-                    }}
-                    style={{
-                      textDecoration: "none",
-                      cursor: "pointer",
-                    }}
-                  >
-                    {" "}
-                    Login{" "}
-                  </p>
-                </Link>
-                {/* <li className="slash"> / </li> */}
+                  Login
+                </p>
+              </Link>
+              {/* <li className="slash"> / </li> */}
               {/* </div> */}
               <p
                 onClick={() => {
@@ -151,11 +141,11 @@ const Sidebar = () => {
               >
                 Logout
               </p>
+              <Footer />
             </div>
-            <Footer />
           </ul>
-        </div>
-      </nav>
+        </nav>
+      </div>
       <style jsx>{sidebar}</style>
     </div>
   );
@@ -165,166 +155,309 @@ export default Sidebar;
 
 const sidebar = css`
   .sidebar_container {
+    top:0;
+    left:0;
     font-family: "Bazzi";
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    max-width: 1200px;
-  }
-
-  .sidebar_menuToggle {
-    display: block;
-    position: relative;
-    width: 20vw;
-    height: auto;
-    margin-top: 11.5vh;
-    left: 20vw;
-
-    z-index: 1000;
-
-    /* -webkit-user-select: none;
-    user-select: none;  */
-  }
-
-  .menu_list {
-    display: absolute;
-    position: relative;
-    margin-top: 15vh;
-    font-size: 30px;
-  }
-
-  .sidebar_menuToggle ul {
+    text-decoration: none;
     list-style: none;
-    display: block;
-    color: #000000;
-    float: left;
-    font-size: 20px;
-    // /* transition: color 0.3s ease; */
-  }
-
-  .sidebar_menuToggle ul p {
-    display: block;
-    width: 100%;
-    color: #000000;
-    padding-top: 15px;
-  }
-
-  .sidebar_menuToggle input {
-    display: block;
-    width: 55px;
-    height: 55px;
-    position: absolute;
-
-    margin: -10px 0 0 20px;
-
-    decoration: none;
-    border: none;
-    outline: none;
-
-    cursor: pointer;
-
-    opacity: 0;
-    z-index: 2;
-    border: 1px solid #000000;
-
-    -webkit-touch-callout: none;
-  }
-
-  // X 버튼
-  .sidebar_menuToggle span {
-    display: block;
-    flex-direction: column;
-    width: 40px;
-    height: 5px;
-    position: relative;
-    margin: 10px 35px;
-
-    background: #ffffff;
-    border-radius: 3px;
-
-    z-index: 10;
-
-    transform-origin: -6px;
-
-    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
-      background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
-  }
-
-  .sidebar_menuToggle span:first-child {
-    transform-origin: 0% 0%;
-  }
-
-  .sidebar_menuToggle span:nth-last-child(2) {
-    transform-origin: 0% 100%;
-  }
-
-  .sidebar_menuToggle input:checked ~ span {
-    opacity: 1;
-    transform: rotate(45deg) translate(-2px, -1px);
-    background: #232323;
-  }
-
-  .sidebar_menuToggle input:checked ~ span:nth-last-child(3) {
-    opacity: 0;
-    transform: rotate(0deg) scale(0.2, 0.2);
-  }
-
-  .sidebar_menuToggle input:checked ~ span:nth-last-child(2) {
-    transform: rotate(-45deg) translate(0, -1px);
-  }
-
-  // 메뉴 바
-
-  .sidebar_menu {
-    position: absolute;
-    background: #ec9ed6;
-    width: 30vw;
-    height: 200vh;
-    padding: 55px;
-    top: -150px;
-    left: -260px;
-    transform-origin: 0% 0%;
-    transform: translate(-1000%, 0);
     list-style-type: none;
+
+    .sidebar_menuToggle {
+      position: relative;
+      left: 0;
+      top: 0;
+      z-index: 1000;
+
+      /* -webkit-user-select: none;
+    user-select: none;  */
+    }
+
+    // 메뉴 바
+    .sidebar_menu {
+      position: fixed;
+      background: #ec9ed6;
+      width: 30vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      list-style-type: none;
+      padding: 15vw 5vw;
+      z-index: 100;
+      transform-origin: 0% 0%; // 사이드바 오픈 버튼
+      transform: translate(-1000%, 0); // 사이드바 오픈 버튼
+    }
+
+    .sidebar_menu p {
+      margin-top: 30px;
+      font-size: 1.8em;
+    }
+
+    // 햄버거바 클릭되는 부분 // 
+    .sidebar_menuToggle input {
+      display: block;
+      width: 50px;
+      height: 50px;
+      position: absolute;
+  
+      top: 100px;
+      left: 165px;
+  
+      // decoration: none;
+      // border: none;
+      // outline: none;
+  
+      cursor: pointer;
+  
+      opacity: 0;
+      background: transparent;
+      z-index: 200;
+
+      -webkit-touch-callout: none;
+
+    }
+  
+
+    // X 버튼
+    .sidebar_menuToggle span {
+      display: block;
+      flex-direction: column;
+      width: 50px;
+      height: 5px;
+      position: relative;
+      decoration: none;
+      background: #ffffff;
+      border-radius: 3px;
+      top: 110px;
+      left: 150px;
+      margin: 0 0 10px 0;
+
+      z-index: 250;
+
+      transform-origin: -5px;
+
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+        background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+    }
+
+    .sidebar_menuToggle span:first-child {
+      transform-origin: 0% 0%;
+    }
+
+    .sidebar_menuToggle span:nth-last-child(2) {
+      transform-origin: 0% 100%;
+    }
+
+    .sidebar_menuToggle input:checked ~ span {
+      opacity: 1;
+      transform: rotate(45deg) translate(3px, -20px);
+      background: #232323;
+    }
+
+    .sidebar_menuToggle input:checked ~ span:nth-last-child(3) {
+      opacity: 0;
+      transform: rotate(0deg) scale(0.2, 0.2);
+    }
+
+    .sidebar_menuToggle input:checked ~ span:nth-last-child(2) {
+      transform: rotate(-45deg) translate(15px, 10px);
+    }
+
+    //햄버거바 클릭했을 때 메뉴 열고 닫기 기능
+    .sidebar_menuToggle input:checked ~ ul {
+      transform: none;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar_menu {
+      position: fixed;
+      background: #ec9ed6;
+      width: 30vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      list-style-type: none;
+      padding: 30vw 5vw;
+      z-index: 100;
+      transform-origin: 0% 0%; // 사이드바 오픈 버튼
+      transform: translate(-1000%, 0); // 사이드바 오픈 버튼
+    }
+
+    .sidebar_menu p {
+      margin-top: 30px;
+      font-size: 1.5em;
+    }
+
+    // 햄버거바 클릭되는 부분 // 
+    .sidebar_menuToggle input {
+      display: block;
+      width: 60px;
+      height: 60px;
+      position: absolute;
+  
+      top: 110px;
+      left: 175px;
+  
+      // decoration: none;
+      // border: none;
+      // outline: none;
+  
+      cursor: pointer;
+  
+      opacity: 0;
+      background: transparent;
+      z-index: 200;
+
+      -webkit-touch-callout: none;
+
+    }
+  
+
+    // X 버튼
+    .sidebar_menuToggle span {
+      display: block;
+      flex-direction: column;
+      width: 40px;
+      height: 4px;
+      position: relative;
+      decoration: none;
+      background: #ffffff;
+      border-radius: 3px;
+      margin: 5px 0px;
+      top: 120px;
+      left: -80px;
+
+      z-index: 250;
+
+      transform-origin: -7px;
+
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+        background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+    }
+
+    .sidebar_menuToggle span:first-child {
+      transform-origin: 0% 0%;
+    }
+
+    .sidebar_menuToggle span:nth-last-child(2) {
+      transform-origin: 0% 100%;
+    }
+
+    .sidebar_menuToggle input:checked ~ span {
+      opacity: 1;
+      transform: rotate(45deg) translate(-2px, -5px);
+      background: #232323;
+    }
+
+    .sidebar_menuToggle input:checked ~ span:nth-last-child(3) {
+      opacity: 0;
+      transform: rotate(0deg) scale(0.2, 0.2);
+    }
+
+    .sidebar_menuToggle input:checked ~ span:nth-last-child(2) {
+      transform: rotate(-45deg) translate(0px, 0px);
+    }
+
+    //햄버거바 클릭했을 때 메뉴 열고 닫기 기능
+    .sidebar_menuToggle input:checked ~ ul {
+      transform: none;
+    }
+
+
+    @media (max-width: 500px) {
+      .sidebar_menu {
+        position: fixed;
+        background: #ec9ed6;
+        width: 40vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        list-style-type: none;
+        padding: 35vw 7vw;
+        z-index: 100;
+        transform-origin: 0% 0%; // 사이드바 오픈 버튼
+        transform: translate(-1000%, 0); // 사이드바 오픈 버튼
+      }
+  
+      .sidebar_menu p {
+        margin-top: 30px;
+        font-size: 1em;
+      }
+  
+      // 햄버거바 클릭되는 부분 // 
+      .sidebar_menuToggle input {
+        display: block;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+    
+        top: 50px;
+        left: 30px;
+    
+        // decoration: none;
+        // border: none;
+        // outline: none;
+    
+        cursor: pointer;
+    
+        opacity: 0;
+        background: transparent;
+        z-index: 200;
+  
+        -webkit-touch-callout: none;
+  
+      }
+    
+  
+      // X 버튼
+      .sidebar_menuToggle span {
+        display: block;
+        flex-direction: column;
+        width: 30px;
+        height: 3px;
+        position: relative;
+        decoration: none;
+        background: #ffffff;
+        border-radius: 3px;
+        top: 50px;
+        left: 50px;
+        margin: 5px 0;
+  
+        z-index: 250;
+  
+        transform-origin: -5px;
+  
+        transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+          background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+      }
+  
+      .sidebar_menuToggle span:first-child {
+        transform-origin: 0% 0%;
+      }
+  
+      .sidebar_menuToggle span:nth-last-child(2) {
+        transform-origin: 0% 100%;
+      }
+  
+      .sidebar_menuToggle input:checked ~ span {
+        opacity: 1;
+        transform: rotate(45deg) translate(-10px, 7px);
+        background: #232323;
+      }
+  
+      .sidebar_menuToggle input:checked ~ span:nth-last-child(3) {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+      }
+  
+      .sidebar_menuToggle input:checked ~ span:nth-last-child(2) {
+        transform: rotate(-45deg) translate(-13px, -4px);
+      }
+  
+      //햄버거바 클릭했을 때 메뉴 열고 닫기 기능
+      .sidebar_menuToggle input:checked ~ ul {
+        transform: none;
+      }
+  
+    }
   }
-
-  .sidebar_menu p{
-    margin: 20px 0 0 10px;
-  }
-
-  // .sidebar_menu {
-  //     position: absolute;
-  //     width: 260px;
-  //     height: calc(100vh + 43px);
-  //     margin: -100px 0 0 -30px;
-  //     padding: 50px;
-  //     padding-top: 125px;
-
-  //     background: #ec9ed6;
-  //     // list-style-type: none;
-
-  //     transform-origin: 0% 0%;
-  //     transform: translate(-1000%, 0);
-  // }
-
-  // 메뉴 바 글씨
-  .sidebar_menu li {
-    top: 100px;
-    line-height: 60px;
-    font-size: 22px;
-    padding: 10px;
-  }
-
-  //햄버거바 클릭했을 때 메뉴 열고 닫기 기능
-  .sidebar_menuToggle input:checked ~ ul {
-    transform: none;
-  }
-
-
-  .loginbtn {
-    padding-right: 10px;
-    align-items: center;
-    vertical-align: middle;
-  }
-
 `;
