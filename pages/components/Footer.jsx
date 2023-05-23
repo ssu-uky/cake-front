@@ -1,6 +1,8 @@
 import css from "styled-jsx/css";
 import Link from "next/link";
 import { useState } from "react";
+import axios from "axios";
+
 
 export default function Footer() {
   // 피드백 //
@@ -21,7 +23,7 @@ export default function Footer() {
   const handleFeedbackSubmit = async () => {
     try {
       const response = await axios.post(
-        "https://manage.naekkukae.store/api/users/feedback/",
+        `https://manage.naekkukae.store/api/users/feedback/`,
         {
           feedback_name: feedbackName,
           feedback_email: feedbackEmail,
@@ -29,14 +31,14 @@ export default function Footer() {
           feedback_password: feedbackPassword,
         }
       );
-      console.log(response.data); // 응답 결과 처리
-
+      
       window.confirm("피드백 제출에 성공하였습니다.");
       // window.alert("피드백 제출에 성공하였습니다.");
       setIsModalOpen(false); // 모달 닫기
     } catch (error) {
       console.log("피드백 제출에 실패하였습니다.");
-      console.log(error.response.data); // 에러 내용
+      console.log(feedbackName, feedbackEmail, feedbackContent,feedbackPassword); // 응답 결과 처리
+      console.log(error); // 에러 내용
     }
   };
 
