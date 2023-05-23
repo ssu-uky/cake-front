@@ -71,7 +71,6 @@ export default function Footer() {
         <div className="modal">
           <div className="modal_content">
             <h2>문의하기</h2>
-            
             <input
               type="text"
               placeholder="이름"
@@ -85,7 +84,7 @@ export default function Footer() {
               onChange={(e) => setFeedbackEmail(e.target.value)}
             />
             <textarea
-              placeholder="내용"
+              placeholder="문의 할 사항을 입력해주세요"
               value={feedbackContent}
               onChange={(e) => setFeedbackContent(e.target.value)}
             ></textarea>
@@ -97,7 +96,7 @@ export default function Footer() {
             />
             <div className="modal_buttons">
               <button onClick={handleModalClose}>닫기</button>
-              <button onClick={handleFeedbackSubmit}>제출</button>
+              <button type="submit" onClick={handleFeedbackSubmit}>제출</button>
             </div>
           </div>
         </div>
