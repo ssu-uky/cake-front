@@ -56,6 +56,7 @@ const login = css`
   .login_container {
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -124,7 +125,7 @@ const login = css`
 
     h1 {
       font-size: 45px;
-      margin-top: 7vw;
+      margin-top: 5vw;
       font-family: "Bazzi";
     }
 
