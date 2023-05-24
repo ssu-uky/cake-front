@@ -5,7 +5,11 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faAngleLeft, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleRight,
+  faAngleLeft,
+  faTrashCan,
+} from "@fortawesome/free-solid-svg-icons";
 // import Sidebar from "../Sidebar";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -34,13 +38,16 @@ export default function Main() {
   const getNewAccessToken = async (refreshToken) => {
     try {
       // const response = await fetch("http://127.0.0.1:8000/api/token/refresh/", {
-        const response = await fetch(`https://manage.naekkukae.store/api/token/refresh/`,{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ refresh: refreshToken }),
-      });
+      const response = await fetch(
+        `https://manage.naekkukae.store/api/token/refresh/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ refresh: refreshToken }),
+        }
+      );
 
       const data = await response.json();
       return data.access;
@@ -69,13 +76,16 @@ export default function Main() {
     }
     try {
       // const response = await fetch("http://127.0.0.1:8000/api/users/info/", {
-        const response = await fetch(`https://manage.naekkukae.store/api/users/info/`,{
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${validAccessToken}`,
-        },
-      });
+      const response = await fetch(
+        `https://manage.naekkukae.store/api/users/info/`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${validAccessToken}`,
+          },
+        }
+      );
 
       const data = await response.json();
       setLoggedInUserPk(data.user_pk);
@@ -277,6 +287,8 @@ export default function Main() {
           <div style={tablestyle}>
             <Image
               src={Caketable}
+              id="caketableimg"
+              layout="responsive"
               alt="caketableimg"
               width={500}
               height={450}
@@ -300,6 +312,8 @@ export default function Main() {
                         src={`/images/cakes/${selectedCake}.png`}
                         height={100}
                         width={100}
+                        className="pickcakeview"
+                        layout="responsive"
                         style={{
                           cursor: "pointer",
                         }}
@@ -309,6 +323,8 @@ export default function Main() {
                     ) : (
                       <Image
                         src={`/images/cakes/${visitor.pickcake}.png`}
+                        className="pickcakeview"
+                        layout="responsive"
                         height={100}
                         width={100}
                         style={{
@@ -341,13 +357,11 @@ export default function Main() {
                             닫기&nbsp; &times;
                           </span>
                           <p className="modal_title" id={selectedCake}>
-                            {" "}
-                            🎉&nbsp; {visitor.visitor_name} 🎉{" "}
+                            🎉&nbsp; {visitor.visitor_name} 🎉
                           </p>
                           <br></br>
                           <p className="modal_body" id={selectedCake}>
-                            {" "}
-                            {visitor.letter}{" "}
+                            {visitor.letter}
                           </p>
                           <FontAwesomeIcon
                             icon={faTrashCan}
@@ -454,29 +468,27 @@ const main = css`
   }
 
   .main_text_title {
-    font-size: 2em;
+    font-size: 2.5em;
     margin-top: 7vh;
-    margin-bottom: 10px;
   }
 
   .main_text_message {
-    font-size: 2em;
+    font-size: 2.5em;
     margin-top: -15px;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
   }
 
   // 케이크 css
   .caketable-container {
     position: relative;
-    width: 500px;
-    // height: 450px;
-    margin: auto;
+    width: 700px;
+    height: 650px;
+    margin: 0 auto;
   }
 
   .caketable {
     display: inline-block;
     position: relative;
-    // width: 500px;
   }
 
   // 전체 케이크 이동
@@ -494,6 +506,8 @@ const main = css`
 
   .pickcake {
     width: calc(25% - 10px);
+    height: calc(25% - 10px);
+    padding: 0 5px;
     // margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -505,21 +519,19 @@ const main = css`
   .visitor_name {
     width: 100%;
     // height: 100%;
-    font-size: 1em;
+    font-size: 1.5em;
     font-family: "Bazzi";
     text-align: center;
     align-items: center;
     vertical-align: middle;
-    margin-top: -5px;
-    margin-bottom: 5px;
   }
 
   .first-row {
-    margin-top: -260px;
+    margin-top: -420px;
   }
 
   .second-row {
-    margin-top: -135px;
+    margin-top: -203px;
   }
 
   // 페이지네이션
@@ -530,9 +542,9 @@ const main = css`
     vertical-align: middle;
     align-items: center;
     font-family: "Bazzi";
-    font-size: 1.5em;
+    font-size: 2.3em;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 80px;
   }
 
   .pagetext {
@@ -541,7 +553,32 @@ const main = css`
     align-items: center;
     vertical-align: middle;
     text-align: center;
-    margin: 0 20px;
+    margin: 0 30px;
+  }
+
+  // 하단 버튼 정렬
+  .main_btn_container {
+    display: flex;
+    flex-direction: row;
+    width: 700px;
+    height: 100%;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  // 하단 버튼 디자인
+  .main_btn {
+    width: 200px;
+    height: 55px;
+    border-radius: 15px;
+    border: none;
+    font-family: "Bazzi";
+    background-color: #f073cd;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+    margin-top: 35px;
   }
 
   // 모달 창
@@ -603,81 +640,588 @@ const main = css`
     position: relative;
   }
 
-  // 하단 버튼 정렬
-  .main_btn_container {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 30px;
-  }
+  // @media (max-width: 768px) {
+  //   .main_text_title {
+  //     font-size: 2.5em;
+  //     margin-top: 7vh;
+  //     margin-bottom: 10px;
+  //   }
 
-  // 하단 버튼 디자인
-  .main_btn {
-    width: 150px;
-    height: 45px;
-    border-radius: 15px;
-    border: none;
-    font-family: "Bazzi";
-    background-color: #f073cd;
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
+  //   .main_text_message {
+  //     font-size: 2.5em;
+  //     margin-top: -15px;
+  //     margin-bottom: 25px;
+  //   }
+
+  //   .main_btn_container {
+  //     width: 700px;
+  //     height: auto;
+  //     margin: 0 auto;
+  //     position: relative;
+  //   }
+  // }
+
+  @media (max-width: 768px) {
+    .main_container {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #f7bedf;
+      color: white;
+      text-align: center;
+      position: relative;
+      font-family: "Bazzi";
+      vertical-align: middle;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+
+      //중앙정렬
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .main_text_title {
+      font-size: 2em;
+      margin-top: 12vh;
+      margin-bottom: 15px;
+    }
+
+    .main_text_message {
+      font-size: 2em;
+      margin-top: -15px;
+      margin-bottom: 30px;
+    }
+
+    // 케이크 css //
+    .caketable-container {
+      // width: 80%;
+      width: 50vh;
+      // height: 50vh;
+      // margin: 0 auto;
+      display: fixed;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .caketable {
+      display: inline-block;
+      position: relative;
+    }
+
+    // 전체 케이크 이동
+    .main_cakeImg {
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+
+    .pickcake {
+      width: calc(25% - 10px);
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .visitor_name {
+      width: 100%;
+      font-size: 1.2em;
+      font-family: "Bazzi";
+      text-align: center;
+      align-items: center;
+      vertical-align: middle;
+      margin-top: -5px;
+      margin-bottom: 5px;
+    }
+
+    .first-row {
+      margin-top: -30vh;
+    }
+
+    .second-row {
+      margin-top: -14.5vh;
+    }
+
+    // 페이지네이션
+    .pagebtn {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      vertical-align: middle;
+      align-items: center;
+      font-family: "Bazzi";
+      font-size: 1.5em;
+      margin: 0 auto;
+      margin-top: -15px;
+    }
+
+    .pagetext {
+      font-size: 1em;
+      font-family: "Bazzi";
+      align-items: center;
+      vertical-align: middle;
+      text-align: center;
+      margin: 5px 20px;
+    }
+
+    // 하단 버튼 정렬
+    .main_btn_container {
+      width: 50vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+      // position: relative;
+    }
+
+    // 하단 버튼 디자인
+    .main_btn {
+      width: 160px;
+      height: 50px;
+      border-radius: 15px;
+      border: none;
+      background-color: #f073cd;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    // 모달 창
+    .modal_container {
+      width: 100%;
+      height: 350px;
+      border-radius: 20px;
+      font-family: "Bazzi";
+      background-color: rgba(247, 191, 224, 0.8);
+      // backdrop-filter: blur(1px);
+      // color: black;
+      color: f073cd;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      padding: 25px;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      // align-items: flex-end;
+    }
+
+    .modal_inner {
+      width: 90%;
+      height: 80%;
+      display: relative;
+      margin: 0 auto;
+      vertical-align: middle;
+      align-items: center;
+      background-color: #f073cd;
+      border-radius: 20px;
+      margin-top: 50px;
+    }
+
+    .modal_close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 17px;
+    }
+
+    .modal_title {
+      // color: #f073cd;
+      font-size: 20px;
+      margin: 0 auto;
+      padding-top: 30px;
+      text-align: center;
+    }
+
+    .modal_body {
+      font-size: 17px;
+      padding: 10px;
+      text-align: center;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .main_container {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #f7bedf;
+      color: white;
+      text-align: center;
+      position: relative;
+      vertical-align: middle;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+    }
+
+    .main_text_title {
+      font-size: 1.5em;
+      margin-top: 17vh;
+      margin-bottom: 15px;
+    }
+
+    .main_text_message {
+      font-size: 1.5em;
+      margin-top: -15px;
+      margin-bottom: 30px;
+    }
+
+    // 케이크 css //
+    .caketable-container {
+      width: 33vh;
+      // width: 50%;
+      // height: 50vh;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .caketable {
+      display: inline-block;
+      position: relative;
+    }
+
+    // 전체 케이크 이동
+    .main_cakeImg {
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+
+    .pickcake {
+      width: calc(25% - 10px);
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .visitor_name {
+      width: 100%;
+      font-size: 1em;
+      font-family: "Bazzi";
+      text-align: center;
+      align-items: center;
+      vertical-align: middle;
+      margin-top: -5px;
+      margin-bottom: 5px;
+    }
+
+    .first-row {
+      margin-top: -19vh;
+    }
+
+    .second-row {
+      margin-top: -9vh;
+    }
+
+    // 페이지네이션
+    .pagebtn {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      vertical-align: middle;
+      align-items: center;
+      font-family: "Bazzi";
+      font-size: 1.2em;
+      margin: 0 auto;
+      margin-top: -220px;
+    }
+
+    .pagetext {
+      font-size: 1em;
+      font-family: "Bazzi";
+      align-items: center;
+      vertical-align: middle;
+      text-align: center;
+      margin: 0 25px;
+    }
+
+    // 하단 버튼 정렬
+    .main_btn_container {
+      width: 33vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+      // position: relative;
+    }
+
+    // 하단 버튼 디자인
+    .main_btn {
+      width: 120px;
+      height: 50px;
+      border-radius: 15px;
+      border: none;
+      font-family: "Bazzi";
+      background-color: #f073cd;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    // 모달 창
+    .modal_container {
+      width: 100%;
+      height: 350px;
+      border-radius: 20px;
+      font-family: "Bazzi";
+      background-color: rgba(247, 191, 224, 0.8);
+      // backdrop-filter: blur(1px);
+      // color: black;
+      color: f073cd;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      padding: 25px;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      // align-items: flex-end;
+    }
+
+    .modal_inner {
+      width: 90%;
+      height: 80%;
+      display: relative;
+      margin: 0 auto;
+      vertical-align: middle;
+      align-items: center;
+      background-color: #f073cd;
+      border-radius: 20px;
+      margin-top: 50px;
+    }
+
+    .modal_close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 17px;
+    }
+
+    .modal_title {
+      // color: #f073cd;
+      font-size: 20px;
+      margin: 0 auto;
+      padding-top: 30px;
+      text-align: center;
+    }
+
+    .modal_body {
+      font-size: 17px;
+      padding: 10px;
+      text-align: center;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+  }
+  @media (max-width: 420px) {
+    .main_container {
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #f7bedf;
+      color: white;
+      text-align: center;
+      position: relative;
+      vertical-align: middle;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+    }
+
+    .main_text_title {
+      font-size: 1.5em;
+      margin-top: 17vh;
+      margin-bottom: 15px;
+    }
+
+    .main_text_message {
+      font-size: 1.5em;
+      margin-top: -15px;
+      margin-bottom: 30px;
+    }
+
+    // 케이크 css //
+    .caketable-container {
+      width: 27vh;
+      // width: 50%;
+      // height: 50vh;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .caketable {
+      display: inline-block;
+      position: relative;
+    }
+
+    // 전체 케이크 이동
+    .main_cakeImg {
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+
+    .pickcake {
+      width: calc(25% - 10px);
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .visitor_name {
+      width: 100%;
+      font-size: 1em;
+      font-family: "Bazzi";
+      text-align: center;
+      align-items: center;
+      vertical-align: middle;
+      margin-top: -5px;
+      margin-bottom: 5px;
+    }
+
+    .first-row {
+      margin-top: -15.2vh;
+    }
+
+    .second-row {
+      margin-top: -7vh;
+    }
+
+    // 페이지네이션
+    .pagebtn {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      vertical-align: middle;
+      align-items: center;
+      font-family: "Bazzi";
+      font-size: 1em;
+      margin: 0 auto;
+      margin-top: -300px;
+    }
+
+    .pagetext {
+      font-size: 1em;
+      font-family: "Bazzi";
+      align-items: center;
+      vertical-align: middle;
+      text-align: center;
+      margin: 0 25px;
+    }
+
+    // 하단 버튼 정렬
+    .main_btn_container {
+      width: 27vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+      // position: relative;
+      margin-top: -10px;
+    }
+
+    // 하단 버튼 디자인
+    .main_btn {
+      width: 100px;
+      height: 40px;
+      border-radius: 15px;
+      border: none;
+      font-family: "Bazzi";
+      background-color: #f073cd;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    // 모달 창
+    .modal_container {
+      width: 100%;
+      height: 350px;
+      border-radius: 20px;
+      font-family: "Bazzi";
+      background-color: rgba(247, 191, 224, 0.8);
+      // backdrop-filter: blur(1px);
+      // color: black;
+      color: f073cd;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      padding: 25px;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      // align-items: flex-end;
+    }
+
+    .modal_inner {
+      width: 90%;
+      height: 80%;
+      display: relative;
+      margin: 0 auto;
+      vertical-align: middle;
+      align-items: center;
+      background-color: #f073cd;
+      border-radius: 20px;
+      margin-top: 50px;
+    }
+
+    .modal_close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 17px;
+    }
+
+    .modal_title {
+      // color: #f073cd;
+      font-size: 20px;
+      margin: 0 auto;
+      padding-top: 30px;
+      text-align: center;
+    }
+
+    .modal_body {
+      font-size: 17px;
+      padding: 10px;
+      text-align: center;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
   }
 `;
-
-// const main = css`
-//   @font-face {
-//     font-family: "Bazzi";
-//     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
-//       format("woff");
-//     font-weight: normal;
-//     font-style: normal;
-//   }
-//   .main_container {
-//     width: 500px;
-//     height: 100vh;
-//     background-color: #f7bedf;
-//     color: white;
-//     text-align: center;
-//     font-family: "Bazzi";
-//     //중앙정렬
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//   }
-//   .main_text {
-//     font-size: 30px;
-//     line-height: 15px;
-//   }
-//   .main_btn_container {
-//     display: flex;
-//     justify-content: space-evenly;
-//   }
-//   .main_btn {
-//     width: 150px;
-//     height: 45px;
-//     border-radius: 15px;
-//     border: none;
-//     font-family: "Bazzi";
-//     background-color: #f073cd;
-//     color: white;
-//     margin-top: 10px;
-//     font-size: 15px;
-//   }
-//   .main_cakeImg {
-//     position: absolute;
-//     display: flex;
-//     flex-flow: row wrap;
-//     width: 100%;
-//     top: 330px;
-//   }
-//   .pickcake {
-//     margin-right: 30px;
-//   }
-//   .modal {
-//     height: 100px;
-//     width: 100px;
-//     background-color: #ffffff;
-//     color: black;
-//       }
-// `;

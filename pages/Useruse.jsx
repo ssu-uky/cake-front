@@ -103,7 +103,7 @@ export default function Useruse() {
             <Image src={cakeimg} 
             id = "color-picker"
             layout = "responsive"
-            width={450} height={400} />
+            width={600} height={550} />
           </div>
         </div>
         <button type="submit" className="useruse_submit_button font">
@@ -143,6 +143,7 @@ const Global = createGlobalStyle`
     width: 80%;
     height: 80%;
   }
+
   .saturation-black{
     width: 100vw;
     height: 100%;
@@ -154,6 +155,7 @@ const Global = createGlobalStyle`
 
   .chrome-picker{
     width: 100%;
+    margin: 20px 0;
   }
 
   .chrome-picker:nth-child(1){
@@ -171,7 +173,7 @@ const useruse = css`
 
 #image-container{
   width: 450px;
-  height: 400px;
+  height: 450px;
 }
 
 #color-picker{
@@ -207,6 +209,7 @@ const useruse = css`
 
   // 전체 이동 //
   .useruse_nickname_container {
+    margin-top: 10vh;
     padding: 5vh;
   }
 
@@ -238,7 +241,7 @@ const useruse = css`
     vertical-align: middle;
     align-items: center;
     align-content: center;
-    line-height: 15px;
+    line-height: 40px;
   }
 
   .useruse_nickname:focus {
@@ -259,10 +262,10 @@ const useruse = css`
     border: none;
     margin: 0 auto;
     border-radius: 15px;
-    height: 35px;
-    width: 90px;
+    height: 40px;
+    width: 100px;
     font-size: 20px;
-    margin-top: 130px;
+    margin-top: 200px;
     color: white;
     background-color: #f073cd;
     display: flex;
@@ -289,7 +292,7 @@ const useruse = css`
       height: 100%;
       margin: 0 auto;
       position: absolute;
-      top: 5vw;
+      top: 15vw;
       transform: translate(10vw, 10vw);
       overflow: hidden;
       background-color: #f7bedf;
@@ -336,7 +339,7 @@ const useruse = css`
     }
 
     .useruse_submit_button {
-      margin-top: 25vh;
+      margin-top: 23vh;
       height: 35px;
       width: 90px;
       border-radius: 15px;

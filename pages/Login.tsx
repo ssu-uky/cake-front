@@ -156,6 +156,7 @@ const login = css`
       color: black;
       font-family: "Bazzi";
       background-color: yellow;
+      margin: 0;
     }
 
     .login_email_btn {
