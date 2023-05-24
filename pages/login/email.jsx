@@ -1,263 +1,337 @@
 import css from "styled-jsx/css";
 import Image from "next/image";
-import Loginimg from "public/images/Loginimg.png";
+// import Loginimg from "public/images/Loginimg.png";
+import Loginimg500 from "public/images/Loginimg500.png";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import router from "next/router";
 import axios from "axios";
 
 export default function EmailLogin() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
-    useEffect(() => {
-        const access = sessionStorage.getItem("access");
-        if (access) {
-            // axios.get(`http://127.0.0.1:8000/api/users/info/`, {
-            axios.get(`https://manage.naekkukae.store/api/users/info/`,{
-                headers: {
-                    Authorization: `Bearer ${access}`,
-                },
-                })
-                .then((response) => {
-                    const user_pk = response.data.user_pk;
-                    router.push(`/caketables/${user_pk}/`);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
+  useEffect(() => {
+    const access = sessionStorage.getItem("access");
+    if (access) {
+      // axios.get(`http://127.0.0.1:8000/api/users/info/`, {
+      axios
+        .get(`https://manage.naekkukae.store/api/users/info/`, {
+          headers: {
+            Authorization: `Bearer ${access}`,
+          },
+        })
+        .then((response) => {
+          const user_pk = response.data.user_pk;
+          router.push(`/caketables/${user_pk}/`);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, []);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!email || !password) {
+      alert("모든 항목을 채워주세요.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        // `http://127.0.0.1:8000/api/users/login/`,
+        `https://manage.naekkukae.store/api/users/login/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
         }
-    }, []);
+      );
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+      if (!response.ok) {
+        throw new Error("로그인 오류");
+      }
 
-        if (!email || !password) {
-            alert("모든 항목을 채워주세요.");
-            return;
-        }
+      const data = await response.json();
+      console.log(data);
 
-        try {
-            const response = await fetch(
-                // `http://127.0.0.1:8000/api/users/login/`,
-                `https://manage.naekkukae.store/api/users/login/`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        password: password,
-                    }),
-                }
-            );
+      const accessToken = data.token.access;
+      const refreshToken = data.token.refresh;
 
-            if (!response.ok) {
-                throw new Error("로그인 오류");
-            }
+      sessionStorage.setItem("access", accessToken);
+      sessionStorage.setItem("refresh", refreshToken);
 
-            const data = await response.json();
-            console.log(data);
+      // caketable 존재 확인
+      const user_pk = data.user_pk;
+      console.log(user_pk);
 
-            const accessToken = data.token.access;
-            const refreshToken = data.token.refresh;
+      const caketableResponse = await fetch(
+        // `http://127.0.0.1:8000/api/caketables/${user_pk}/`
+        `https://manage.naekkukae.store/api/caketables/${user_pk}/`
+      );
+      // 백엔드 데이터에 user_pk를 가진 사람 정보 확인 중 tablecolor 가 있으면 본인 페이지로 이동
+      //  tablecolor 가 없다면 Useruse로 이동
+      const caketableData = await caketableResponse.json();
+      if (caketableData[0] && caketableData[0].tablecolor) {
+        router.push(`/caketables/${user_pk}`);
+      } else {
+        router.push("/Useruse");
+      }
 
-            sessionStorage.setItem("access", accessToken);
-            sessionStorage.setItem("refresh", refreshToken);
+      console.log(caketableData.tablecolor, email, password);
+    } catch (error) {
+      alert("아이디와 비밀번호를 다시 확인해주세요");
+      console.log(error);
+      console.log("아이디와 비밀번호를 다시 확인해주세요");
+    }
+  };
 
-            // caketable 존재 확인
-            const user_pk = data.user_pk;
-            console.log(user_pk);
+  const handleSignup = async () => {
+    router.push("signup/");
+  };
 
-            const caketableResponse = await fetch(
-                // `http://127.0.0.1:8000/api/caketables/${user_pk}/`
-                `https://manage.naekkukae.store/api/caketables/${user_pk}/`
-            );
-            // 백엔드 데이터에 user_pk를 가진 사람 정보 확인 중 tablecolor 가 있으면 본인 페이지로 이동
-            //  tablecolor 가 없다면 Useruse로 이동
-            const caketableData = await caketableResponse.json();
-            if (caketableData[0] && caketableData[0].tablecolor) {
-                router.push(`/caketables/${user_pk}`);
-            } else {
-                router.push("/Useruse");
-            }
+  const handleFindPw = async () => {
+    router.push("resetpw/");
+  };
 
-            console.log(caketableData.tablecolor, email, password);
-        } catch (error) {
-            alert("아이디와 비밀번호를 다시 확인해주세요");
-            console.log(error);
-            console.log("아이디와 비밀번호를 다시 확인해주세요");
-        }
-    };
-
-    const handleSignup = async () => {
-        router.push("signup/");
-    };
-
-    const handleFindPw = async () => {
-        router.push("resetpw/");
-    };
-
-    return (
-        <div className="email_container">
-            <br></br>
-            <br></br>
-            <Image
-                src={Loginimg}
-                alt="로그인 이미지"
-                width={180}
-                height={130}
-                className="loginimg"
-            />
-            <h1> 네가 꾸민 케이크 </h1>
-            <form className="login_form" onSubmit={handleSubmit}>
-                <div className="email_label">
-                    <input
-                        type="email"
-                        id="input2"
-                        placeholder="아이디"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        onFocus={(e) => (e.target.placeholder = "")}
-                        onBlur={(e) => (e.target.placeholder = "아이디")}
-                        className="email_input"
-                    />
-                </div>
-                <div className="email_label">
-                    <input
-                        type="password"
-                        id="input3"
-                        placeholder="비밀번호"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        onFocus={(e) => (e.target.placeholder = "")}
-                        onBlur={(e) => (e.target.placeholder = "비밀번호")}
-                        className="email_input"
-                    />
-                </div>
-                <div className="login_button">
-                    <button type="submit" className="login_btn">
-                        로그인
-                    </button>
-                </div>
-                <div className="find_button">
-                    <li>아이디 찾기</li>
-                    &nbsp;&nbsp; | &nbsp;&nbsp;
-                    <li onClick={handleFindPw} style={{ cursor: "pointer" }}>
-                        비밀번호 찾기
-                    </li>
-                    &nbsp;&nbsp; | &nbsp;&nbsp;
-                    <li onClick={handleSignup} style={{ cursor: "pointer" }}>
-                        회원가입
-                    </li>
-                </div>
-            </form>
-
-            <style jsx>{email_login}</style>
+  return (
+    <div className="email_container">
+      <br></br>
+      <br></br>
+      <div className="login_img">
+        <Image src={Loginimg500} alt="loginimg" layout="responsive" />
+      </div>
+      <h1> 네가 꾸민 케이크 </h1>
+      <form className="login_form" onSubmit={handleSubmit}>
+        <div className="email_label">
+          <input
+            type="email"
+            id="input2"
+            placeholder="아이디"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onFocus={(e) => (e.target.placeholder = "")}
+            onBlur={(e) => (e.target.placeholder = "아이디")}
+            className="email_input"
+          />
         </div>
-    );
+        <div className="email_label">
+          <input
+            type="password"
+            id="input3"
+            placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onFocus={(e) => (e.target.placeholder = "")}
+            onBlur={(e) => (e.target.placeholder = "비밀번호")}
+            className="email_input"
+          />
+        </div>
+        <div className="login_button">
+          <button type="submit" className="login_btn">
+            로그인
+          </button>
+        </div>
+        <div className="find_button">
+          <li>아이디 찾기</li>
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <li onClick={handleFindPw} style={{ cursor: "pointer" }}>
+            비밀번호 찾기
+          </li>
+          &nbsp;&nbsp; | &nbsp;&nbsp;
+          <li onClick={handleSignup} style={{ cursor: "pointer" }}>
+            회원가입
+          </li>
+        </div>
+      </form>
+
+      <style jsx>{email_login}</style>
+    </div>
+  );
 }
 
 const email_login = css`
-    @font-face {
-        font-family: "Bazzi";
-        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
-            format("woff");
-        font-weight: normal;
-        font-style: normal;
-    }
+  @font-face {
+    font-family: "Bazzi";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
 
-    .email_container {
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        background-color: #f7bedf;
-        color: white;
-        text-align: center;
-        align-items: center;
-        vertical-align: middle;
-        //중앙정렬
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+  .email_container {
+    padding-top: 60px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f7bedf;
+    color: white;
+    text-align: center;
+    align-items: center;
+    vertical-align: middle;
+    //중앙정렬
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
+  .login_img {
+    width: 350px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: "Bazzi";
+    font-size: 45px;
+    margin-bottom: 20px;
+  }
+
+  .login_form {
+    font-family: "Bazzi";
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+    margin: 20px;
+  }
+
+  .email_label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+  }
+
+  .email_input {
+    font-size: 18px;
+    width: 255px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    // outline: none;
+    margin: 0 auto;
+    padding-left: 10px;
+    align-items: center;
+    vertical-align: middle;
+    outline-color: #f073cd;
+  }
+
+  .login_btn {
+    width: 120px;
+    height: 45px;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    margin: 20px;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    background-color: #f073cd;
+    font-size: 20px;
+    // background-color: white;
+  }
+
+  .find_button {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    margin-top: 10px;
+    color: white;
+    text-decoration: none;
+    list-style: none;
+  }
+
+  @media (max-width: 640px) {
     .login_img {
-        margin: 10vh;
-        display: block;
-        text-align: center;
+      width: 280px;
+      height: auto;
     }
-
     h1 {
-        font-family: "Bazzi";
-        font-size: 40px;
-        margin-top: 20px;
+      font-size: 40px;
+      margin-bottom: 20px;
     }
-
-    .login_form {
-        font-family: "Bazzi";
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        // justify-content: center;
-        margin: 20px;
-    }
-
-    .email_label {
-        font-family: "Bazzi";
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        margin: 10px;
-        // width: 100%;
-    }
-
     .email_input {
-        font-family: "Bazzi";
-        font-size: 15px;
-        width: 230px;
-        height: 45px;
-        border: none;
-        border-radius: 5px;
-        outline: none;
-        margin: 0 auto;
-        padding-left: 10px;
-        align-items: center;
-        vertical-align: middle;
+      font-size: 15px;
+      width: 230px;
+      height: 45px;
+      border: none;
+      border-radius: 5px;
     }
 
     .login_btn {
-        width: 100px;
-        height: 40px;
-        align-items: center;
-        vertical-align: middle;
-        justify-content: center;
-        margin-top: 15px;
-        border: none;
-        border-radius: 25px;
-        color: white;
-        background-color: #f073cd;
-        // background-color: white;
+      width: 115px;
+      height: 45px;
+      align-items: center;
+      vertical-align: middle;
+      justify-content: center;
+      margin: 20px;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      background-color: #f073cd;
     }
-
-    // .login_btn:hover {
-    //     background-color: #f073cd;
-    //     color: white;
-    // }
 
     .find_button {
-        font-family: "Bazzi";
-        display: flex;
-        flex-direction: row;
-        font-size: 15px;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        color: white;
-        text-decoration: none;
-        list-style: none;
+      display: flex;
+      flex-direction: row;
+      font-size: 18px;
+      margin-top: 10px;
+      color: white;
+      text-decoration: none;
+      list-style: none;
     }
+  }
+
+  @media(max-width: 376px) {
+    .login_img {
+      width: 200px;
+      height: auto;
+      margin-bottom:10px;
+    }
+    h1 {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+    .email_input {
+      font-size: 15px;
+      width: 220px;
+      height: 45px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .login_btn {
+      width: 100px;
+      height: 40px;
+      align-items: center;
+      vertical-align: middle;
+      justify-content: center;
+      margin: 20px;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      background-color: #f073cd;
+    }
+
+    .find_button {
+      display: flex;
+      flex-direction: row;
+      font-size: 15px;
+      margin-top: 10px;
+      color: white;
+      text-decoration: none;
+      list-style: none;
+    }
+  }
 `;
