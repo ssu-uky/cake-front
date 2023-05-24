@@ -26,8 +26,8 @@ export default function CakeTable(props) {
 
     useEffect(() => {
         if (!user_pk) return;
-        fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/`, {
-        // fetch(`https://manage.naekkukae.store/api/caketables/${user_pk}/`, {
+        // fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/`, {
+        fetch(`https://manage.naekkukae.store/api/caketables/${user_pk}/`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
