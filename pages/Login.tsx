@@ -73,15 +73,15 @@ const login = css`
 
   h1 {
     text-align: center;
-    font-size: 60px;
-    margin-top: vh;
+    font-size: 50px;
+    margin-top: 5vh;
     margin-bottom: 3vh;
     font-family: "Bazzi";
     color: white;
   }
 
   .login_img {
-    width: 430px;
+    width: 300px;
     height: auto;
     margin: 0 auto;
   }
@@ -100,7 +100,7 @@ const login = css`
   }
 
   .loginbtn {
-    width: 350px;
+    width: 310px;
     height: 70px;
     border-radius: 15px;
     border: none;
