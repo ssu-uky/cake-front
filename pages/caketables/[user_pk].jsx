@@ -599,10 +599,9 @@ const main = css`
     height: 350px;
     border-radius: 20px;
     font-family: "Bazzi";
-    background-color: rgba(247, 191, 224);
     // backdrop-filter: blur(1px);
     // color: black;
-    color: f073cd;
+    background-color: #f073cd;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -620,7 +619,7 @@ const main = css`
     margin: 0 auto;
     vertical-align: middle;
     align-items: center;
-    background-color: #f073cd;
+    background-color: #f7bedf;
     border-radius: 20px;
     margin-top: 50px;
   }
@@ -784,10 +783,9 @@ const main = css`
       height: 350px;
       border-radius: 20px;
       font-family: "Bazzi";
-      background-color: rgba(247, 191, 224, 0.8);
       // backdrop-filter: blur(1px);
       // color: black;
-      color: f073cd;
+      background-color: #f073cd;
       position: fixed;
       bottom: 0;
       left: 0;
@@ -805,7 +803,7 @@ const main = css`
       margin: 0 auto;
       vertical-align: middle;
       align-items: center;
-      background-color: #f073cd;
+      background-color: #f7bedf;
       border-radius: 20px;
       margin-top: 50px;
     }
@@ -967,10 +965,10 @@ const main = css`
       height: 350px;
       border-radius: 20px;
       font-family: "Bazzi";
-      background-color: rgba(247, 191, 224, 0.8);
+      background-color: #f073cd;
       // backdrop-filter: blur(1px);
       // color: black;
-      color: f073cd;
+      // color: f073cd;
       position: fixed;
       bottom: 0;
       left: 0;
@@ -988,7 +986,7 @@ const main = css`
       margin: 0 auto;
       vertical-align: middle;
       align-items: center;
-      background-color: #f073cd;
+      background-color: #f7bedf;
       border-radius: 20px;
       margin-top: 50px;
     }
