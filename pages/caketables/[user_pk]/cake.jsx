@@ -54,6 +54,14 @@ export default function CakeTable(props) {
         return;
       }
     }
+    if (pickcake === null) {
+      alert("케이크를 선택해주세요.");
+      return;
+    }
+    if (letter.trim() === "") {
+      alert("편지를 작성해주세요.");
+      return;
+    }
     try {
       const response = await fetch(
         `https://manage.naekkukae.store/api/caketables/${user_pk}/cake/`,

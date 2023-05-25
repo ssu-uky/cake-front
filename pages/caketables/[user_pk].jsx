@@ -599,7 +599,7 @@ const main = css`
     height: 350px;
     border-radius: 20px;
     font-family: "Bazzi";
-    background-color: rgba(247, 191, 224, 0.8);
+    background-color: rgba(247, 191, 224);
     // backdrop-filter: blur(1px);
     // color: black;
     color: f073cd;

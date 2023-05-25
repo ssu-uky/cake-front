@@ -10,6 +10,7 @@ export default function Footer() {
   const [feedbackContent, setFeedbackContent] = useState("");
   const [feedbackPassword, setFeedbackPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -20,6 +21,11 @@ export default function Footer() {
   };
 
   const handleFeedbackSubmit = async () => {
+    const passwordPattern = /^\d{4}$/;
+    if (!passwordPattern.test(feedbackPassword)) {
+      alert("비밀번호는 숫자 4글자로 작성해주세요.");
+      return;
+    }
     try {
       const response = await axios.post(
         `https://manage.naekkukae.store/api/users/feedback/`,
@@ -31,7 +37,7 @@ export default function Footer() {
         }
       );
 
-      window.alert("피드백을 제출해주셔서 감사합니다 :)");
+      window.alert("피드백을 제출해주셔서 감사합니다! 빠른 시일내로 반영하겠습니다 :)");
       setIsModalOpen(false); // 모달 닫기
     } catch (error) {
       window.alert("피드백 제출에 실패하였습니다.");
@@ -82,13 +88,13 @@ export default function Footer() {
               onChange={(e) => setFeedbackEmail(e.target.value)}
             />
             <textarea
-              placeholder="문의 사항을 입력해주세요."
+              placeholder="문의 사항을 입력해주세요 :)"
               value={feedbackContent}
               onChange={(e) => setFeedbackContent(e.target.value)}
             ></textarea>
             <input
               type="password"
-              placeholder="비밀번호"
+              placeholder="비밀번호는 숫자 4글자로 작성해주세요."
               value={feedbackPassword}
               onChange={(e) => setFeedbackPassword(e.target.value)}
             />
