@@ -118,16 +118,28 @@ export default function Main() {
   const totalPages = paginatedCakes.length;
 
   // 이전 페이지 버튼
+  // const handleBeforePage = () => {
+  //   if (currentPage > 0) {
+  //     setCurrentPage(currentPage - 1);
+  //   }
+  // };
+
   const handleBeforePage = () => {
     if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+      setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
   // 다음 페이지 버튼
+  // const handleNextPage = () => {
+  //   if (currentPage < totalPages) {
+  //     setCurrentPage(currentPage + 1);
+  //   }
+  // };
+
   const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+    if (currentPage < totalPages - 1) {
+      setCurrentPage((prevPage) => prevPage + 1);
     }
   };
 
@@ -569,8 +581,8 @@ const main = css`
   // 하단 버튼 디자인
   .main_btn {
     width: 200px;
-    height: 55px;
-    border-radius: 15px;
+    height: 60px;
+    border-radius: 20px;
     border: none;
     font-family: "Bazzi";
     background-color: #f073cd;
@@ -640,27 +652,6 @@ const main = css`
     position: relative;
   }
 
-  // @media (max-width: 768px) {
-  //   .main_text_title {
-  //     font-size: 2.5em;
-  //     margin-top: 7vh;
-  //     margin-bottom: 10px;
-  //   }
-
-  //   .main_text_message {
-  //     font-size: 2.5em;
-  //     margin-top: -15px;
-  //     margin-bottom: 25px;
-  //   }
-
-  //   .main_btn_container {
-  //     width: 700px;
-  //     height: auto;
-  //     margin: 0 auto;
-  //     position: relative;
-  //   }
-  // }
-
   @media (max-width: 768px) {
     .main_container {
       width: 100vw;
@@ -684,22 +675,18 @@ const main = css`
 
     .main_text_title {
       font-size: 2em;
-      margin-top: 12vh;
-      margin-bottom: 15px;
+      margin-top: 10vw;
     }
 
     .main_text_message {
       font-size: 2em;
-      margin-top: -15px;
-      margin-bottom: 30px;
+      margin-bottom: 2vw;
     }
 
     // 케이크 css //
     .caketable-container {
-      // width: 80%;
-      width: 50vh;
-      // height: 50vh;
-      // margin: 0 auto;
+      width: 80vw;
+      height: 80vw;
       display: fixed;
       position: relative;
       overflow: hidden;
@@ -736,16 +723,14 @@ const main = css`
       text-align: center;
       align-items: center;
       vertical-align: middle;
-      margin-top: -5px;
-      margin-bottom: 5px;
     }
 
     .first-row {
-      margin-top: -30vh;
+      margin-top: -47.5vw;
     }
 
     .second-row {
-      margin-top: -14.5vh;
+      margin-top: -22.5vw;
     }
 
     // 페이지네이션
@@ -758,7 +743,7 @@ const main = css`
       font-family: "Bazzi";
       font-size: 1.5em;
       margin: 0 auto;
-      margin-top: -15px;
+      margin-top: 20px;
     }
 
     .pagetext {
@@ -772,7 +757,7 @@ const main = css`
 
     // 하단 버튼 정렬
     .main_btn_container {
-      width: 50vh;
+      width: 80vw;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -782,8 +767,8 @@ const main = css`
 
     // 하단 버튼 디자인
     .main_btn {
-      width: 160px;
-      height: 50px;
+      width: 165px;
+      height: 55px;
       border-radius: 15px;
       border: none;
       background-color: #f073cd;
@@ -852,8 +837,8 @@ const main = css`
       position: relative;
     }
   }
-  
-  @media (max-width: 600px) {
+
+  @media (max-width: 640px) {
     .main_container {
       width: 100vw;
       height: 100vh;
@@ -870,7 +855,7 @@ const main = css`
 
     .main_text_title {
       font-size: 1.5em;
-      margin-top: 17vh;
+      margin-top: 15vh;
       margin-bottom: 15px;
     }
 
@@ -882,9 +867,7 @@ const main = css`
 
     // 케이크 css //
     .caketable-container {
-      width: 33vh;
-      // width: 50%;
-      // height: 50vh;
+      width: 80vw;
       margin: 0 auto;
       position: relative;
       overflow: hidden;
@@ -916,206 +899,20 @@ const main = css`
 
     .visitor_name {
       width: 100%;
-      font-size: 1em;
+      font-size: 0.7em;
       font-family: "Bazzi";
       text-align: center;
       align-items: center;
       vertical-align: middle;
-      margin-top: -5px;
-      margin-bottom: 5px;
+      margin-top: -1px;
     }
 
     .first-row {
-      margin-top: -19vh;
+      margin-top: -45vw;
     }
 
     .second-row {
-      margin-top: -9vh;
-    }
-
-    // 페이지네이션
-    .pagebtn {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      vertical-align: middle;
-      align-items: center;
-      font-family: "Bazzi";
-      font-size: 1.2em;
-      margin: 0 auto;
-      margin-top: -220px;
-    }
-
-    .pagetext {
-      font-size: 1em;
-      font-family: "Bazzi";
-      align-items: center;
-      vertical-align: middle;
-      text-align: center;
-      margin: 0 25px;
-    }
-
-    // 하단 버튼 정렬
-    .main_btn_container {
-      width: 33vh;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin: 0 auto;
-      // position: relative;
-    }
-
-    // 하단 버튼 디자인
-    .main_btn {
-      width: 120px;
-      height: 50px;
-      border-radius: 15px;
-      border: none;
-      font-family: "Bazzi";
-      background-color: #f073cd;
-      color: white;
-      font-size: 14px;
-      cursor: pointer;
-      outline: none;
-    }
-
-    // 모달 창
-    .modal_container {
-      width: 100%;
-      height: 350px;
-      border-radius: 20px;
-      font-family: "Bazzi";
-      background-color: rgba(247, 191, 224, 0.8);
-      // backdrop-filter: blur(1px);
-      // color: black;
-      color: f073cd;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      padding: 25px;
-      z-index: 100;
-      display: flex;
-      justify-content: center;
-      // align-items: flex-end;
-    }
-
-    .modal_inner {
-      width: 90%;
-      height: 80%;
-      display: relative;
-      margin: 0 auto;
-      vertical-align: middle;
-      align-items: center;
-      background-color: #f073cd;
-      border-radius: 20px;
-      margin-top: 50px;
-    }
-
-    .modal_close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      color: white;
-      font-size: 17px;
-    }
-
-    .modal_title {
-      // color: #f073cd;
-      font-size: 20px;
-      margin: 0 auto;
-      padding-top: 30px;
-      text-align: center;
-    }
-
-    .modal_body {
-      font-size: 17px;
-      padding: 10px;
-      text-align: center;
-      height: 80px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-  }
-  @media (max-width: 420px) {
-    .main_container {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      background-color: #f7bedf;
-      color: white;
-      text-align: center;
-      position: relative;
-      vertical-align: middle;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-    }
-
-    .main_text_title {
-      font-size: 1.5em;
-      margin-top: 17vh;
-      margin-bottom: 15px;
-    }
-
-    .main_text_message {
-      font-size: 1.5em;
-      margin-top: -15px;
-      margin-bottom: 30px;
-    }
-
-    // 케이크 css //
-    .caketable-container {
-      width: 27vh;
-      // width: 50%;
-      // height: 50vh;
-      margin: 0 auto;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .caketable {
-      display: inline-block;
-      position: relative;
-    }
-
-    // 전체 케이크 이동
-    .main_cakeImg {
-      position: absolute;
-      width: 100%;
-      z-index: 10;
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-between;
-    }
-
-    .pickcake {
-      width: calc(25% - 10px);
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-    .visitor_name {
-      width: 100%;
-      font-size: 1em;
-      font-family: "Bazzi";
-      text-align: center;
-      align-items: center;
-      vertical-align: middle;
-      margin-top: -5px;
-      margin-bottom: 5px;
-    }
-
-    .first-row {
-      margin-top: -15.2vh;
-    }
-
-    .second-row {
-      margin-top: -7vh;
+      margin-top: -20vw;
     }
 
     // 페이지네이션
@@ -1128,7 +925,7 @@ const main = css`
       font-family: "Bazzi";
       font-size: 1em;
       margin: 0 auto;
-      margin-top: -300px;
+      margin-top: -85vw;
     }
 
     .pagetext {
@@ -1137,23 +934,22 @@ const main = css`
       align-items: center;
       vertical-align: middle;
       text-align: center;
-      margin: 0 25px;
+      margin: 0 20px;
     }
 
     // 하단 버튼 정렬
     .main_btn_container {
-      width: 27vh;
+      width: 80vw;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       margin: 0 auto;
       // position: relative;
-      margin-top: -10px;
     }
 
     // 하단 버튼 디자인
     .main_btn {
-      width: 100px;
+      width: 95px;
       height: 40px;
       border-radius: 15px;
       border: none;
@@ -1224,4 +1020,124 @@ const main = css`
       position: relative;
     }
   }
+
+  @media (max-width: 450px) {
+    .main_text_title {
+      font-size: 1.2em;
+      margin-top: 30vw;
+    }
+
+    .main_text_message {
+      font-size: 1.2em;
+      margin-bottom: 3.5vw;
+    }
+
+    // 페이지네이션
+    .pagebtn {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      vertical-align: middle;
+      align-items: center;
+      font-family: "Bazzi";
+      font-size: 1em;
+      margin: 0 auto;
+      margin-top: 10vw;
+    }
+
+    .pagetext {
+      font-size: 1em;
+      font-family: "Bazzi";
+      align-items: center;
+      vertical-align: middle;
+      text-align: center;
+      margin: 0 20px;
+    }
+
+    // 하단 버튼 정렬
+    .main_btn_container {
+      width: 80vw;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+    }
+
+    // 하단 버튼 디자인
+    .main_btn {
+      width: 95px;
+      height: 37px;
+      border-radius: 15px;
+      border: none;
+      font-family: "Bazzi";
+      background-color: #f073cd;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+
+  @media (max-width: 350px) {
+    .main_text_title {
+      font-size: 1em;
+      margin-top: 35vw;
+    }
+
+    .main_text_message {
+      font-size: 1em;
+      margin-bottom: 4vw;
+    }
+
+    // 페이지네이션
+    .pagebtn {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      vertical-align: middle;
+      align-items: center;
+      font-family: "Bazzi";
+      font-size: 1em;
+      margin: 0 auto;
+      margin-top: 10vw;
+    }
+
+    .pagetext {
+      font-size: 1em;
+      font-family: "Bazzi";
+      align-items: center;
+      vertical-align: middle;
+      text-align: center;
+      margin: 0 20px;
+    }
+
+    // 하단 버튼 정렬
+    .main_btn_container {
+      width: 100vw;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      position: absolute;
+      align-items: center;
+      justify-content: space-evenly;
+      margin-top: 10px;
+    }
+
+    // 하단 버튼 디자인
+    .main_btn {
+      width: 150px;
+      height: 33px;
+      border-radius: 10px;
+      border: none;
+      font-family: "Bazzi";
+      background-color: #f073cd;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+      outline: none;
+      margin: 0 auto;
+    }
+  }
+
 `;
