@@ -5,11 +5,25 @@ import Footer from "./components/Footer";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const Sidebar = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const sidebarRef = useRef(null);
+
+  const handleOutsideClick = (e) => {
+    if (!sidebarRef.current.contains(e.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   const handleCakeClick = async () => {
     const accessToken = sessionStorage.getItem("access");
@@ -59,7 +73,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar_container">
+    <div className="sidebar_container" ref={sidebarRef}>
       <div className="sidebar_menuToggle">
         <nav role="sidebar_navigation">
           <input
@@ -353,7 +367,7 @@ const sidebar = css`
       width: 45vw;
       height: calc(100vh + 43px);
       padding: 40px;
-      padding-top: 185px;
+      padding-top: 45vw;
       font-size: 20px;
       line-height: 37px;
   
@@ -530,8 +544,8 @@ const sidebar = css`
       height: calc(100vh + 43px);
       padding: 20px;
       padding-top: 22vh;
-      font-size: 18px;
-      line-height: 35px;
+      font-size: 15px;
+      line-height: 30px;
   
       background: #ec9ed6;
   

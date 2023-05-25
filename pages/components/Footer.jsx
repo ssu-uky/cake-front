@@ -34,13 +34,8 @@ export default function Footer() {
       window.confirm("피드백을 제출해주셔서 감사합니다 :)");
       setIsModalOpen(false); // 모달 닫기
     } catch (error) {
+      window.confirm("피드백 제출에 실패하였습니다.");
       console.log("피드백 제출에 실패하였습니다.");
-      console.log(
-        feedbackName,
-        feedbackEmail,
-        feedbackContent,
-        feedbackPassword
-      ); // 응답 결과 처리
       console.log(error); // 에러 내용
     }
   };
@@ -233,7 +228,7 @@ h2{
       display: block;
       color: black;
       font-family: "Bazzi";
-      font-size: 16px;
+      font-size: 14px;
       text-decoration: none;
       line-height: 2em;
       left: 0;
@@ -293,7 +288,7 @@ h2{
       display: block;
       color: black;
       font-family: "Bazzi";
-      font-size: 12px;
+      font-size: 11px;
       text-decoration: none;
       line-height: 2em;
     }
