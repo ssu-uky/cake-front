@@ -1065,7 +1065,7 @@ const main = css`
 
     // 하단 버튼 디자인
     .main_btn {
-      width: 95px;
+      width: 98px;
       height: 37px;
       border-radius: 15px;
       border: none;
