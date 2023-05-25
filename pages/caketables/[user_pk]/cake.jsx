@@ -134,7 +134,7 @@ export default function CakeTable(props) {
             className="visitoruse_input"
             // checked
           />
-          <label htmlFor="tab1" className="visitoruse_label">
+          <label htmlFor="tab1" className="visitoruse_label" style={{cursor:"pointer"}}>
             케이크 선택
           </label>
           <input
@@ -143,7 +143,7 @@ export default function CakeTable(props) {
             name="tabs"
             className="visitoruse_input"
           />
-          <label htmlFor="tab2" className="visitoruse_label">
+          <label htmlFor="tab2" className="visitoruse_label" style={{cursor:"pointer"}}>
             편지 쓰기
           </label>
           <section id="content1" className="visitoruse_section">
@@ -306,7 +306,7 @@ export default function CakeTable(props) {
                 onChange={(e) => setLetter(e.target.value)}
               />
             </div>
-            <button type="submit" className="useruse_submit_button font">
+            <button type="submit" className="useruse_submit_button" style={{cursor:"pointer"}}>
               보내기
             </button>
           </section>
