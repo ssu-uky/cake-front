@@ -190,7 +190,7 @@ const sidebar = css`
     height: calc(100vh + 43px);
     margin: -100px 0 0 -30px;
     padding: 60px;
-    padding-top: 200px;
+    padding-top: 180px;
     font-size: 30px;
     line-height: 50px;
 
@@ -288,7 +288,7 @@ const sidebar = css`
     width: 35vw;
     height: calc(100vh + 43px);
     padding: 50px;
-    padding-top: 200px;
+    padding-top: 170px;
     font-size: 22px;
     line-height: 45px;
 
@@ -367,7 +367,7 @@ const sidebar = css`
       width: 45vw;
       height: calc(100vh + 43px);
       padding: 40px;
-      padding-top: 45vw;
+      padding-top: 150px;
       font-size: 20px;
       line-height: 37px;
   
@@ -448,9 +448,9 @@ const sidebar = css`
       width: 45vw;
       height: calc(100vh + 43px);
       padding: 30px;
-      padding-top: 23vh;
+      padding-top: 145px;
       font-size: 18px;
-      line-height: 35px;
+      line-height: 30px;
   
       background: #ec9ed6;
   
