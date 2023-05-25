@@ -31,11 +31,10 @@ export default function Footer() {
         }
       );
 
-      window.confirm("피드백을 제출해주셔서 감사합니다 :)");
+      window.alert("피드백을 제출해주셔서 감사합니다 :)");
       setIsModalOpen(false); // 모달 닫기
     } catch (error) {
-      window.confirm("피드백 제출에 실패하였습니다.");
-      console.log("피드백 제출에 실패하였습니다.");
+      window.alert("피드백 제출에 실패하였습니다.");
       console.log(error); // 에러 내용
     }
   };
