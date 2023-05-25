@@ -45,7 +45,7 @@ export default function CakeTable(props) {
   }, [user_pk]);
 
   // 금지어 설정
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const bannedWords = ["시발", "씨발", "ㅅㅂ", "ㅂㅅ", "병신"];
     for (const word of bannedWords) {
@@ -54,29 +54,28 @@ export default function CakeTable(props) {
         return;
       }
     }
-    // fetch(`http://127.0.0.1:8000/api/caketables/${user_pk}/cake/`, {
-    fetch(`https://manage.naekkukae.store/api/caketables/${user_pk}/cake/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        visitor_name: visitor_name,
-        visitor_password: visitor_password,
-        pickcake: pickcake,
-        letter: letter,
-      }),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        router.push(`/caketables/${cakeData.user_pk}/`);
-        console.log(data); // 케이크 데이터 확인용
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    try {
+      const response = await fetch(
+        `https://manage.naekkukae.store/api/caketables/${user_pk}/cake/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            visitor_name: visitor_name,
+            visitor_password: visitor_password,
+            pickcake: pickcake,
+            letter: letter,
+          }),
+        }
+      );
+      // const data = await response.json();
+      router.push(`/caketables/${cakeData.user_pk}`);
+      console.log(data); // 케이크 데이터 확인용
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
