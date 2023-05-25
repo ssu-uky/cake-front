@@ -193,6 +193,7 @@ const sidebar = css`
     padding-top: 180px;
     font-size: 30px;
     line-height: 50px;
+    overflow: hidden;
 
     background: #ec9ed6;
     // list-style-type: none;
@@ -291,6 +292,7 @@ const sidebar = css`
     padding-top: 170px;
     font-size: 22px;
     line-height: 45px;
+    overflow: hidden;
 
     background: #ec9ed6;
 
@@ -370,6 +372,7 @@ const sidebar = css`
       padding-top: 150px;
       font-size: 20px;
       line-height: 37px;
+      overflow: hidden;
   
       background: #ec9ed6;
       // list-style-type: none;
@@ -451,6 +454,7 @@ const sidebar = css`
       padding-top: 145px;
       font-size: 18px;
       line-height: 30px;
+      overflow: hidden;
   
       background: #ec9ed6;
   
