@@ -271,7 +271,7 @@ const email_login = css`
     }
 
     .login_img {
-      width: 280px;
+      width: 200px;
       height: auto;
     }
     h1 {
@@ -314,7 +314,7 @@ const email_login = css`
 
   @media(max-width: 376px) {
     .login_img {
-      width: 200px;
+      width: 150px;
       height: auto;
       margin-bottom:10px;
     }
@@ -331,9 +331,9 @@ const email_login = css`
     }
 
     .login_btn {
-      width: 90px;
-      height: 40px;
-      font-size: 15px;
+      width: 85px;
+      height: 35px;
+      font-size: 12px;
       align-items: center;
       vertical-align: middle;
       justify-content: center;
