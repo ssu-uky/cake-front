@@ -142,7 +142,11 @@ export default function CakeTable(props) {
             className="visitoruse_input"
             // checked
           />
-          <label htmlFor="tab1" className="visitoruse_label" style={{cursor:"pointer"}}>
+          <label
+            htmlFor="tab1"
+            className="visitoruse_label"
+            style={{ cursor: "pointer" }}
+          >
             케이크 선택
           </label>
           <input
@@ -151,7 +155,11 @@ export default function CakeTable(props) {
             name="tabs"
             className="visitoruse_input"
           />
-          <label htmlFor="tab2" className="visitoruse_label" style={{cursor:"pointer"}}>
+          <label
+            htmlFor="tab2"
+            className="visitoruse_label"
+            style={{ cursor: "pointer" }}
+          >
             편지 쓰기
           </label>
           <section id="content1" className="visitoruse_section">
@@ -325,7 +333,11 @@ export default function CakeTable(props) {
                 onChange={(e) => setLetter(e.target.value)}
               />
             </div>
-            <button type="submit" className="useruse_submit_button" style={{cursor:"pointer"}}>
+            <button
+              type="submit"
+              className="useruse_submit_button"
+              style={{ cursor: "pointer" }}
+            >
               보내기
             </button>
           </section>
@@ -361,7 +373,6 @@ const visitoruse = css`
 
   .visitoruse_text {
     font-size: 35px;
-    line-height: 45px;
     margin-top: 20vw;
   }
 
@@ -379,7 +390,7 @@ const visitoruse = css`
     vertical-align: middle;
     font-size: 17px;
     padding: 10px;
-    margin: 10px 0;
+    margin: 15px 0;
   }
 
   .visitoruse_nickname {
@@ -430,6 +441,9 @@ const visitoruse = css`
   .visitoruse_pinktable {
     position: relative;
     margin: calc(80px / -20);
+    display: inline-block;
+    margin-top: 90px;
+    // margin-top: 10vw;
   }
 
   .useruse_submit_button {
@@ -471,11 +485,6 @@ const visitoruse = css`
     width: 100px;
     height: 100px;
     display: fixed;
-  }
-
-  .visitoruse_pinktable {
-    display: inline-block;
-    margin-top: 90px;
   }
 
   #cake1 {
@@ -595,19 +604,20 @@ const visitoruse = css`
     }
 
     .visitoruse_text {
-      font-size: 30px;
-      line-height: 45px;
-      margin-top: 22vw;
+      font-size: 1.7em;
+      // line-height: 45px;
+      margin-top: 25vw;
     }
 
     .visitoruse_name {
       font-size: 20px;
+      width: 160px;
       vertical-align: middle;
-        text-align: center;
-        align-items: center;    
-        justify-content: center;
-        margin-bottom: 10px;
-        // margin-left: 3px;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      margin-bottom: 5px;
     }
 
     .visitoruse_nickname {
@@ -618,13 +628,12 @@ const visitoruse = css`
       text-align: center;
       vertical-align: middle;
       font-size: 17px;
-      padding: 10px;
       vertical-align: middle;
-        text-align: center; 
-        align-items: center;
-        justify-content: center;
-        margin-right: 3px;
-        
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      margin-bottom: 20px;
     }
 
     .visitoruse_tab_container {
@@ -643,6 +652,7 @@ const visitoruse = css`
       text-align: center;
       align-items: center;
       justify-content: center;
+      margin: 0 auto;
     }
 
     .visitoruse_input {
@@ -660,12 +670,12 @@ const visitoruse = css`
 
     .visitoruse_pinktable {
       display: inline-block;
-      margin-top: 80px;
+      margin-top: 85px;
       width: 100%;
     }
 
     .letter_textarea {
-      width: 300px;
+      width: 70vw;
       height: 200px;
       font-size: 25px;
       line-height: 45px;
@@ -693,10 +703,9 @@ const visitoruse = css`
     }
 
     .visitoruse_text {
-      font-size: 22px;
-      line-height: 35px;
-      margin-top: 20vw;
-      margin-bottom: -20px;
+      font-size: 1.5em;
+      margin-top: 27vw;
+      margin-bottom: -10px;
     }
 
     .visitoruse_nickname_container {
@@ -706,8 +715,8 @@ const visitoruse = css`
 
     .visitoruse_name {
       font-size: 15px;
+      width: 130px;
       vertical-align: middle;
-      margin: 0 autp;
     }
 
     .visitoruse_nickname {
@@ -718,8 +727,6 @@ const visitoruse = css`
       text-align: center;
       vertical-align: middle;
       font-size: 15px;
-      padding: 10px;
-      margin-top: -1px;
     }
 
     .visitoruse_tab_container {
@@ -755,13 +762,13 @@ const visitoruse = css`
 
     .visitoruse_pinktable {
       display: inline-block;
-      margin-top: 70px;
+      margin-top: 22vw;
       width: 100%;
       white-space: nowrap;
     }
 
     .letter_textarea {
-      width: 70vw;
+      width: 80vw;
       height: 50vw;
       font-size: 17px;
       line-height: 25px;
@@ -775,8 +782,8 @@ const visitoruse = css`
       border: none;
       background-color: #f073cd;
       color: white;
-      width: 80px;
-      height: 35px;
+      width: 22vw;
+      height: 9vw;
       font-size: 15px;
       border-radius: 10px;
       margin: 0 auto;
@@ -786,7 +793,7 @@ const visitoruse = css`
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: -18px;
+      margin-top: -3vw;
     }
-}
+  }
 `;

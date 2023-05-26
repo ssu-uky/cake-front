@@ -170,7 +170,12 @@ export default function Main() {
           }
         );
         const data = response.data;
-        router.push(`/caketables/${data.user_pk}/`);
+        // 이미 본인의 테이블에 위치한 경우
+        if (data.user_pk === cakeData.user_pk) {
+          alert("이미 본인의 테이블에 위치하고 있습니다!");
+        } else {
+          router.push(`/caketables/${data.user_pk}/`);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -379,10 +384,14 @@ export default function Main() {
                             icon={faTrashCan}
                             onClick={handleDelete}
                             style={{
-                              fontSize: "1.2em",
+                              fontSize: "25px",
                               color: "#ffffff",
-                              marginLeft: "70%",
+                              marginTop: "10px",
+                              marginBottom: "10px",
+                              marginLeft: "75%",
                               cursor: "pointer",
+                              position: "relative",
+                              display: "inline-block",
                             }}
                           />
                         </div>
@@ -441,7 +450,7 @@ export default function Main() {
             내 테이블 만들기
           </button>
           <button className="main_btn" onClick={copyURL}>
-            내 테이블 공유하기
+            이 테이블 공유하기
           </button>
         </div>
         <style jsx>{main}</style>
@@ -454,7 +463,7 @@ const main = css`
   @font-face {
     font-family: "Bazzi";
     src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
-      format("woff");
+    format("woff");
     font-weight: normal;
     font-style: normal;
   }
@@ -595,7 +604,7 @@ const main = css`
 
   // 모달 창
   .modal_container {
-    width: 100%;
+    width: 100vw;
     height: 350px;
     border-radius: 20px;
     font-family: "Bazzi";
@@ -605,50 +614,97 @@ const main = css`
     position: fixed;
     bottom: 0;
     left: 0;
-    padding: 25px;
+    padding: 15px;
     z-index: 100;
     display: flex;
     justify-content: center;
     // align-items: flex-end;
   }
 
+  // .modal_inner {
+  //   width: 90%;
+  //   height: 80%;
+  //   display: relative;
+  //   margin: 0 auto;
+  //   vertical-align: middle;
+  //   align-items: center;
+  //   background-color: rgba(247, 190, 223, 0.7);
+  //   // background-color: #f7bedf;
+  //   border-radius: 20px;
+  //   margin-top: 50px;
+  // }
+
   .modal_inner {
-    width: 90%;
-    height: 80%;
-    display: relative;
-    margin: 0 auto;
-    vertical-align: middle;
+    width: 85vw;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: #f7bedf;
+    background-color: rgba(247, 190, 223, 0.7);
     border-radius: 20px;
     margin-top: 50px;
+    overflow: visible;
   }
 
   .modal_close {
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 30px;
     color: white;
-    font-size: 17px;
+    font-size: 1.3em;
   }
+
+  // .modal_title {
+  //   // color: #f073cd;
+  //   font-size: 20px;
+  //   margin: 0 auto;
+  //   padding-top: 30px;
+  //   text-align: center;
+  // }
 
   .modal_title {
-    // color: #f073cd;
-    font-size: 20px;
-    margin: 0 auto;
-    padding-top: 30px;
+    font-size: 1.7em;
+    padding-top: 1.5vw;
+    // margin: 0 auto;
+    // padding-top: -7vw;
+    margin-bottom: -2vw;
     text-align: center;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    display: inline-block;
   }
 
+  // .modal_body {
+  //   font-size: 17px;
+  //   padding: 10px;
+  //   text-align: center;
+  //   height: 80px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   position: relative;
+  // }
+
   .modal_body {
-    font-size: 17px;
+    font-size: 1.3em;
     padding: 10px;
     text-align: center;
-    height: 80px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    position: relative;
+    align-items: flex-start;
+    // flex-grow: 1;
+    overflow: visible;
+    line-height: 1.6em;
+    white-space: pre-wrap;
+    max-width: 80%;
+    word-break: break-all;
+    hyphens: auto;
+    display: inline-block;
+  }
+
+  .modal_body p {
+    margin: 0;
   }
 
   @media (max-width: 768px) {
@@ -776,64 +832,6 @@ const main = css`
       cursor: pointer;
       outline: none;
     }
-
-    // 모달 창
-    .modal_container {
-      width: 100%;
-      height: 350px;
-      border-radius: 20px;
-      font-family: "Bazzi";
-      // backdrop-filter: blur(1px);
-      // color: black;
-      background-color: #f073cd;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      padding: 25px;
-      z-index: 100;
-      display: flex;
-      justify-content: center;
-      // align-items: flex-end;
-    }
-
-    .modal_inner {
-      width: 90%;
-      height: 80%;
-      display: relative;
-      margin: 0 auto;
-      vertical-align: middle;
-      align-items: center;
-      background-color: #f7bedf;
-      border-radius: 20px;
-      margin-top: 50px;
-    }
-
-    .modal_close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      color: white;
-      font-size: 17px;
-    }
-
-    .modal_title {
-      // color: #f073cd;
-      font-size: 20px;
-      margin: 0 auto;
-      padding-top: 30px;
-      text-align: center;
-    }
-
-    .modal_body {
-      font-size: 17px;
-      padding: 10px;
-      text-align: center;
-      height: 80px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
   }
 
   @media (max-width: 640px) {
@@ -958,75 +956,16 @@ const main = css`
       cursor: pointer;
       outline: none;
     }
-
-    // 모달 창
-    .modal_container {
-      width: 100%;
-      height: 350px;
-      border-radius: 20px;
-      font-family: "Bazzi";
-      background-color: #f073cd;
-      // backdrop-filter: blur(1px);
-      // color: black;
-      // color: f073cd;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      padding: 25px;
-      z-index: 100;
-      display: flex;
-      justify-content: center;
-      // align-items: flex-end;
-    }
-
-    .modal_inner {
-      width: 90%;
-      height: 80%;
-      display: relative;
-      margin: 0 auto;
-      vertical-align: middle;
-      align-items: center;
-      background-color: #f7bedf;
-      border-radius: 20px;
-      margin-top: 50px;
-    }
-
-    .modal_close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      color: white;
-      font-size: 17px;
-    }
-
-    .modal_title {
-      // color: #f073cd;
-      font-size: 20px;
-      margin: 0 auto;
-      padding-top: 30px;
-      text-align: center;
-    }
-
-    .modal_body {
-      font-size: 17px;
-      padding: 10px;
-      text-align: center;
-      height: 80px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
   }
 
   @media (max-width: 450px) {
     .main_text_title {
-      font-size: 1.2em;
+      font-size: 1.5em;
       margin-top: 90px;
     }
 
     .main_text_message {
-      font-size: 1.2em;
+      font-size: 1.5em;
       margin-bottom: 25px;
     }
 
@@ -1049,7 +988,6 @@ const main = css`
       justify-content: flex-start;
     }
 
-
     .first-row {
       margin-top: -54vw;
     }
@@ -1057,7 +995,6 @@ const main = css`
     .second-row {
       margin-top: -25vw;
     }
-
 
     .visitor_name {
       width: 100%;
@@ -1068,7 +1005,6 @@ const main = css`
       vertical-align: middle;
       margin-top: 2px;
     }
-
 
     // 페이지네이션
     .pagebtn {
@@ -1082,7 +1018,6 @@ const main = css`
       margin: 0 auto;
       margin-top: 20px;
     }
-
 
     .pagetext {
       font-size: 1em;
@@ -1179,5 +1114,4 @@ const main = css`
       margin: 0 auto;
     }
   }
-
 `;

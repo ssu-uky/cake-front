@@ -168,13 +168,7 @@ const Sidebar = () => {
 export default Sidebar;
 
 const sidebar = css`
-  @font-face {
-    font-family: "Bazzi";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
-      format("woff");
-    font-weight: normal;
-    font-style: normal;
-  }
+  // 전체 컨테이너
   .sidebar_container {
     font-family: "Bazzi";
     width: 100%;

@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Footer() {
   // 피드백 //
   const [feedbackName, setFeedbackName] = useState("");
-  const [feedbackEmail, setFeedbackEmail] = useState("");
+  // const [feedbackEmail, setFeedbackEmail] = useState("");
   const [feedbackContent, setFeedbackContent] = useState("");
   const [feedbackPassword, setFeedbackPassword] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,15 +26,27 @@ export default function Footer() {
       alert("비밀번호는 숫자 4글자로 작성해주세요.");
       return;
     }
+    
+    if (!feedbackName || !feedbackContent || !feedbackPassword) {
+      alert("모든 항목을 채워주세요 !");
+      return;
+    }
+    const access = sessionStorage.getItem("access");
+    
     try {
       const response = await axios.post(
         `https://manage.naekkukae.store/api/users/feedback/`,
         {
           feedback_name: feedbackName,
-          feedback_email: feedbackEmail,
+          // feedback_email: feedbackEmail,
           feedback_content: feedbackContent,
           feedback_password: feedbackPassword,
-        }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${access}`,
+          },
+      }
       );
 
       window.alert("피드백을 제출해주셔서 감사합니다! 빠른 시일내로 반영하겠습니다 :)");
@@ -49,7 +61,7 @@ export default function Footer() {
     <div className="footer_container">
       <nav>
         <span onClick={handleModalOpen} style={{ cursor: "pointer" }}>
-          문의하기
+          피드백 보내기
         </span>
         <br />
         <Link
@@ -81,12 +93,12 @@ export default function Footer() {
               value={feedbackName}
               onChange={(e) => setFeedbackName(e.target.value)}
             />
-            <input
+            {/* <input
               type="email"
               placeholder="이메일"
               value={feedbackEmail}
               onChange={(e) => setFeedbackEmail(e.target.value)}
-            />
+            /> */}
             <textarea
               placeholder="문의 사항을 입력해주세요 :)"
               value={feedbackContent}
@@ -122,6 +134,7 @@ const footer = css`
     font-style: normal;
   }
 
+  
   .footer_container {
     width: 100%;
     padding: 1em;
