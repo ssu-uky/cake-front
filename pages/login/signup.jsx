@@ -189,14 +189,6 @@ export default function Email_login() {
 }
 
 const emaillogin = css`
-  @font-face {
-    font-family: "Bazzi";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
-      format("woff");
-    font-weight: normal;
-    font-style: normal;
-  }
-
   .emaillogin_container {
     font-family: "Bazzi";
     width: 100vw;
@@ -384,6 +376,19 @@ const emaillogin = css`
         outline-color: #f073cd;
         margin-bottom: 10px;
       }
-    }
+
+  .emaillogin_button {
+    width: 130px;
+    height: 45px;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+    border: none;
+    border-radius: 25px;
+    background-color: #f073cd;
+    color: white;
+    margin-top: 5px;
+    font-size: 17px;
+  }
   }
 `;

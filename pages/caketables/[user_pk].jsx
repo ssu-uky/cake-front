@@ -725,11 +725,11 @@ const main = css`
     }
 
     .first-row {
-      margin-top: -47.5vw;
+      margin-top: -57.5vw;
     }
 
     .second-row {
-      margin-top: -22.5vw;
+      margin-top: -28vw;
     }
 
     // 페이지네이션
@@ -766,8 +766,8 @@ const main = css`
 
     // 하단 버튼 디자인
     .main_btn {
-      width: 165px;
-      height: 55px;
+      width: 25vw;
+      height: 7.5vw;
       border-radius: 15px;
       border: none;
       background-color: #f073cd;
@@ -947,8 +947,8 @@ const main = css`
 
     // 하단 버튼 디자인
     .main_btn {
-      width: 125px;
-      height: 45px;
+      width: 25vw;
+      height: 8vw;
       border-radius: 15px;
       border: none;
       font-family: "Bazzi";
@@ -1051,22 +1051,22 @@ const main = css`
 
 
     .first-row {
-      margin-top: -55vw;
+      margin-top: -54vw;
     }
 
     .second-row {
-      margin-top: -26vw;
+      margin-top: -25vw;
     }
 
 
     .visitor_name {
       width: 100%;
-      font-size: 0.8em;
+      font-size: 0.7em;
       font-family: "Bazzi";
       text-align: center;
       align-items: center;
       vertical-align: middle;
-      margin-top: 2.5px;
+      margin-top: 2px;
     }
 
 
@@ -1080,7 +1080,7 @@ const main = css`
       font-family: "Bazzi";
       font-size: 1em;
       margin: 0 auto;
-      margin-top: 30px;
+      margin-top: 20px;
     }
 
 
@@ -1104,8 +1104,8 @@ const main = css`
 
     // 하단 버튼 디자인
     .main_btn {
-      width: 120px;
-      height: 37px;
+      width: 25.5vw;
+      height: 8vw;
       border-radius: 12px;
       border: none;
       font-family: "Bazzi";
@@ -1114,18 +1114,19 @@ const main = css`
       font-size: 12px;
       cursor: pointer;
       outline: none;
+      margin-top: 20px;
     }
   }
 
   @media (max-width: 350px) {
     .main_text_title {
       font-size: 1em;
-      margin-top: 35vw;
+      margin-top: 90px;
     }
 
     .main_text_message {
       font-size: 1em;
-      margin-bottom: 4vw;
+      margin-bottom: 10px;
     }
 
     // 페이지네이션
@@ -1136,9 +1137,9 @@ const main = css`
       vertical-align: middle;
       align-items: center;
       font-family: "Bazzi";
-      font-size: 1em;
+      font-size: 0.8em;
       margin: 0 auto;
-      margin-top: 10vw;
+      margin-top: 20px;
     }
 
     .pagetext {
@@ -1160,13 +1161,13 @@ const main = css`
       position: absolute;
       align-items: center;
       justify-content: space-evenly;
-      margin-top: 10px;
+      margin-top: 5px;
     }
 
     // 하단 버튼 디자인
     .main_btn {
-      width: 150px;
-      height: 33px;
+      width: 120px;
+      height: 30px;
       border-radius: 10px;
       border: none;
       font-family: "Bazzi";

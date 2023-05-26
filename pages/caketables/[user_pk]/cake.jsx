@@ -168,7 +168,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake1"
-                  //   layout="responsive"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -181,6 +181,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake2"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -193,6 +194,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake3"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -205,6 +207,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake4"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -217,6 +220,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake5"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -229,6 +233,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake6"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -241,6 +246,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake7"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -253,6 +259,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake8"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -265,6 +272,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake9"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -277,6 +285,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake10"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -289,6 +298,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake11"
+                  // layout="responsive"
                 />
               </div>
               <div
@@ -301,6 +311,7 @@ export default function CakeTable(props) {
                   width={100}
                   height={100}
                   alt="cake12"
+                  // layout="responsive"
                 />
               </div>
             </div>
@@ -566,7 +577,8 @@ const visitoruse = css`
     right: 125%;
   }
 
-  @media (max-width: 640px) {
+  // @media (max-width: 640px) {
+  @media (max-width: 520px) {
     .visitoruse_container {
       font-family: "Bazzi";
       width: 100vw;
