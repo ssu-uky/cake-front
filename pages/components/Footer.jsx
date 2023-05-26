@@ -229,11 +229,11 @@ h2{
     .footer_container {
       overflow: hidden;
       position: absolute;
-      bottom: 7vh;
+      bottom: 45px;
       display: block;
       color: black;
       font-family: "Bazzi";
-      font-size: 14px;
+      font-size: 13px;
       text-decoration: none;
       line-height: 2em;
       left: 0;
@@ -258,11 +258,11 @@ h2{
     .footer_container {
       overflow: hidden;
       position: absolute;
-      bottom: 7vh;
+      bottom: 45px;
       display: block;
       color: black;
       font-family: "Bazzi";
-      font-size: 14px;
+      font-size: 12px;
       text-decoration: none;
       line-height: 2em;
       left: 0;
@@ -289,13 +289,13 @@ h2{
       padding: 1em;
       overflow: hidden;
       position: absolute;
-      bottom: 7vh;
+      bottom: 45px;
       display: block;
       color: black;
       font-family: "Bazzi";
       font-size: 11px;
       text-decoration: none;
-      line-height: 2em;
+      line-height: 25px;
     }
 
     .modal {

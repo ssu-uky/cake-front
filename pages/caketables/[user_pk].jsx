@@ -573,7 +573,7 @@ const main = css`
     display: flex;
     flex-direction: row;
     width: 700px;
-    height: 100%;
+    // height: 100%;
     justify-content: space-between;
     margin: 0 auto;
   }
@@ -684,8 +684,8 @@ const main = css`
 
     // 케이크 css //
     .caketable-container {
-      width: 80vw;
-      height: 80vw;
+      width: 95vw;
+      height: 95vw;
       display: fixed;
       position: relative;
       overflow: hidden;
@@ -756,7 +756,7 @@ const main = css`
 
     // 하단 버튼 정렬
     .main_btn_container {
-      width: 80vw;
+      width: 95vw;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -852,20 +852,21 @@ const main = css`
     }
 
     .main_text_title {
-      font-size: 1.5em;
-      margin-top: 15vh;
+      font-size: 1.7em;
+      margin-top: 100px;
       margin-bottom: 15px;
     }
 
     .main_text_message {
-      font-size: 1.5em;
+      font-size: 1.7em;
       margin-top: -15px;
       margin-bottom: 30px;
     }
 
     // 케이크 css //
     .caketable-container {
-      width: 80vw;
+      width: 95vw;
+      height: 95vw;
       margin: 0 auto;
       position: relative;
       overflow: hidden;
@@ -897,20 +898,19 @@ const main = css`
 
     .visitor_name {
       width: 100%;
-      font-size: 0.7em;
+      font-size: 1em;
       font-family: "Bazzi";
       text-align: center;
       align-items: center;
       vertical-align: middle;
-      margin-top: -1px;
     }
 
     .first-row {
-      margin-top: -45vw;
+      margin-top: -57vw;
     }
 
     .second-row {
-      margin-top: -20vw;
+      margin-top: -27.5vw;
     }
 
     // 페이지네이션
@@ -923,7 +923,7 @@ const main = css`
       font-family: "Bazzi";
       font-size: 1em;
       margin: 0 auto;
-      margin-top: -85vw;
+      margin-top: 7vw;
     }
 
     .pagetext {
@@ -937,7 +937,7 @@ const main = css`
 
     // 하단 버튼 정렬
     .main_btn_container {
-      width: 80vw;
+      width: 95vw;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -947,14 +947,14 @@ const main = css`
 
     // 하단 버튼 디자인
     .main_btn {
-      width: 95px;
-      height: 40px;
+      width: 125px;
+      height: 45px;
       border-radius: 15px;
       border: none;
       font-family: "Bazzi";
       background-color: #f073cd;
       color: white;
-      font-size: 12px;
+      font-size: 15px;
       cursor: pointer;
       outline: none;
     }
@@ -1022,13 +1022,53 @@ const main = css`
   @media (max-width: 450px) {
     .main_text_title {
       font-size: 1.2em;
-      margin-top: 30vw;
+      margin-top: 90px;
     }
 
     .main_text_message {
       font-size: 1.2em;
-      margin-bottom: 3.5vw;
+      margin-bottom: 25px;
     }
+
+    // 전체 케이크 이동
+    .main_cakeImg {
+      position: absolute;
+      width: 100%;
+      z-index: 10;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-between;
+    }
+
+    .pickcake {
+      width: calc(25% - 10px);
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+
+    .first-row {
+      margin-top: -55vw;
+    }
+
+    .second-row {
+      margin-top: -26vw;
+    }
+
+
+    .visitor_name {
+      width: 100%;
+      font-size: 0.8em;
+      font-family: "Bazzi";
+      text-align: center;
+      align-items: center;
+      vertical-align: middle;
+      margin-top: 2.5px;
+    }
+
 
     // 페이지네이션
     .pagebtn {
@@ -1040,8 +1080,9 @@ const main = css`
       font-family: "Bazzi";
       font-size: 1em;
       margin: 0 auto;
-      margin-top: 10vw;
+      margin-top: 30px;
     }
+
 
     .pagetext {
       font-size: 1em;
@@ -1054,7 +1095,7 @@ const main = css`
 
     // 하단 버튼 정렬
     .main_btn_container {
-      width: 80vw;
+      width: 95vw;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -1063,9 +1104,9 @@ const main = css`
 
     // 하단 버튼 디자인
     .main_btn {
-      width: 98px;
+      width: 120px;
       height: 37px;
-      border-radius: 15px;
+      border-radius: 12px;
       border: none;
       font-family: "Bazzi";
       background-color: #f073cd;

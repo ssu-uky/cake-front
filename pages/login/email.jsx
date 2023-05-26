@@ -168,7 +168,7 @@ const email_login = css`
   }
 
   .email_container {
-    padding-top: 60px;
+    padding-top: 1vw;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -253,20 +253,38 @@ const email_login = css`
   }
 
   @media (max-width: 640px) {
+    .email_container {
+      padding-top: 8vw;
+      width: 100vw;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f7bedf;
+      color: white;
+      text-align: center;
+      align-items: center;
+      vertical-align: middle;
+      //중앙정렬
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
     .login_img {
       width: 280px;
       height: auto;
     }
     h1 {
-      font-size: 40px;
+      font-size: 37px;
       margin-bottom: 20px;
     }
     .email_input {
       font-size: 15px;
-      width: 230px;
+      width: 220px;
       height: 45px;
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
+      margin: -5px 0;
     }
 
     .login_btn {
@@ -280,12 +298,13 @@ const email_login = css`
       border-radius: 25px;
       color: white;
       background-color: #f073cd;
+      margin: 15px;
     }
 
     .find_button {
       display: flex;
       flex-direction: row;
-      font-size: 18px;
+      font-size: 15px;
       margin-top: 10px;
       color: white;
       text-decoration: none;
@@ -312,12 +331,13 @@ const email_login = css`
     }
 
     .login_btn {
-      width: 100px;
+      width: 90px;
       height: 40px;
+      font-size: 15px;
       align-items: center;
       vertical-align: middle;
       justify-content: center;
-      margin: 20px;
+      // margin: 20px;
       border: none;
       border-radius: 25px;
       color: white;
@@ -327,8 +347,8 @@ const email_login = css`
     .find_button {
       display: flex;
       flex-direction: row;
-      font-size: 15px;
-      margin-top: 10px;
+      font-size: 12px;
+      margin-top: 5px;
       color: white;
       text-decoration: none;
       list-style: none;
