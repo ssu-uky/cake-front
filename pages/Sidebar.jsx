@@ -174,6 +174,7 @@ const sidebar = css`
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    position: relative;
   }
 
 
@@ -188,6 +189,7 @@ const sidebar = css`
     font-size: 30px;
     line-height: 50px;
     overflow: hidden;
+    position: absolute;
 
     background: #ec9ed6;
     // list-style-type: none;

@@ -962,12 +962,12 @@ const main = css`
     .main_text_title {
       font-size: 6.5vw;
       margin-top: 30vw;
-      margin-bottom: 5vw;
+      // margin-bottom: 5vw;
     }
 
     .main_text_message {
       font-size: 6.5vw;
-      margin-bottom: 10vw;
+      margin-bottom: 5vw;
     }
 
     // 전체 케이크 이동

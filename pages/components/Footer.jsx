@@ -240,9 +240,9 @@ h2{
       display: block;
       color: black;
       font-family: "Bazzi";
-      font-size: 3vw;
+      font-size: 3.3vw;
       text-decoration: none;
-      line-height: 5vw;
+      line-height: 5.5vw;
       left: 0;
       bottom: 0;
     }
