@@ -126,18 +126,10 @@ export default function Footer() {
 }
 
 const footer = css`
-  @font-face {
-    font-family: "Bazzi";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
-      format("woff");
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  
   .footer_container {
+    font-family: "Bazzi";
     width: 100%;
-    padding: 1em;
+    padding: 1.5em;
     left:0;
     overflow: hidden;
     position: absolute;
@@ -212,8 +204,8 @@ h2{
   @media (max-width: 768px) {
     .footer_container {
       overflow: hidden;
-      position: absolute;
-      bottom: 5vh;
+      padding-bottom: 65px;
+      position:0;
       display: block;
       color: black;
       font-family: "Bazzi";
@@ -221,6 +213,7 @@ h2{
       text-decoration: none;
       line-height: 2em;
       left: 0;
+      bottom: 0;
     }
 
     .modal {
@@ -242,14 +235,16 @@ h2{
     .footer_container {
       overflow: hidden;
       position: absolute;
-      bottom: 45px;
+      // padding-bottom: 65px;
+      // margin: 0 auto;
       display: block;
       color: black;
       font-family: "Bazzi";
-      font-size: 13px;
+      font-size: 3vw;
       text-decoration: none;
-      line-height: 2em;
+      line-height: 5vw;
       left: 0;
+      bottom: 0;
     }
 
     .modal {
@@ -271,7 +266,8 @@ h2{
     .footer_container {
       overflow: hidden;
       position: absolute;
-      bottom: 45px;
+      padding-bottom: 160px;
+      // margin: 0 auto;
       display: block;
       color: black;
       font-family: "Bazzi";
@@ -279,6 +275,7 @@ h2{
       text-decoration: none;
       line-height: 2em;
       left: 0;
+      bottom: 0;
     }
 
     .modal {

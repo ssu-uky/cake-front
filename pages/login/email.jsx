@@ -168,7 +168,7 @@ const email_login = css`
   }
 
   .email_container {
-    padding-top: 1vw;
+    padding: 5vw 0;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -185,7 +185,7 @@ const email_login = css`
   }
 
   .login_img {
-    width: 350px;
+    width: 300px;
     height: auto;
     margin: 0 auto;
   }
@@ -254,7 +254,7 @@ const email_login = css`
 
   @media (max-width: 640px) {
     .email_container {
-      padding-top: 8vw;
+      padding:8vw 0;
       width: 100vw;
       height: 100%;
       overflow: hidden;
@@ -313,33 +313,50 @@ const email_login = css`
   }
 
   @media(max-width: 376px) {
+    .email_container {
+      padding:8vw 0;
+      width: 100vw;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f7bedf;
+      color: white;
+      text-align: center;
+      align-items: center;
+      vertical-align: middle;
+      //중앙정렬
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
     .login_img {
-      width: 150px;
+      width: 170px;
       height: auto;
       margin-bottom:10px;
     }
     h1 {
-      font-size: 30px;
-      margin-bottom: 20px;
+      font-size: 28px;
+      margin-bottom: -7px;
     }
     .email_input {
-      font-size: 15px;
-      width: 220px;
+      font-size: 13px;
+      width: 215px;
       height: 45px;
       border: none;
-      border-radius: 5px;
+      border-radius: 10px;
     }
 
     .login_btn {
-      width: 85px;
+      width: 80px;
       height: 35px;
-      font-size: 12px;
+      font-size: 14px;
       align-items: center;
       vertical-align: middle;
       justify-content: center;
-      // margin: 20px;
+      // margin: 10px;
       border: none;
-      border-radius: 25px;
+      border-radius: 20px;
       color: white;
       background-color: #f073cd;
     }
@@ -348,7 +365,7 @@ const email_login = css`
       display: flex;
       flex-direction: row;
       font-size: 12px;
-      margin-top: 5px;
+      margin-top: 7px;
       color: white;
       text-decoration: none;
       list-style: none;

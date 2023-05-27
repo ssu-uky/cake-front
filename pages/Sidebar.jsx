@@ -99,7 +99,7 @@ const Sidebar = () => {
                     cursor: "pointer",
                   }}
                 >
-                  Login
+                  Home
                 </p>
               </Link>
               {/* <li className="slash"> / </li> */}
@@ -212,9 +212,9 @@ const sidebar = css`
     
   .sidebar_menuToggle input {
     display: block;
-    width: 40px;
-    height: 40px;
-    left: 15px;
+    width: 50px;
+    height: 50px;
+    left: 30px;
     // top: 20px;
     position: absolute;
 
@@ -231,9 +231,9 @@ const sidebar = css`
   .sidebar_menuToggle span {
     display: block;
     flex-direction: column;
-    width: 35px;
+    width: 40px;
     height: 4px;
-    margin: 10px 20px;
+    margin: 10px 30px;
     position: relative;
     
 
@@ -268,7 +268,7 @@ const sidebar = css`
   }
 
   .sidebar_menuToggle input:checked ~ span:nth-last-child(2) {
-    transform: rotate(-45deg) translate(-1px, -1px);
+    transform: rotate(-45deg) translate(-3px, 1px);
   }
 
   //햄버거바 클릭했을 때 메뉴 열고 닫기 기능
@@ -363,9 +363,9 @@ const sidebar = css`
       width: 45vw;
       height: calc(100vh + 43px);
       padding: 40px;
-      padding-top: 43vw;
-      font-size: 18px;
-      line-height: 30px;
+      padding-top: 40vw;
+      font-size: 4.3vw;
+      line-height: 7.3vw;
       overflow: hidden;
   
       background: #ec9ed6;
@@ -378,22 +378,38 @@ const sidebar = css`
     .sidebar_menuToggle {
       display: block;
       position: relative;
-      padding-top: 10px;
-      top: 40px;
-      left: 30px;
+      // padding-top: 10px;
+      // top: 40px;
+      // left: 30px;
   
       z-index: 1000;
   
       /* -webkit-user-select: none;
       user-select: none;  */
     }
+
+    .sidebar_menuToggle input {
+      display: block;
+      width: 40px;
+      height: 40px;
+      left: 5px;
+      // top: 10px;
+      position: absolute;
+  
+      cursor: pointer;
+  
+      opacity: 0;
+      z-index: 2;
+  
+      -webkit-touch-callout: none;
+    }
   
       .sidebar_menuToggle span {
         display: block;
         flex-direction: column;
-        width: 35px;
+        width: 30px;
         height: 3px;
-        margin: 8px 15px;
+        margin: 7px 10px;
         position: relative;
         
     
@@ -428,7 +444,7 @@ const sidebar = css`
       }
     
       .sidebar_menuToggle input:checked ~ span:nth-last-child(2) {
-        transform: rotate(-45deg) translate(-1px, -1px);
+        transform: rotate(-45deg) translate(0.5px, -1px);
       }
     
       //햄버거바 클릭했을 때 메뉴 열고 닫기 기능
@@ -443,11 +459,11 @@ const sidebar = css`
     .sidebar_menu {
       position: absolute;
       width: 45vw;
-      height: calc(100vh + 43px);
+      height: calc(100vh + 45vw);
       padding: 30px;
       padding-top: 145px;
-      font-size: 15px;
-      line-height: 27px;
+      font-size: 17px;
+      line-height: 25px;
       overflow: hidden;
   
       background: #ec9ed6;
@@ -459,9 +475,6 @@ const sidebar = css`
     .sidebar_menuToggle {
       display: block;
       position: relative;
-      // padding-top: 20px;
-      top: 40px;
-      left: 30px;
   
       z-index: 1000;
   
@@ -471,10 +484,10 @@ const sidebar = css`
 
     .sidebar_menuToggle input {
       display: block;
-      width: 40px;
-      height: 40px;
-      left: 14px;
-      top: 17px;
+      width: 30px;
+      height: 30px;
+      top: -5px;
+      left: -5px;
       position: absolute;
   
       cursor: pointer;
@@ -488,9 +501,9 @@ const sidebar = css`
       .sidebar_menuToggle span {
         display: block;
         flex-direction: column;
-        width: 30px;
-        height: 3px;
-        margin: 7px 15px;
+        width: 22px;
+        height: 2.5px;
+        margin: 5px 3px;
         position: relative;
         
     
@@ -525,7 +538,7 @@ const sidebar = css`
       }
     
       .sidebar_menuToggle input:checked ~ span:nth-last-child(2) {
-        transform: rotate(-45deg) translate(-1px, -1px);
+        transform: rotate(-45deg) translate(-1px, -2px);
       }
     
       //햄버거바 클릭했을 때 메뉴 열고 닫기 기능
