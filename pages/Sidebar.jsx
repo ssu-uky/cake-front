@@ -363,7 +363,7 @@ const sidebar = css`
       width: 45vw;
       height: calc(100vh + 43px);
       padding: 40px;
-      padding-top: 150px;
+      padding-top: 43vw;
       font-size: 18px;
       line-height: 30px;
       overflow: hidden;
