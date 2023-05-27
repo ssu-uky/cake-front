@@ -1040,14 +1040,14 @@ const main = css`
 
     // 하단 버튼 디자인
     .main_btn {
-      width: 25.5vw;
-      height: 8vw;
+      width: 26vw;
+      height: 9vw;
       border-radius: 12px;
       border: none;
       font-family: "Bazzi";
       background-color: #f073cd;
       color: white;
-      font-size: 12px;
+      font-size: 3vw;
       cursor: pointer;
       outline: none;
       margin-top: 20px;

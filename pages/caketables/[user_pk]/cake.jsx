@@ -442,8 +442,8 @@ const visitoruse = css`
     position: relative;
     margin: calc(80px / -20);
     display: inline-block;
-    margin-top: 90px;
-    // margin-top: 10vw;
+    // margin-top: 90px;
+    margin-top: 15vw;
   }
 
   .useruse_submit_button {
@@ -482,8 +482,9 @@ const visitoruse = css`
 
   .selected {
     border: 2px dashed #f073cd;
-    width: 100px;
+    width: 100%;
     height: 100px;
+    // margin: 0 auto;
     display: fixed;
   }
 
@@ -606,7 +607,8 @@ const visitoruse = css`
     .visitoruse_text {
       font-size: 1.7em;
       // line-height: 45px;
-      margin-top: 25vw;
+      margin-top: 20vw;
+      margin-bottom: -5vw;
     }
 
     .visitoruse_name {
@@ -633,11 +635,11 @@ const visitoruse = css`
       align-items: center;
       justify-content: center;
       margin: 0 auto;
-      margin-bottom: 20px;
+      // margin-bottom: 1vw;
     }
 
     .visitoruse_tab_container {
-      margin-top: 20px;
+      // margin-top: 7vw;
     }
 
     .visitoruse_nickname:focus {
@@ -660,7 +662,7 @@ const visitoruse = css`
     }
 
     .visitoruse_label {
-      width: 180px;
+      width: 45vw;
       display: inline-block;
       padding: 13px 40px;
       border-radius: 15px 15px 0 0;
@@ -669,14 +671,14 @@ const visitoruse = css`
     }
 
     .visitoruse_pinktable {
-      display: inline-block;
-      margin-top: 85px;
+      // display: inline-block;
+      margin-top: 20.5vw;
       width: 100%;
     }
 
     .letter_textarea {
-      width: 70vw;
-      height: 200px;
+      width: 80vw;
+      height: 50vw;
       font-size: 25px;
       line-height: 45px;
       border: 0;
@@ -704,33 +706,38 @@ const visitoruse = css`
 
     .visitoruse_text {
       font-size: 1.5em;
-      margin-top: 27vw;
-      margin-bottom: -10px;
+      margin-top: 17vw;
+      margin-bottom: -6vw;
     }
 
     .visitoruse_nickname_container {
       width: 90%;
       margin: 0 auto;
+      margin-bottom: 3vw;
     }
 
     .visitoruse_name {
       font-size: 15px;
       width: 130px;
       vertical-align: middle;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1vw;
     }
 
     .visitoruse_nickname {
       border: none;
       height: 35px;
-      width: 130px;
-      border-radius: 15px;
+      width: 135px;
+      border-radius: 10px;
       text-align: center;
       vertical-align: middle;
-      font-size: 15px;
+      font-size: 13px;
     }
 
     .visitoruse_tab_container {
-      margin-top: 10px;
+      margin-top: 3.5vw;
     }
 
     .visitoruse_nickname:focus {
@@ -762,9 +769,12 @@ const visitoruse = css`
 
     .visitoruse_pinktable {
       display: inline-block;
-      margin-top: 22vw;
+      margin-top: 20vw;
       width: 100%;
+      height: 100%;
       white-space: nowrap;
+      // margin-right: 1vw;
+      right: 1vw;
     }
 
     .letter_textarea {
@@ -795,5 +805,6 @@ const visitoruse = css`
       justify-content: center;
       margin-top: -3vw;
     }
+    
   }
 `;
