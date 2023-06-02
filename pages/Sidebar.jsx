@@ -182,7 +182,8 @@ const sidebar = css`
   .sidebar_menu {
     position: absolute;
     width: 40vw;
-    height: calc(100vh + 43px);
+    // height: calc(100vh + 43px);
+    height: 100vh;
     margin: -100px 0 0 -30px;
     padding: 60px;
     padding-top: 180px;
