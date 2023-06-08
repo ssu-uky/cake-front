@@ -2,6 +2,7 @@ import css from "styled-jsx/css";
 import Image from "next/image";
 import Loginimg500 from "public/images/Loginimg500.png";
 import router from "next/router";
+import axios from "axios";
 
 export default function Email_login() {
   const handleSubmit = async (e) => {
@@ -50,44 +51,48 @@ export default function Email_login() {
       return;
     }
 
-    // fetch(`https://manage.neokkukae.store/api/users/signup/`,{ //배포용
-    // fetch(`http://127.0.0.1:8000/api/users/signup/`,{ //로컬용 / 이메일 인증 필요없음
-    fetch(`https://manage.naekkukae.store/api/users/signup/email/`, {
-      //로컬용 이메일 인증 필요
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          alert("이미 존재하는 이메일입니다.");
-          console.log("이미 존재하는 이메일입니다.");
-          // throw new Error("이미 존재하는 이메일입니다.");
+    axios
+      .post(
+        "https://manage.naekkukae.store/api/users/signup/email/",
+        {
+          name: name,
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-        return response.json();
-      })
+      )
       .then((response) => {
-        console.log("Server response:", response);
+        console.log("Server response:", response.data);
 
         // 회원가입 시에는 토큰 저장 필요 없음
-        // if (!response.token || !response.token.access || !response.token.refresh) {
+        // if (!response.data.token || !response.data.token.access || !response.data.token.refresh) {
         //   throw new Error("서버 응답에 토큰이 없습니다.");
         // }
 
-        // sessionStorage.setItem('access', response.token.access);
-        // sessionStorage.setItem('refresh', response.token.refresh);
+        // sessionStorage.setItem('access', response.data.token.access);
+        // sessionStorage.setItem('refresh', response.data.token.refresh);
 
         alert(
           "회원가입이 완료되었습니다. 이메일 인증을 하신 후 로그인 해주세요!"
         );
         // alert("회원가입이 완료되었습니다. 로그인을 해주세요!");
         window.location.href = "/";
+      })
+      .catch((error) => {
+        if (error.response) {
+          if (error.response.status === 409) {
+            alert("이미 존재하는 이메일입니다.");
+            console.log("이미 존재하는 이메일입니다.");
+          } else {
+            console.log("서버 오류:", error.response.data);
+          }
+        } else {
+          console.log("요청 실패:", error.message);
+        }
       });
   };
 

@@ -182,7 +182,7 @@ const sidebar = css`
   .sidebar_menu {
     position: absolute;
     width: 40vw;
-    height: 100vh;
+    height: calc(100vh + 43px);
     margin: -100px 0 0 -30px;
     padding: 60px;
     padding-top: 180px;
@@ -283,7 +283,7 @@ const sidebar = css`
   .sidebar_menu {
     position: absolute;
     width: 35vw;
-    height: 100vh;
+    height: calc(100vh + 43px);
     padding: 50px;
     padding-top: 170px;
     font-size: 22px;
@@ -363,7 +363,7 @@ const sidebar = css`
     .sidebar_menu {
       position: absolute;
       width: 45vw;
-      height: 100vh;
+      height: calc(100vh + 43px);
       padding: 40px;
       padding-top: 40vw;
       font-size: 4.3vw;
@@ -461,7 +461,7 @@ const sidebar = css`
     .sidebar_menu {
       position: absolute;
       width: 45vw;
-      height: 100vh;
+      height: calc(100vh + 45vw);
       padding: 30px;
       padding-top: 145px;
       font-size: 17px;
@@ -554,7 +554,7 @@ const sidebar = css`
     .sidebar_menu {
       position: absolute;
       width: 50vw;
-      height: 100vh;
+      height: calc(100vh + 43px);
       padding: 20px;
       padding-top: 50vw;
       font-size: 15px;
