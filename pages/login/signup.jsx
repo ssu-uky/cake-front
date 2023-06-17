@@ -68,14 +68,6 @@ export default function Email_login() {
       .then((response) => {
         console.log("Server response:", response.data);
 
-        // 회원가입 시에는 토큰 저장 필요 없음
-        // if (!response.data.token || !response.data.token.access || !response.data.token.refresh) {
-        //   throw new Error("서버 응답에 토큰이 없습니다.");
-        // }
-
-        // sessionStorage.setItem('access', response.data.token.access);
-        // sessionStorage.setItem('refresh', response.data.token.refresh);
-
         alert(
           "회원가입이 완료되었습니다. 이메일 인증을 하신 후 로그인 해주세요!"
         );
@@ -84,7 +76,7 @@ export default function Email_login() {
       })
       .catch((error) => {
         if (error.response) {
-          if (error.response.status === 409) {
+          if (error.response.status === 400) {
             alert("이미 존재하는 이메일입니다.");
             console.log("이미 존재하는 이메일입니다.");
           } else {
@@ -212,14 +204,14 @@ const emaillogin = css`
   }
 
   .login_img {
-    width: 300px;
+    width: 230px;
     height: auto;
     margin: 0 auto;
-    padding-top: 3vh;
+    paddinf: 10px;
   }
 
   h1 {
-    font-size: 50px;
+    font-size: 45px;
     margin-bottom: 10px;
   }
 
@@ -262,7 +254,7 @@ const emaillogin = css`
     border-radius: 10px;
     margin-bottom: 10px;
     justify-content: space-between;
-    font-size: 18px;
+    font-size: 17px;
     outline-color: #f073cd;
   }
 
@@ -305,9 +297,9 @@ const emaillogin = css`
     margin: 20px;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     .login_img {
-      width: 250px;
+      width: 200px;
       height: auto;
       margin: 0 auto;
       padding-top: 3vh;
@@ -345,9 +337,9 @@ const emaillogin = css`
       outline-color: #f073cd;
     }
   
-    @media (max-width: 425px) {
+    @media (max-width: 640px) {
       .login_img {
-        width: 135px;
+        width: 200px;
         height: auto;
         margin: 0 auto;
         padding-top: 1vh;
@@ -382,9 +374,58 @@ const emaillogin = css`
         margin-bottom: 10px;
       }
 
+    .emaillogin_button {
+      width: 130px;
+      height: 45px;
+      align-items: center;
+      vertical-align: middle;
+      justify-content: center;
+      border: none;
+      border-radius: 25px;
+      background-color: #f073cd;
+      color: white;
+      margin-top: 5px;
+      font-size: 17px;
+    }
+  }
+
+  @media (max-width: 376px){
+    .login_img {
+      width: 150px;
+      height: auto;
+      margin: 0 auto;
+      margin-top: 40px;
+    }
+    h1{
+      font-size: 30px;
+    }
+
+    .emaillogin_form {
+      display: flex;
+      margin: 0 auto;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+    }
+  
+    .emaillogin_label > label {
+      display: none;
+    }
+  
+    .emaillogin_input {
+      align-items: center;
+      text-align: center;
+      width: 180px;
+      height: 40px;
+      border-radius: 10px;
+      font-size: 12px;
+      outline-color: #f073cd;
+      margin-bottom: 10px;
+    }
+
   .emaillogin_button {
-    width: 130px;
-    height: 45px;
+    width: 120px;
+    height: 40px;
     align-items: center;
     vertical-align: middle;
     justify-content: center;
@@ -392,8 +433,8 @@ const emaillogin = css`
     border-radius: 25px;
     background-color: #f073cd;
     color: white;
-    margin-top: 5px;
-    font-size: 17px;
+    font-size: 14px;
   }
-  }
+}
+
 `;

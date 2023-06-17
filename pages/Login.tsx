@@ -74,7 +74,7 @@ const login = css`
   h1 {
     text-align: center;
     font-size: 50px;
-    margin-top: 5vh;
+    margin-top: 20px;
     margin-bottom: 3vh;
     font-family: "Bazzi";
     color: white;
@@ -87,7 +87,7 @@ const login = css`
   }
 
   .login_btn_container {
-    margin-top: 5vh;
+    margin-top: 4vh;
   }
 
   .login_text_box {
@@ -173,8 +173,7 @@ const login = css`
 
     h1 {
       font-size: 35px;
-      margin-top: 5vh;
-      margin-bottom: 3vh;
+      margin-top: 10px;
     }
 
     .login_img {

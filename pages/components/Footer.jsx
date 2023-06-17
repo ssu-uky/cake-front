@@ -133,11 +133,11 @@ const footer = css`
     left:0;
     overflow: hidden;
     position: absolute;
-    bottom: 7vh;
+    bottom: 50px;
     display: fixed;
     color: black;
     font-family: "Bazzi";
-    font-size: 20px;
+    font-size: 18px;
     text-decoration: none;
     line-height: 2rem;
   }
@@ -209,10 +209,9 @@ h2{
       display: block;
       color: black;
       font-family: "Bazzi";
-      font-size: 17px;
+      font-size: 14px;
       text-decoration: none;
-      line-height: 2em;
-      left: 0;
+      line-height: 30px;
       bottom: 0;
     }
 
@@ -235,15 +234,11 @@ h2{
     .footer_container {
       overflow: hidden;
       position: absolute;
-      // padding-bottom: 65px;
-      // margin: 0 auto;
       display: block;
       color: black;
       font-family: "Bazzi";
-      font-size: 3.3vw;
+      font-size: 13px;
       text-decoration: none;
-      line-height: 5.5vw;
-      left: 0;
       bottom: 0;
     }
 

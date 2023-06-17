@@ -168,7 +168,7 @@ const email_login = css`
   }
 
   .email_container {
-    padding: 5vw 0;
+    // padding: 5vw 0;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -333,15 +333,15 @@ const email_login = css`
     .login_img {
       width: 170px;
       height: auto;
-      margin-bottom:10px;
+      margin-top: 30px;
     }
     h1 {
       font-size: 28px;
-      margin-bottom: -7px;
+      // margin-bottom: -7px;
     }
     .email_input {
       font-size: 13px;
-      width: 215px;
+      width: 200px;
       height: 45px;
       border: none;
       border-radius: 10px;

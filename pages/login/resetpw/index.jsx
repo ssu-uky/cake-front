@@ -93,14 +93,15 @@ const resetPw = css`
 
   .login_img {
     padding-top: 40px;
-    width: 350px;
+    width: 250px;
     height: auto;
     margin: 0 auto;
   }
 
   h1 {
     font-family: "Bazzi";
-    font-size: 45px;
+    font-size: 40px;
+    margin-top: 15px;
     margin-bottom: 20px;
   }
 
@@ -109,22 +110,21 @@ const resetPw = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    // justify-content: center;
-    margin: 20px;
   }
 
   .email_input {
-    font-size: 18px;
+    font-size: 17px;
     width: 250px;
     height: 55px;
     border: none;
-    border-radius: 5px;
-    // outline: none;
+    border-radius: 10px;
     margin: 0 auto;
-    padding-left: 10px;
+    padding-left: 20px;
     align-items: center;
     vertical-align: middle;
     outline-color: #f073cd;
+    margin-bottom: 15px;
+    // text-align: center;
   }
 
   .reset_form_input {
@@ -133,7 +133,7 @@ const resetPw = css`
 
   .login_btn {
     width: 120px;
-    height: 50px;
+    height: 45px;
     align-items: center;
     vertical-align: middle;
     justify-content: center;
@@ -143,25 +143,22 @@ const resetPw = css`
     color: white;
     font-size: 20px;
     background-color: #f073cd;
-    // background-color: white;
   }
 
   @media (max-width: 640px) {
     .login_img {
-      width: 280px;
+      width: 200px;
       height: auto;
       margin-top: 30px;
     }
     h1 {
-      font-size: 40px;
-      margin-bottom: 20px;
+      font-size: 32px;
     }
     .email_input {
       font-size: 15px;
       width: 230px;
       height: 45px;
       border: none;
-      border-radius: 5px;
     }
 
     .login_btn {
@@ -177,22 +174,24 @@ const resetPw = css`
       background-color: #f073cd;
     }
   }
+
   @media (max-width: 376px) {
     .login_img {
-      width: 200px;
+      width: 170px;
       height: auto;
-      margin-top: 30px;
-      margin-bottom: 10px;
+      margin-top: 40px;
     }
     h1 {
-      font-size: 30px;
+      font-size: 25px;
     }
     .email_input {
-      font-size: 15px;
-      width: 200px;
+      font-size: 12px;
+      width: 185px;
       height: 45px;
       border: none;
-      border-radius: 5px;
+      align-items: center;
+      vertical-align: middle;
+      justify-content: center;
     }
 
     .login_btn {

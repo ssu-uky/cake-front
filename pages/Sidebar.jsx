@@ -181,13 +181,13 @@ const sidebar = css`
   // 메뉴 바
   .sidebar_menu {
     position: absolute;
-    width: 40vw;
+    width: 230px;
     height: calc(100vh + 43px);
     margin: -100px 0 0 -30px;
-    padding: 60px;
-    padding-top: 180px;
-    font-size: 30px;
-    line-height: 50px;
+    padding: 40px;
+    padding-top: 150px;
+    font-size: 20px;
+    line-height: 35px;
     overflow: hidden;
     position: absolute;
 
@@ -282,12 +282,12 @@ const sidebar = css`
     // 메뉴 바
   .sidebar_menu {
     position: absolute;
-    width: 35vw;
+    width: 25vw;
     height: calc(100vh + 43px);
-    padding: 50px;
+    padding: 30px;
     padding-top: 170px;
-    font-size: 22px;
-    line-height: 45px;
+    font-size: 20px;
+    line-height: 30px;
     overflow: hidden;
 
     background: #ec9ed6;
@@ -362,12 +362,12 @@ const sidebar = css`
     // 메뉴 바
     .sidebar_menu {
       position: absolute;
-      width: 45vw;
+      width: 40vw;
       height: calc(100vh + 43px);
-      padding: 40px;
-      padding-top: 40vw;
-      font-size: 4.3vw;
-      line-height: 7.3vw;
+      padding: 25px;
+      padding-top: 170px;
+      font-size: 18px;
+      line-height: 30px;
       overflow: hidden;
   
       background: #ec9ed6;
@@ -380,9 +380,6 @@ const sidebar = css`
     .sidebar_menuToggle {
       display: block;
       position: relative;
-      // padding-top: 10px;
-      // top: 40px;
-      // left: 30px;
   
       z-index: 1000;
   
@@ -462,9 +459,9 @@ const sidebar = css`
       position: absolute;
       width: 45vw;
       height: calc(100vh + 45vw);
-      padding: 30px;
-      padding-top: 145px;
-      font-size: 17px;
+      padding: 25px;
+      padding-top: 150px;
+      font-size: 15px;
       line-height: 25px;
       overflow: hidden;
   
