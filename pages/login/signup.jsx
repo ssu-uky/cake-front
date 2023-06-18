@@ -342,7 +342,6 @@ const emaillogin = css`
         width: 200px;
         height: auto;
         margin: 0 auto;
-        padding-top: 1vh;
       }
   
       h1{
